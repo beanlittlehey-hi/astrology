@@ -78,3 +78,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/home-* miniprogram/pages/index/index.wxml docs/ITERATION_LOG.md`
 - 提交：本提交 `Fix home image asset sizing`
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 首页资源与 Tab 还原修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/home-bg-clean.png`、`miniprogram/assets/home-v2/home-card-hero-bg.png`、`miniprogram/assets/home-v2/home-card-small-bg.png`、`miniprogram/assets/home-v2/home-icon-question.png`、`miniprogram/assets/home-v2/home-icon-diary.png`、`miniprogram/assets/home-v2/tab-card-bg.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：使用用户新提供的长屏 PNG 背景替换模糊 JPG；从桌面源图重新处理首页大小卡片和问/记图标，只去除边缘棋盘格/白边并保留卡片内部玻璃拟态；接入 `tab-card-bg.png` 作为底部 Tab 玻璃底图，并放大首页卡片、图标和 Tab 资源显示尺寸。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：新背景为高清 PNG，清晰度优先但包体明显大于上一版 JPG；如果微信预览或审核包体受限，需在不引入模糊延展的前提下进一步压缩背景。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
