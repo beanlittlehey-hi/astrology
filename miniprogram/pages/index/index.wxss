@@ -5074,7 +5074,7 @@
   z-index: 1;
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 112rpx 32rpx calc(164rpx + env(safe-area-inset-bottom));
+  padding: 112rpx 32rpx calc(150rpx + env(safe-area-inset-bottom));
   overflow: visible;
   background: transparent;
 }
@@ -5149,16 +5149,16 @@
 }
 
 .home-v2-hero {
-  min-height: 420rpx;
-  margin: 0 0 26rpx;
-  padding: 70rpx 46rpx 42rpx;
+  min-height: 470rpx;
+  margin: 0 0 28rpx;
+  padding: 70rpx 46rpx 46rpx;
   border-radius: 34rpx;
 }
 
 .home-v2-hero .home-card-copy {
   position: relative;
   z-index: 2;
-  width: 360rpx;
+  width: 335rpx;
 }
 
 .home-v2-content .eyebrow {
@@ -5183,11 +5183,11 @@
 .home-v2-primary {
   position: relative;
   overflow: hidden;
-  width: 330rpx;
+  width: 300rpx;
   height: 96rpx;
   min-height: 96rpx;
-  margin: 40rpx 0 0;
-  padding: 0 30rpx;
+  margin: 46rpx 0 0;
+  padding: 0 26rpx;
   border-radius: 999rpx;
   color: #ffffff;
   background: transparent;
@@ -5216,20 +5216,20 @@
 .home-v2-tarot {
   position: absolute;
   z-index: 2;
-  right: 58rpx;
-  top: 70rpx;
-  width: 226rpx;
-  height: 330rpx;
+  right: 42rpx;
+  top: 88rpx;
+  width: 205rpx;
+  height: 305rpx;
   filter: drop-shadow(0 14rpx 22rpx rgba(69, 62, 111, 0.24));
   transform: rotate(5deg);
 }
 
 .home-v2-small-card {
   width: 100%;
-  height: 178rpx;
-  min-height: 178rpx;
+  height: 196rpx;
+  min-height: 196rpx;
   margin: 0 0 26rpx;
-  padding: 28rpx 44rpx;
+  padding: 32rpx 44rpx;
   border-radius: 30rpx;
   display: grid;
   grid-template-columns: 128rpx minmax(0, 1fr);
@@ -5240,10 +5240,22 @@
 }
 
 .home-v2-small-card .mini-icon-img,
+.home-v2-small-card .home-card-small-right-bg,
 .home-v2-small-card .home-small-copy,
 .home-v2-small-card .list-copy {
   position: relative;
   z-index: 2;
+}
+
+.home-v2-small-card .home-card-small-right-bg {
+  position: absolute;
+  right: 34rpx;
+  bottom: 8rpx;
+  width: 260rpx;
+  height: 150rpx;
+  z-index: 1;
+  opacity: 0.92;
+  pointer-events: none;
 }
 
 .home-v2-small-card .mini-icon-img {
@@ -5255,6 +5267,9 @@
 .home-v2-small-card .home-small-copy,
 .home-v2-small-card .list-copy {
   min-width: 0;
+  max-width: 380rpx;
+  justify-self: start;
+  text-align: left;
 }
 
 .home-v2-content .panel-title {
@@ -5278,7 +5293,7 @@
 .home-v2-content .home-journal-card .row-between {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 14rpx;
   min-width: 0;
 }
@@ -5299,8 +5314,8 @@
 }
 
 .page > .bottom-nav {
-  height: calc(142rpx + env(safe-area-inset-bottom));
-  padding: 8rpx 82rpx env(safe-area-inset-bottom);
+  height: calc(126rpx + env(safe-area-inset-bottom));
+  padding: 0 82rpx env(safe-area-inset-bottom);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
   background: transparent;
@@ -5311,7 +5326,9 @@
 
 .page > .bottom-nav .bottom-nav-bg {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   z-index: 0;

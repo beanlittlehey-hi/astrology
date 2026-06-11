@@ -109,5 +109,16 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：新小卡背景源图本身装饰更弱，当前按新资源真实比例处理；需真机肉眼确认小卡高度、Tab 图标和按钮背景。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：`5ddb886 Refine home button cards and tab sizing`
+- 远端状态：已同步到 `origin/main`
+
+## 2026-06-12 - 首页第四轮间距与小卡装饰修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/home-card-small-bg.png`、`miniprogram/assets/home-v2/home-card-small-right-bg.png`、`miniprogram/assets/home-v2/tab-card-bg.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：增加今日运势卡片高度并缩小/右移塔罗牌，拉开抽卡按钮和塔罗牌距离；重新处理小卡玻璃底并新增右下角月亮荷花装饰层；问/记内容左对齐；底部 Tab 恢复更低高度并保留放大图标与文字。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：右下角装饰来自烘进棋盘格的源图，当前已去除边缘背景并压缩，需真机肉眼确认装饰细节是否足够完整。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push

@@ -55,6 +55,7 @@
 
       <view class="home-v2-card home-v2-small-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
         <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="home-card-small-right-bg" src="/assets/home-v2/home-card-small-right-bg.png" mode="aspectFit"></image>
         <image class="mini-icon-img" src="/assets/home-v2/home-icon-question.png" mode="aspectFit"></image>
         <view class="home-small-copy">
           <text class="panel-title">专属牌阵</text>
@@ -64,6 +65,7 @@
 
       <view class="home-v2-card home-v2-small-card home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
         <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="home-card-small-right-bg" src="/assets/home-v2/home-card-small-right-bg.png" mode="aspectFit"></image>
         <image class="mini-icon-img" src="/assets/home-v2/home-icon-diary.png" mode="aspectFit"></image>
         <view class="list-copy">
           <view class="row-between">
