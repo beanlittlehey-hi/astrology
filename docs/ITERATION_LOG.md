@@ -144,3 +144,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-card-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 首页 Tab 最大高度覆盖恢复
+
+- 页面/模块：首页 `home-v2` 底部 Tab
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：按用户要求直接恢复上一版最大高度覆盖方式，将底部 Tab 容器恢复到 `142rpx + safe-area`，底图改回 `inset: 0` 和 `height: 100%` 铺满整个固定容器，避免底部露出页面模糊背景；Tab 图标和字号保持当前大小不变。
+- 验证：待本次提交前运行 `node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：该修改会让 Tab 视觉高度回到更高版本，用于覆盖模糊背景；如果后续还要缩短，需要同步提供更矮且能完全包住 icon/文字的底图资源。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
