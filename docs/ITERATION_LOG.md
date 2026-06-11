@@ -44,4 +44,4 @@
 - 风险/待确认：PNG 资源保持原格式，需通过微信开发者工具预览确认首页视觉与包体大小；本次不改其它页面。
 - 基线/对比：`git diff 84f1a75..ab1a278 -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/home-v2 docs/ITERATION_LOG.md`
 - 提交：`ab1a278 Restore editable home v2 UI`、`36d40b3 Record home v2 commit in iteration log`
-- 远端状态：当前本地 `main` 领先 `origin/main`，需 push 后 GitHub 才能看到本轮首页差异。
+- 远端状态：已在本轮同步到 `origin/main`，GitHub 可通过上述提交号和 diff 基线复查首页差异。
