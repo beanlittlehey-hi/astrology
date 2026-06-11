@@ -5074,19 +5074,20 @@
   z-index: 1;
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 112rpx 32rpx calc(140rpx + env(safe-area-inset-bottom));
+  padding: 112rpx 32rpx calc(152rpx + env(safe-area-inset-bottom));
   overflow: visible;
   background: transparent;
 }
 
 .home-v2-profile {
-  width: max-content;
+  width: 100%;
   max-width: 100%;
   min-height: 64rpx;
-  margin: 0 0 56rpx 12rpx;
+  margin: 0 0 56rpx;
   padding: 0;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 18rpx;
   color: #4d5f9e;
   background: transparent;
@@ -5096,11 +5097,11 @@
   font-size: 30rpx;
   line-height: 1.2;
   font-weight: 700;
+  text-align: left;
 }
 
 .home-v2-profile::after,
 .home-v2-primary::after,
-.home-v2-small-card::after,
 .home-v2-screen .bottom-nav .nav-item::after {
   border: 0;
 }
@@ -5127,6 +5128,7 @@
 .home-v2-card {
   position: relative;
   width: 100%;
+  min-width: 0;
   overflow: hidden;
   box-sizing: border-box;
   border: 0;
@@ -5195,24 +5197,27 @@
 .home-v2-tarot {
   position: absolute;
   z-index: 2;
-  right: 60rpx;
-  top: 74rpx;
-  width: 218rpx;
-  height: 286rpx;
+  right: 58rpx;
+  top: 70rpx;
+  width: 226rpx;
+  height: 330rpx;
   filter: drop-shadow(0 14rpx 22rpx rgba(69, 62, 111, 0.24));
-  transform: rotate(4deg);
+  transform: rotate(5deg);
 }
 
 .home-v2-small-card {
-  min-height: 240rpx;
+  width: 100%;
+  height: 178rpx;
+  min-height: 178rpx;
   margin: 0 0 26rpx;
-  padding: 38rpx 44rpx;
+  padding: 28rpx 44rpx;
   border-radius: 30rpx;
   display: grid;
   grid-template-columns: 128rpx minmax(0, 1fr);
   align-items: center;
   gap: 30rpx;
   text-align: left;
+  line-height: normal;
 }
 
 .home-v2-small-card .mini-icon-img,
@@ -5225,6 +5230,12 @@
 .home-v2-small-card .mini-icon-img {
   width: 112rpx;
   height: 112rpx;
+  justify-self: center;
+}
+
+.home-v2-small-card .home-small-copy,
+.home-v2-small-card .list-copy {
+  min-width: 0;
 }
 
 .home-v2-content .panel-title {
@@ -5249,27 +5260,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18rpx;
+  gap: 14rpx;
+  min-width: 0;
 }
 
 .home-v2-content .home-journal-card .time {
   flex-shrink: 0;
   color: #425cb3;
-  font-size: 24rpx;
+  font-size: 22rpx;
   line-height: 1.2;
   font-weight: 800;
 }
 
 .home-v2-content .home-journal-card .clamp {
-  max-width: 420rpx;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .page > .bottom-nav {
-  height: calc(118rpx + env(safe-area-inset-bottom));
-  padding: 8rpx 86rpx env(safe-area-inset-bottom);
+  height: calc(126rpx + env(safe-area-inset-bottom));
+  padding: 10rpx 88rpx env(safe-area-inset-bottom);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: center;
   background: transparent url("/assets/home-v2/tab-card-bg.png") center bottom / 100% 100% no-repeat;
@@ -5280,7 +5292,7 @@
 
 .page > .bottom-nav .nav-item {
   pointer-events: auto;
-  height: 102rpx;
+  height: 106rpx;
   padding: 0;
   gap: 2rpx;
   color: #7d86ad;
@@ -5296,36 +5308,11 @@
   color: inherit;
 }
 
-.page > .bottom-nav .nav-indicator {
-  order: -1;
-  width: 56rpx;
-  height: 56rpx;
-  border-radius: 0;
-  background: transparent center / contain no-repeat;
-}
-
-.page > .bottom-nav .nav-item:nth-child(1) .nav-indicator {
-  background-image: url("/assets/home-v2/tab-home-default.png");
-}
-
-.page > .bottom-nav .nav-item:nth-child(2) .nav-indicator {
-  background-image: url("/assets/home-v2/tab-reading-default.png");
-}
-
-.page > .bottom-nav .nav-item:nth-child(3) .nav-indicator {
-  background-image: url("/assets/home-v2/tab-diary-default.png");
-}
-
-.page > .bottom-nav .nav-item:nth-child(1).active .nav-indicator {
-  background-image: url("/assets/home-v2/tab-home-active.png");
-}
-
-.page > .bottom-nav .nav-item:nth-child(2).active .nav-indicator {
-  background-image: url("/assets/home-v2/tab-reading-active.png");
-}
-
-.page > .bottom-nav .nav-item:nth-child(3).active .nav-indicator {
-  background-image: url("/assets/home-v2/tab-diary-active.png");
+.page > .bottom-nav .nav-icon {
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+  flex-shrink: 0;
 }
 
 .page > .bottom-nav .nav-item.active {

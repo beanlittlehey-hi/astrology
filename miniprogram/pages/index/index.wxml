@@ -33,7 +33,7 @@
   </view>
 
   <view wx:elif="{{screen === 'home'}}" class="screen app-screen home-v2-screen">
-    <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.png" mode="aspectFill"></image>
+    <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="content with-nav home-v2-content">
       <button class="home-v2-profile" bindtap="toggleDrawer">
         <text class="avatar home-v2-avatar">M</text>
@@ -50,16 +50,16 @@
         <image class="home-v2-tarot" src="/assets/home-v2/tarot-card-back.png" mode="aspectFit"></image>
       </view>
 
-      <button class="home-v2-card home-v2-small-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
+      <view class="home-v2-card home-v2-small-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
         <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
         <image class="mini-icon-img" src="/assets/home-v2/home-icon-question.png" mode="aspectFit"></image>
         <view class="home-small-copy">
           <text class="panel-title">专属牌阵</text>
           <text class="muted">感情 / 工作 / 综合</text>
         </view>
-      </button>
+      </view>
 
-      <button class="home-v2-card home-v2-small-card home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
+      <view class="home-v2-card home-v2-small-card home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
         <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
         <image class="mini-icon-img" src="/assets/home-v2/home-icon-diary.png" mode="aspectFit"></image>
         <view class="list-copy">
@@ -70,7 +70,7 @@
           <text class="tags">{{diaries[0].sceneName}} / {{diaries[0].emotionText}}</text>
           <text class="muted clamp">{{diaries[0].userInput}}</text>
         </view>
-      </button>
+      </view>
     </view>
 
     <view wx:if="{{drawerOpen}}" class="drawer-layer" bindtap="toggleDrawer"></view>
@@ -451,16 +451,16 @@
 
   <view wx:if="{{showTab}}" class="bottom-nav">
     <view class="nav-item {{activeNav === 'home' ? 'active' : ''}}" data-screen="home" data-nav="home" bindtap="go">
+      <image class="nav-icon" src="{{activeNav === 'home' ? '/assets/home-v2/tab-home-active.png' : '/assets/home-v2/tab-home-default.png'}}" mode="aspectFit"></image>
       <text>首页</text>
-      <view class="nav-indicator"></view>
     </view>
     <view class="nav-item {{activeNav === 'reading' ? 'active' : ''}}" data-screen="question" data-nav="reading" bindtap="go">
+      <image class="nav-icon" src="{{activeNav === 'reading' ? '/assets/home-v2/tab-reading-active.png' : '/assets/home-v2/tab-reading-default.png'}}" mode="aspectFit"></image>
       <text>测算</text>
-      <view class="nav-indicator"></view>
     </view>
     <view class="nav-item {{activeNav === 'journal' ? 'active' : ''}}" data-screen="journal" data-nav="journal" bindtap="go">
+      <image class="nav-icon" src="{{activeNav === 'journal' ? '/assets/home-v2/tab-diary-active.png' : '/assets/home-v2/tab-diary-default.png'}}" mode="aspectFit"></image>
       <text>日记</text>
-      <view class="nav-indicator"></view>
     </view>
     <view wx:if="{{healingEnabled}}" class="nav-item {{activeNav === 'healing' ? 'active' : ''}}" data-screen="healing" data-nav="healing" bindtap="go">
       <text>疗愈</text>

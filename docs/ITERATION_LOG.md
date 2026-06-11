@@ -87,5 +87,16 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：新背景为高清 PNG，清晰度优先但包体明显大于上一版 JPG；如果微信预览或审核包体受限，需在不引入模糊延展的前提下进一步压缩背景。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：`8924864 Fix home resource fidelity and tab bar`
+- 远端状态：已同步到 `origin/main`
+
+## 2026-06-12 - 首页二次肉眼还原修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/home-bg-clean.jpg`、`miniprogram/assets/home-v2/tarot-card-back.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将首页背景从 36 色 PNG 改为保色 JPG 压缩，重做塔罗背面透明裁切以去掉棋盘格/白边；小卡从 `button` 改为满宽 `view`，统一两张小卡尺寸；底部 Tab 图标从 WXSS 背景图改为 WXML `<image>` 渲染，修复真机图标不可见；顶部欢迎行强制左对齐。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：背景采用 JPG 是为了在 2MB 预览包限制内保留更接近原图的颜色；需真机肉眼确认卡片铺满、Tab 图标和塔罗背面边缘。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
