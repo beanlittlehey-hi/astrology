@@ -5232,9 +5232,9 @@
   padding: 32rpx 44rpx;
   border-radius: 30rpx;
   display: grid;
-  grid-template-columns: 128rpx minmax(0, 1fr);
+  grid-template-columns: 104rpx minmax(0, 1fr);
   align-items: center;
-  gap: 30rpx;
+  gap: 20rpx;
   text-align: left;
   line-height: normal;
 }
@@ -5249,7 +5249,7 @@
 
 .home-v2-small-card .home-card-small-right-bg {
   position: absolute;
-  right: 34rpx;
+  right: 8rpx;
   bottom: 8rpx;
   width: 260rpx;
   height: 150rpx;
@@ -5267,7 +5267,7 @@
 .home-v2-small-card .home-small-copy,
 .home-v2-small-card .list-copy {
   min-width: 0;
-  max-width: 380rpx;
+  max-width: 430rpx;
   justify-self: start;
   text-align: left;
 }
@@ -5293,17 +5293,21 @@
 .home-v2-content .home-journal-card .row-between {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 14rpx;
   min-width: 0;
+  width: 100%;
 }
 
 .home-v2-content .home-journal-card .time {
   flex-shrink: 0;
+  margin-left: auto;
   color: #425cb3;
   font-size: 22rpx;
   line-height: 1.2;
   font-weight: 800;
+  text-align: right;
+  max-width: 250rpx;
 }
 
 .home-v2-content .home-journal-card .clamp {
@@ -5330,7 +5334,7 @@
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100%;
+  height: 92rpx;
   z-index: 0;
   pointer-events: none;
 }
@@ -5339,7 +5343,8 @@
   position: relative;
   z-index: 1;
   pointer-events: auto;
-  height: 126rpx;
+  align-self: end;
+  height: 92rpx;
   padding: 0;
   gap: 0;
   color: #7d86ad;

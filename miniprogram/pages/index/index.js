@@ -387,6 +387,12 @@ function buildDiaryFromSession(session, userInput) {
 
 function decorateDiary(diary) {
   const firstEmotion = (diary.emotionTags || [])[0] || "平静"
+  const emotionTags = Array.isArray(diary.emotionTags) ? diary.emotionTags : []
+  const fallbackTags = String(diary.emotionText || "")
+    .split(/[、/，,\s]+/)
+    .map((item) => item.trim())
+    .filter(Boolean)
+  const homeTags = (emotionTags.length ? emotionTags : fallbackTags).slice(0, 3)
   const journalDateKey = diaryDateKey(diary)
   const moodMap = {
     焦虑: "anxiety",
@@ -401,7 +407,8 @@ function decorateDiary(diary) {
   return {
     ...diary,
     journalDateKey,
-    emotionText: (diary.emotionTags || []).join(" / "),
+    emotionText: emotionTags.join(" / "),
+    homeEmotionText: homeTags.join(" / "),
     firstEmotion,
     moodClass: moodMap[firstEmotion] || "calm"
   }

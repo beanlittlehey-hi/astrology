@@ -120,5 +120,16 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：右下角装饰来自烘进棋盘格的源图，当前已去除边缘背景并压缩，需真机肉眼确认装饰细节是否足够完整。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：`25fdb2b Refine home hero spacing and card details`
+- 远端状态：已同步到 `origin/main`
+
+## 2026-06-12 - 首页第五轮小卡与 Tab 根因修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/tab-card-bg.png`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：问/记小卡内容左移，右侧装饰更靠右；首页最近日记只展示前三个情绪标签并隐藏用户输入正文，日期右对齐；Tab 背景改为直角短底图，修复底图被安全区容器拉满导致高度过高的问题。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：`homeEmotionText` 仅用于首页最近日记展示，不改变日记存储和详情页；Tab 背景高度由固定 `92rpx` 控制，需真机确认视觉高度。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-card-bg.png miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push

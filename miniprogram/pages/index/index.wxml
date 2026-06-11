@@ -72,8 +72,7 @@
             <text class="panel-title">最近日记</text>
             <text class="time">{{diaries[0].date}}</text>
           </view>
-          <text class="tags">{{diaries[0].sceneName}} / {{diaries[0].emotionText}}</text>
-          <text class="muted clamp">{{diaries[0].userInput}}</text>
+          <text class="tags">{{diaries[0].homeEmotionText}}</text>
         </view>
       </view>
     </view>
