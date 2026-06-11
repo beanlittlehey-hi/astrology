@@ -32,45 +32,36 @@
     </view>
   </view>
 
-  <view wx:elif="{{screen === 'home'}}" class="screen app-screen">
-    <view class="content with-nav home-content">
-      <view class="topbar home-topbar">
-        <button class="profile-entry" bindtap="toggleDrawer">
-          <text class="avatar">M</text>
-          <text>月光旅人，欢迎回来</text>
-        </button>
-      </view>
+  <view wx:elif="{{screen === 'home'}}" class="screen app-screen home-v2-screen">
+    <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.png" mode="aspectFill"></image>
+    <view class="content with-nav home-v2-content">
+      <button class="home-v2-profile" bindtap="toggleDrawer">
+        <text class="avatar home-v2-avatar">M</text>
+        <text class="home-v2-greeting">月光旅人，欢迎回来</text>
+      </button>
 
-      <view class="hero-card daily-draw-card">
+      <view class="home-v2-card home-v2-hero daily-draw-card">
+        <image class="home-card-bg" src="/assets/home-v2/home-card-hero-bg.png" mode="scaleToFill"></image>
         <view class="home-card-copy">
           <text class="eyebrow">今日运势</text>
           <text class="hero-title">随机抽取一张牌，查看今天的心流</text>
-          <button class="primary" data-screen="daily" data-nav="home" bindtap="go">抽取卡牌</button>
+          <button class="primary home-v2-primary" data-screen="daily" data-nav="home" bindtap="go">抽取卡牌</button>
         </view>
-        <view class="home-tarot-back">
-          <image src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
-        </view>
+        <image class="home-v2-tarot" src="/assets/home-v2/tarot-card-back.png" mode="aspectFit"></image>
       </view>
 
-      <view class="quick-row {{healingEnabled ? '' : 'single'}}">
-        <button class="panel link-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
-          <image class="home-card-bg" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
-          <text class="mini-icon teal">问</text>
-          <view class="home-small-copy">
-            <text class="panel-title">专属牌阵</text>
-            <text class="muted">感情 / 工作 / 综合</text>
-          </view>
-        </button>
-        <button wx:if="{{healingEnabled}}" class="panel link-card" bindtap="openHealing">
-          <text class="mini-icon rose">修</text>
-          <text class="panel-title">静心修心</text>
-          <text class="muted">水晶修心推荐</text>
-        </button>
-      </view>
+      <button class="home-v2-card home-v2-small-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
+        <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="mini-icon-img" src="/assets/home-v2/home-icon-question.png" mode="aspectFit"></image>
+        <view class="home-small-copy">
+          <text class="panel-title">专属牌阵</text>
+          <text class="muted">感情 / 工作 / 综合</text>
+        </view>
+      </button>
 
-      <button class="list-item home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
-        <image class="home-card-bg" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
-        <text class="mini-icon violet">记</text>
+      <button class="home-v2-card home-v2-small-card home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
+        <image class="home-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="mini-icon-img" src="/assets/home-v2/home-icon-diary.png" mode="aspectFit"></image>
         <view class="list-copy">
           <view class="row-between">
             <text class="panel-title">最近日记</text>

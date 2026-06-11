@@ -5049,15 +5049,96 @@
   font-weight: 900;
 }
 
-/* home-v2 bugfix: keep supplied transparent card PNGs full-size, no white side strips */
-.home-v2-content .daily-draw-card > .home-card-bg,
-.home-v2-content .home-spread-card > .home-card-bg,
-.home-v2-content .home-journal-card > .home-card-bg {
+/* home-v2 final editable homepage */
+.home-v2-screen {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background: #efeaff;
+}
+
+.home-v2-screen::before {
+  display: none;
+}
+
+.home-v2-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.home-v2-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 68rpx 22rpx calc(132rpx + env(safe-area-inset-bottom));
+  overflow: visible;
+  background: transparent;
+}
+
+.home-v2-profile {
+  width: max-content;
+  max-width: 100%;
+  min-height: 48rpx;
+  margin: 0 0 36rpx;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  color: #4d5f9e;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 22rpx;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.home-v2-profile::after,
+.home-v2-primary::after,
+.home-v2-small-card::after,
+.home-v2-screen .bottom-nav .nav-item::after {
+  border: 0;
+}
+
+.home-v2-avatar {
+  width: 34rpx;
+  height: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7d83ff 0%, #9c75ff 100%);
+  border: 2rpx solid rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8rpx 18rpx rgba(104, 109, 207, 0.18);
+  font-size: 20rpx;
+  font-weight: 900;
+}
+
+.home-v2-greeting {
+  display: block;
+  padding-top: 2rpx;
+}
+
+.home-v2-card {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  box-shadow: 0 18rpx 34rpx rgba(121, 107, 170, 0.08);
+}
+
+.home-v2-card > .home-card-bg {
   position: absolute !important;
   left: 0 !important;
-  right: auto !important;
   top: 0 !important;
-  bottom: auto !important;
+  right: auto !important;
   width: 100% !important;
   height: 100% !important;
   opacity: 1 !important;
@@ -5066,16 +5147,186 @@
   border-radius: inherit !important;
 }
 
-.home-v2-content .home-spread-card,
-.home-v2-content .home-journal-card {
-  background: transparent !important;
-  min-height: 168rpx !important;
+.home-v2-hero {
+  min-height: 280rpx;
+  margin: 0 0 18rpx;
+  padding: 50rpx 30rpx 34rpx;
+  border-radius: 26rpx;
 }
 
-.home-v2-content .home-journal-card .list-copy,
-.home-v2-content .home-spread-card .home-small-copy,
-.home-v2-content .home-spread-card .mini-icon-img,
-.home-v2-content .home-journal-card .mini-icon-img {
-  position: relative !important;
-  z-index: 3 !important;
+.home-v2-hero .home-card-copy {
+  position: relative;
+  z-index: 2;
+  width: 340rpx;
+}
+
+.home-v2-content .eyebrow {
+  display: block;
+  margin: 0 0 28rpx;
+  color: #253f9a;
+  font-size: 48rpx;
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: 2rpx;
+}
+
+.home-v2-content .hero-title {
+  display: block;
+  width: 270rpx;
+  color: #64719f;
+  font-size: 21rpx;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.home-v2-primary {
+  width: 244rpx;
+  min-height: 70rpx;
+  margin: 28rpx 0 0;
+  padding: 0 30rpx;
+  border-radius: 999rpx;
+  color: #ffffff;
+  background: linear-gradient(90deg, #8d8bf2 0%, #a994ee 46%, #ead8b2 100%);
+  box-shadow: 0 12rpx 28rpx rgba(126, 110, 226, 0.26);
+  font-size: 25rpx;
+  font-weight: 800;
+}
+
+.home-v2-tarot {
+  position: absolute;
+  z-index: 2;
+  right: 44rpx;
+  top: 42rpx;
+  width: 168rpx;
+  height: 212rpx;
+  filter: drop-shadow(0 14rpx 22rpx rgba(69, 62, 111, 0.24));
+}
+
+.home-v2-small-card {
+  min-height: 132rpx;
+  margin: 0 0 18rpx;
+  padding: 26rpx 34rpx;
+  border-radius: 22rpx;
+  display: grid;
+  grid-template-columns: 72rpx minmax(0, 1fr);
+  align-items: center;
+  gap: 24rpx;
+  text-align: left;
+}
+
+.home-v2-small-card .mini-icon-img,
+.home-v2-small-card .home-small-copy,
+.home-v2-small-card .list-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.home-v2-small-card .mini-icon-img {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.home-v2-content .panel-title {
+  display: block;
+  color: #293f8f;
+  font-size: 26rpx;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.home-v2-content .muted,
+.home-v2-content .tags {
+  display: block;
+  margin-top: 8rpx;
+  color: #65709a;
+  font-size: 20rpx;
+  line-height: 1.45;
+  font-weight: 700;
+}
+
+.home-v2-content .home-journal-card .row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.home-v2-content .home-journal-card .time {
+  flex-shrink: 0;
+  color: #425cb3;
+  font-size: 17rpx;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.home-v2-content .home-journal-card .clamp {
+  max-width: 420rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page > .bottom-nav {
+  height: calc(92rpx + env(safe-area-inset-bottom));
+  padding: 0 72rpx env(safe-area-inset-bottom);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  background: transparent;
+  border-top: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.page > .bottom-nav .nav-item {
+  pointer-events: auto;
+  height: 92rpx;
+  padding: 0;
+  gap: 4rpx;
+  color: #7d86ad;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: 19rpx;
+  font-weight: 800;
+}
+
+.page > .bottom-nav .nav-item text {
+  width: auto;
+  color: inherit;
+}
+
+.page > .bottom-nav .nav-indicator {
+  order: -1;
+  width: 42rpx;
+  height: 42rpx;
+  border-radius: 0;
+  background: transparent center / contain no-repeat;
+}
+
+.page > .bottom-nav .nav-item:nth-child(1) .nav-indicator {
+  background-image: url("/assets/home-v2/tab-home-default.png");
+}
+
+.page > .bottom-nav .nav-item:nth-child(2) .nav-indicator {
+  background-image: url("/assets/home-v2/tab-reading-default.png");
+}
+
+.page > .bottom-nav .nav-item:nth-child(3) .nav-indicator {
+  background-image: url("/assets/home-v2/tab-diary-default.png");
+}
+
+.page > .bottom-nav .nav-item:nth-child(1).active .nav-indicator {
+  background-image: url("/assets/home-v2/tab-home-active.png");
+}
+
+.page > .bottom-nav .nav-item:nth-child(2).active .nav-indicator {
+  background-image: url("/assets/home-v2/tab-reading-active.png");
+}
+
+.page > .bottom-nav .nav-item:nth-child(3).active .nav-indicator {
+  background-image: url("/assets/home-v2/tab-diary-active.png");
+}
+
+.page > .bottom-nav .nav-item.active {
+  color: #566bc6;
 }
