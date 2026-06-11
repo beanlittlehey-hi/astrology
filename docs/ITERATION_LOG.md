@@ -98,5 +98,16 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：背景采用 JPG 是为了在 2MB 预览包限制内保留更接近原图的颜色；需真机肉眼确认卡片铺满、Tab 图标和塔罗背面边缘。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：`3e673eb Refine home visual assets and tab icons`
+- 远端状态：已同步到 `origin/main`
+
+## 2026-06-12 - 首页第三轮按钮与 Tab 细节修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/home-draw-button-bg.png`、`miniprogram/assets/home-v2/home-card-small-bg.png`、`miniprogram/assets/home-v2/tab-card-bg.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将顶部欢迎行从 `button` 改为 `view` 以保证视觉左对齐；新增抽卡按钮背景图并用 WXML 文本叠加；替换用户新提供的小卡背景和 Tab 背景；Tab 背景改为 WXML `<image>` 层，Tab icon 与字号放大。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：新小卡背景源图本身装饰更弱，当前按新资源真实比例处理；需真机肉眼确认小卡高度、Tab 图标和按钮背景。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push

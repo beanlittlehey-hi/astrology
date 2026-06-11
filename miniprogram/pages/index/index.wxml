@@ -35,17 +35,20 @@
   <view wx:elif="{{screen === 'home'}}" class="screen app-screen home-v2-screen">
     <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="content with-nav home-v2-content">
-      <button class="home-v2-profile" bindtap="toggleDrawer">
+      <view class="home-v2-profile" bindtap="toggleDrawer">
         <text class="avatar home-v2-avatar">M</text>
         <text class="home-v2-greeting">月光旅人，欢迎回来</text>
-      </button>
+      </view>
 
       <view class="home-v2-card home-v2-hero daily-draw-card">
         <image class="home-card-bg" src="/assets/home-v2/home-card-hero-bg.png" mode="scaleToFill"></image>
         <view class="home-card-copy">
           <text class="eyebrow">今日运势</text>
           <text class="hero-title">随机抽取一张牌，查看今天的心流</text>
-          <button class="primary home-v2-primary" data-screen="daily" data-nav="home" bindtap="go">抽取卡牌</button>
+          <button class="primary home-v2-primary" data-screen="daily" data-nav="home" bindtap="go">
+            <image class="home-v2-primary-bg" src="/assets/home-v2/home-draw-button-bg.png" mode="scaleToFill"></image>
+            <text>抽取卡牌</text>
+          </button>
         </view>
         <image class="home-v2-tarot" src="/assets/home-v2/tarot-card-back.png" mode="aspectFit"></image>
       </view>
@@ -450,6 +453,7 @@
   </view>
 
   <view wx:if="{{showTab}}" class="bottom-nav">
+    <image class="bottom-nav-bg" src="/assets/home-v2/tab-card-bg.png" mode="scaleToFill"></image>
     <view class="nav-item {{activeNav === 'home' ? 'active' : ''}}" data-screen="home" data-nav="home" bindtap="go">
       <image class="nav-icon" src="{{activeNav === 'home' ? '/assets/home-v2/tab-home-active.png' : '/assets/home-v2/tab-home-default.png'}}" mode="aspectFit"></image>
       <text>首页</text>
