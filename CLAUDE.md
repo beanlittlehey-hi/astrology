@@ -48,9 +48,10 @@ python3 -m json.tool project.config.json >/dev/null
 
 7. 每次完成后更新 `docs/ITERATION_LOG.md`，写清楚改动页面、文件、验证结果、风险、提交号和可复查的 diff 基线。
 8. 每个可交付小任务都要提交 Git commit。不要把多轮 UI 修改长期留在未提交状态。
-9. commit 只能保证本地可 diff；如果目的是让后续会话、其他机器或 GitHub 都能看到每轮差异，完成小任务并验证后必须 push 到远端，除非用户明确要求暂不 push。
-10. 每次完成后报告当前 `git status --short --branch`。如果显示 `[ahead N]`，必须明确说明远端还看不到这些版本差异，并询问/执行 push。
-11. 如果新开分支或 fork 任务，完成后必须明确合并回 `main`，push 到 GitHub，并确认 GitHub 上能看到结果。
+9. commit 只能保证本地可 diff；如果目的是让后续会话、其他机器或 GitHub 都能看到每轮差异，完成小任务并验证后应 push 到远端。
+10. push 规则：默认由 Claude 判断是否需要 push 并明确询问用户；只有用户在当前项目中明确说“以后自动 push”或等价长期授权后，才可在验证通过后自动 push。没有授权时，不要擅自 push。
+11. 每次完成后报告当前 `git status --short --branch`。如果显示 `[ahead N]`，必须明确说明远端还看不到这些版本差异，并询问用户是否 push。
+12. 如果新开分支或 fork 任务，完成后必须明确合并回 `main`，按上述 push 规则同步到 GitHub，并确认 GitHub 上能看到结果。
 
 ## 常用检查
 

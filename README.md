@@ -37,4 +37,4 @@ python3 -m json.tool project.config.json >/dev/null
 - 不要提交 `project.private.config.json`、`.env*`、`output/`、`tmp/`、原型资料、市场调研资料或高分辨率素材目录。
 - DeepSeek API Key 只能放在云函数环境变量中，不能写进前端源码或提交到 Git。
 - 每次迭代请更新 `docs/ITERATION_LOG.md`，写清楚改动页面、文件、验证结果、风险、提交号和 diff 基线。
-- 本地 commit 只能让当前机器可追踪差异；如需跨会话或在 GitHub 上恢复每轮版本，验证通过后应 push 到远端。
+- 本地 commit 只能让当前机器可追踪差异；如需跨会话或在 GitHub 上恢复每轮版本，验证通过后应 push 到远端。默认先询问用户确认，只有用户明确长期授权后才自动 push。
