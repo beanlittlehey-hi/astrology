@@ -14,6 +14,7 @@
 - [ ] 已执行 `python3 -m json.tool project.config.json >/dev/null`
 - [ ] 如改动云函数，已执行相关 `node --check cloudfunctions/.../index.js`
 - [ ] 如改动 UI，已在微信开发者工具或预览二维码中检查目标页面
+- [ ] `docs/ITERATION_LOG.md` 已记录提交号、验证结果和可复查的 diff 基线
 
 ## 风险
 
