@@ -51,8 +51,8 @@
 - 页面/模块：协作流程与版本管理
 - 改动文件：`AGENTS.md`、`docs/ITERATION_LOG.md`
 - 改动摘要：新增 Codex 项目协作规则，明确默认中文、命令前说明目的和风险、push 前确认、发现 `[ahead N]` 时必须提示远端不可见并询问是否 push。
-- 验证：待本次提交前运行 Git 状态和文档差异检查。
-- 风险/待确认：这是流程文档，不影响小程序运行；本地提交后仍需用户确认才 push。
+- 验证：`git status --short --branch`、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`
+- 风险/待确认：这是流程文档，不影响小程序运行。
 - 基线/对比：`git diff -- AGENTS.md docs/ITERATION_LOG.md`
-- 提交：待提交
-- 远端状态：待用户确认是否 push
+- 提交：`79b22eb Add Codex project guardrails`
+- 远端状态：已同步到 `origin/main`
