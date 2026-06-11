@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+
+# Local/editor/cache
+.claude/
+.playwright-cli/
+tmp/
+output/
+backups/
+
+# Private/local WeChat developer config
+project.private.config.json
+
+# Large/high-resolution generated assets
+miniprogram/assets/tarot-hires/
+
+# Dependencies/logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+scripts/
+
+# Source materials not part of the audit build
+原型图/
+市场调研/
+*.docx
+
+# Environment/secrets
+.env
+.env.*
+*.pem
+*.key

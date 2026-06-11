@@ -1,0 +1,479 @@
+<view class="page">
+  <view wx:if="{{screen === 'splash'}}" class="splash screen">
+    <view class="splash-panel">
+      <view class="splash-dots"></view>
+      <view class="splash-main">
+        <view class="brand-mark">
+          <image class="brand-logo" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
+        </view>
+        <view class="splash-copy">
+          <text class="title">月息塔罗</text>
+          <text class="desc">把一段不安的情绪，整理成今天可以完成的一小步。</text>
+        </view>
+      </view>
+      <view class="bottom-actions">
+        <view class="legal" bindtap="showDisclaimer">内容仅供娱乐、情绪陪伴和自我探索参考，不构成医疗、心理诊断、法律或投资建议。</view>
+        <button class="primary splash-primary" bindtap="enterApp">开启治愈之旅</button>
+      </view>
+    </view>
+    <view wx:if="{{authSheetOpen}}" class="auth-mask" bindtap="closeAuthSheet"></view>
+    <view wx:if="{{authSheetOpen}}" class="auth-sheet">
+      <view class="auth-sheet-handle"></view>
+      <view class="auth-sheet-head">
+        <view class="wechat-login-mark">微</view>
+        <view>
+          <text class="panel-title">微信授权登录</text>
+          <text class="muted">授权后即可进入月息塔罗。</text>
+        </view>
+      </view>
+      <button class="primary auth-primary" loading="{{authLoading}}" bindtap="startWechatLogin">微信一键登录</button>
+      <button class="ghost auth-cancel" bindtap="closeAuthSheet">暂不登录</button>
+      <text class="auth-note">登录仅用于记录你的抽牌与情绪日记，内容不构成医疗、心理诊断、法律或投资建议。</text>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'home'}}" class="screen app-screen">
+    <view class="content with-nav home-content">
+      <view class="topbar home-topbar">
+        <button class="profile-entry" bindtap="toggleDrawer">
+          <text class="avatar">M</text>
+          <text>月光旅人，欢迎回来</text>
+        </button>
+      </view>
+
+      <view class="hero-card daily-draw-card">
+        <view class="home-card-copy">
+          <text class="eyebrow">今日运势</text>
+          <text class="hero-title">随机抽取一张牌，查看今天的心流</text>
+          <button class="primary" data-screen="daily" data-nav="home" bindtap="go">抽取卡牌</button>
+        </view>
+        <view class="home-tarot-back">
+          <image src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+        </view>
+      </view>
+
+      <view class="quick-row {{healingEnabled ? '' : 'single'}}">
+        <button class="panel link-card home-spread-card" data-screen="question" data-nav="reading" bindtap="go">
+          <image class="home-card-bg" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
+          <text class="mini-icon teal">问</text>
+          <view class="home-small-copy">
+            <text class="panel-title">专属牌阵</text>
+            <text class="muted">感情 / 工作 / 综合</text>
+          </view>
+        </button>
+        <button wx:if="{{healingEnabled}}" class="panel link-card" bindtap="openHealing">
+          <text class="mini-icon rose">修</text>
+          <text class="panel-title">静心修心</text>
+          <text class="muted">水晶修心推荐</text>
+        </button>
+      </view>
+
+      <button class="list-item home-journal-card" data-id="{{diaries[0].id}}" bindtap="openDiary">
+        <image class="home-card-bg" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
+        <text class="mini-icon violet">记</text>
+        <view class="list-copy">
+          <view class="row-between">
+            <text class="panel-title">最近日记</text>
+            <text class="time">{{diaries[0].date}}</text>
+          </view>
+          <text class="tags">{{diaries[0].sceneName}} / {{diaries[0].emotionText}}</text>
+          <text class="muted clamp">{{diaries[0].userInput}}</text>
+        </view>
+      </button>
+    </view>
+
+    <view wx:if="{{drawerOpen}}" class="drawer-layer" bindtap="toggleDrawer"></view>
+    <view wx:if="{{drawerOpen}}" class="drawer">
+      <view class="drawer-head">
+        <text class="avatar large">M</text>
+        <view>
+          <text class="panel-title">月光旅人 0328</text>
+          <text class="muted">已记录 {{diaries.length}} 条情绪日记</text>
+        </view>
+      </view>
+      <button class="settings-row" data-screen="question" data-nav="reading" bindtap="go"><text>测算历史</text><text>8 条</text></button>
+      <button class="settings-row" data-screen="journal" data-nav="journal" bindtap="go"><text>情绪日记</text><text>{{diaries.length}} 条</text></button>
+      <button class="settings-row" bindtap="showDisclaimer"><text>隐私政策</text><text>查看</text></button>
+      <button class="settings-row" bindtap="showDisclaimer"><text>内容免责声明</text><text>查看</text></button>
+      <button class="settings-row" bindtap="resetLocalData"><text>账号注销</text><text>一键申请</text></button>
+      <text class="drawer-note">问题、测算结果和日记默认只展示摘要。</text>
+      <button class="ghost small drawer-logout" bindtap="logout">退出模拟登录</button>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'daily'}}" class="screen app-screen">
+    <view class="content daily-content">
+      <view class="topbar daily-topbar">
+        <view class="daily-round-btn" data-screen="home" data-nav="home" bindtap="go">‹</view>
+        <view class="daily-title">
+          <text class="h1">今日单张牌</text>
+          <text class="sub">给今天一个温和提醒</text>
+        </view>
+        <view class="daily-round-placeholder"></view>
+      </view>
+
+      <view class="today-card">
+        <view class="today-image-wrap">
+          <image class="today-image" src="{{dailyCard.image}}" mode="aspectFit"></image>
+        </view>
+        <view class="today-card-copy">
+          <text class="tags">关键词：{{dailyCard.keywordText}}</text>
+          <text class="muted">{{dailyCard.advice}}</text>
+        </view>
+      </view>
+      <view class="result-block accent daily-action-card">
+        <text class="panel-title">今日小行动</text>
+        <textarea class="textarea-input" value="{{dailyNote}}" placeholder="写下自己现在的心情和需求" bindinput="onDailyInput"></textarea>
+      </view>
+      <view class="daily-actions">
+        <button class="primary" bindtap="saveDailyDiary">生成今日情绪日记</button>
+        <button class="ghost" data-screen="question" data-nav="reading" bindtap="go">进一步询问</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'question'}}" class="screen app-screen">
+    <view class="content with-nav question-content">
+      <view class="topbar question-topbar">
+        <button class="icon-btn" data-screen="home" data-nav="home" bindtap="go">‹</button>
+        <view>
+          <text class="h1">进一步探索真实的内心</text>
+        </view>
+      </view>
+      <view class="question-label">选择您想深度问答的方向</view>
+      <view class="chips question-tabs">
+        <button wx:for="{{scenes}}" wx:key="id" class="chip {{selectedScene === item.id ? 'on' : ''}}" data-scene="{{item.id}}" bindtap="chooseScene">{{item.name}}</button>
+      </view>
+      <view class="question-hint">已选择「{{selectedSceneName}}」，自动选中推荐牌阵：{{selectedSpread.name}}。</view>
+      <view class="spread-list question-spread-list">
+        <button wx:for="{{filteredSpreads}}" wx:key="id" class="choice {{selectedSpreadId === item.id ? 'active' : ''}} {{item.disabled ? 'disabled' : ''}}" data-spread="{{item.id}}" bindtap="chooseSpread">
+          <view>
+            <text class="panel-title">{{item.name}}</text>
+            <text class="muted">{{item.summary}}</text>
+          </view>
+          <text class="badge">{{item.recommended ? '推荐' : item.badge}}</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'draw'}}" class="screen app-screen">
+    <view class="content draw-content">
+      <view class="topbar draw-topbar">
+        <view class="draw-round-btn" data-screen="question" data-nav="reading" bindtap="go">×</view>
+        <view class="draw-title">
+          <text class="h1">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
+          <text class="sub">{{drawSubtitle}}</text>
+        </view>
+        <view class="draw-round-placeholder"></view>
+      </view>
+
+      <view wx:if="{{hasShuffled}}" class="draw-guide">滑动牌轮，点击你第一眼被吸引的牌</view>
+
+      <view class="deck-area {{hasShuffled ? 'is-wheel' : 'is-pile'}}">
+        <view wx:if="{{!hasShuffled}}" class="deck-pile {{isShuffling ? 'shuffling' : ''}}" bindlongpress="shuffleDeck" bindtap="shuffleDeck">
+          <image wx:for="{{deckBacks}}" wx:key="*this" class="pile-card pile-card-{{index}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+        </view>
+        <view wx:else class="deck-wheel-panel">
+          <text class="draw-question-text">{{question}}</text>
+          <scroll-view class="deck-wheel-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+            <view class="deck-wheel" bindtap="drawOneCard">
+            <image wx:for="{{wheelCards}}" wx:key="*this" class="wheel-card wheel-card-{{index}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+            </view>
+          </scroll-view>
+        </view>
+        <text wx:if="{{!hasShuffled}}" class="deck-status primary-status">{{isShuffling ? '正在洗牌...' : '长按牌堆洗牌'}}</text>
+        <text wx:else class="deck-status">{{drawHint}}</text>
+      </view>
+
+      <view class="drawn draw-slots">
+        <view wx:for="{{drawSlots}}" wx:key="position" class="tarot-mini {{item.drawn ? 'is-drawn' : ''}}">
+          <image wx:if="{{item.drawn}}" class="drawn-card-image" src="{{item.image}}" mode="aspectFit"></image>
+          <view wx:else class="card-back">
+            <image src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+            <text>{{index === drawStep && hasShuffled ? '?' : item.previewName}}</text>
+          </view>
+          <text class="panel-title">{{item.position}}</text>
+          <text class="muted">{{item.status}}</text>
+        </view>
+      </view>
+
+      <button wx:if="{{hasShuffled}}" class="primary draw-result-btn" bindtap="viewResult">查看解读</button>
+    </view>
+    <view class="draw-input-pill">
+      <input class="draw-question-input" value="{{drawQuestionDraft}}" placeholder="请输入您想询问的问题" confirm-type="send" bindinput="onDrawQuestionInput" bindconfirm="submitDrawQuestion"></input>
+      <view class="send-dot" bindtap="submitDrawQuestion">↵</view>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'result'}}" class="screen app-screen">
+    <view class="content">
+      <view class="topbar">
+        <view>
+          <text class="h1">{{currentSession.title}}</text>
+          <text class="sub">{{currentSession.spreadName}} · 情绪解读</text>
+        </view>
+        <button class="icon-btn" bindtap="showDisclaimer">享</button>
+      </view>
+      <view class="result-block accent">
+        <text class="panel-title">问题摘要</text>
+        <text class="muted">{{currentSession.question}}</text>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">整体解读</text>
+        <text class="muted">{{currentSession.summary}}</text>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">牌位拆解</text>
+        <view class="insight-list">
+          <view wx:for="{{currentSession.cardInsights}}" wx:key="title" class="insight-item">
+            <text class="insight-title">{{item.title}}</text>
+            <text class="insight-meta">{{item.keywords}}</text>
+            <text class="muted">{{item.text}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">组合提示</text>
+        <text class="muted">{{currentSession.combinationInsight}}</text>
+      </view>
+      <view class="result-block warn">
+        <text class="panel-title">情绪识别</text>
+        <text class="muted">主要情绪：{{currentSession.emotionText}}。建议先区分事实和猜测。</text>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">24 小时行动</text>
+        <text class="muted">{{currentSession.action}}</text>
+      </view>
+      <textarea class="textarea-input tall result-note-card" value="{{resultNote}}" placeholder="补充你的想法" bindinput="onResultNote"></textarea>
+      <button class="primary" bindtap="saveSessionDiary">保存为情绪日记</button>
+    </view>
+  </view>
+
+  <view wx:elif="{{healingEnabled && screen === 'healing'}}" class="screen app-screen">
+    <view class="content with-nav healing-content">
+      <view class="topbar healing-topbar">
+        <view>
+          <text class="h1">给此刻的心情选一颗水晶</text>
+          <text class="sub">基于焦虑、期待和关系不确定</text>
+        </view>
+      </view>
+
+      <view wx:if="{{jewelryRecommendation}}" class="crystal-hero">
+        <text class="section-title">{{jewelryRecommendation.title}}</text>
+        <view class="bead-bracelet">
+          <view wx:for="{{braceletBeads}}" wx:key="*this" class="bracelet-bead bead-{{index}}"></view>
+          <view class="bracelet-core"></view>
+        </view>
+        <view class="crystal-copy">
+          <text class="section-title">推荐：{{jewelryRecommendation.primary.name}}</text>
+          <text class="muted">根据「恋人」与「节制」的提醒，这颗手链更适合帮你在关系里保持温柔表达，也提醒自己先稳定节奏，再靠近答案。</text>
+        </view>
+      </view>
+
+      <view wx:if="{{jewelryRecommendation}}" class="presale-section">
+        <text class="section-title">其他水晶推荐</text>
+        <view class="alt-list">
+          <button class="alt-jewelry" data-sku="{{jewelryRecommendation.primary.id}}" bindtap="openCustomOrder">
+            <view class="jewelry-stone" style="background: {{jewelryRecommendation.primary.color}}">{{jewelryRecommendation.primary.tone}}</view>
+            <view>
+              <text class="panel-title">{{jewelryRecommendation.primary.name}}</text>
+              <text class="muted">{{jewelryRecommendation.primary.stones}} · {{jewelryRecommendation.primary.theme}}</text>
+              <text class="presale">{{jewelryRecommendation.primary.price}} | {{jewelryRecommendation.primary.presale}}</text>
+            </view>
+          </button>
+          <button wx:for="{{jewelryRecommendation.alternatives}}" wx:key="id" class="alt-jewelry" data-sku="{{item.id}}" bindtap="openCustomOrder">
+            <view class="jewelry-stone" style="background: {{item.color}}">{{item.tone}}</view>
+            <view>
+              <text class="panel-title">{{item.name}}</text>
+              <text class="muted">{{item.stones}} · {{item.theme}}</text>
+              <text class="presale">{{item.price}} | {{item.presale}}</text>
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{healingEnabled && screen === 'custom'}}" class="screen app-screen">
+    <view class="content">
+      <view class="topbar">
+        <button class="icon-btn" bindtap="openHealing">‹</button>
+        <view>
+          <text class="h1">定制属于你的塔罗能量首饰</text>
+          <text class="sub">定制预售 · 先生成方案，后续可接客服或微信支付</text>
+        </view>
+      </view>
+      <view class="custom-hero">
+        <view class="jewelry-stone big" style="background: {{selectedJewelry.color}}">{{selectedJewelry.tone}}</view>
+        <view>
+          <text class="section-title">{{selectedJewelry.name}}</text>
+          <text class="tags">{{selectedJewelry.stones}} · {{selectedJewelry.form}}</text>
+          <text class="muted">{{selectedJewelry.reason}}</text>
+          <text class="price large-price">{{selectedJewelry.price}}</text>
+          <text class="presale">{{selectedJewelry.presale}}</text>
+        </view>
+      </view>
+      <view class="form-section">
+        <text class="panel-title">手围</text>
+        <input class="text-input" type="digit" value="{{orderForm.wristSize}}" data-field="wristSize" bindinput="onOrderInput" placeholder="例如 15"></input>
+      </view>
+      <view class="form-section">
+        <text class="panel-title">金属配件颜色</text>
+        <view class="chips compact">
+          <button class="chip {{orderForm.metal === '金色' ? 'on' : ''}}" data-field="metal" data-value="金色" bindtap="chooseOrderOption">金色</button>
+          <button class="chip {{orderForm.metal === '银色' ? 'on' : ''}}" data-field="metal" data-value="银色" bindtap="chooseOrderOption">银色</button>
+          <button class="chip {{orderForm.metal === '玫瑰金' ? 'on' : ''}}" data-field="metal" data-value="玫瑰金" bindtap="chooseOrderOption">玫瑰金</button>
+        </view>
+      </view>
+      <view class="form-section">
+        <text class="panel-title">风格</text>
+        <view class="chips compact">
+          <button class="chip {{orderForm.style === '简约' ? 'on' : ''}}" data-field="style" data-value="简约" bindtap="chooseOrderOption">简约</button>
+          <button class="chip {{orderForm.style === '甜美' ? 'on' : ''}}" data-field="style" data-value="甜美" bindtap="chooseOrderOption">甜美</button>
+          <button class="chip {{orderForm.style === '通勤' ? 'on' : ''}}" data-field="style" data-value="通勤" bindtap="chooseOrderOption">通勤</button>
+          <button class="chip {{orderForm.style === '神秘' ? 'on' : ''}}" data-field="style" data-value="神秘" bindtap="chooseOrderOption">神秘</button>
+        </view>
+      </view>
+      <view class="form-section">
+        <button class="toggle-row" data-field="includeCard" bindtap="toggleOrderOption">
+          <text>加入个人塔罗牌名小卡</text>
+          <text>{{orderForm.includeCard ? '已选' : '未选'}}</text>
+        </button>
+        <button class="toggle-row" data-field="includeDate" bindtap="toggleOrderOption">
+          <text>加入生日/星座/抽牌日期</text>
+          <text>{{orderForm.includeDate ? '已选' : '未选'}}</text>
+        </button>
+      </view>
+      <view class="form-section">
+        <text class="panel-title">专属祝福语</text>
+        <textarea class="textarea-input" value="{{orderForm.blessing}}" data-field="blessing" bindinput="onOrderInput" placeholder="写一句送给自己的提醒"></textarea>
+      </view>
+      <view class="result-block accent">
+        <text class="panel-title">预售说明</text>
+        <text class="muted">这不是改变结果的道具，而是一件提醒你回到自己节奏里的随身首饰。V0.1 暂不接支付，提交后仅生成方案。</text>
+      </view>
+      <button class="primary" bindtap="submitCustomOrder">生成预售方案</button>
+      <view wx:if="{{orderSummary}}" class="result-block">
+        <text class="panel-title">已生成方案</text>
+        <text class="muted">{{orderSummary.skuName}} · {{orderSummary.stones}} · {{orderSummary.price}}</text>
+        <text class="muted">{{orderSummary.presale}}</text>
+      </view>
+      <view class="legal">塔罗解读和水晶推荐仅作为情绪陪伴、文化娱乐和自我探索参考，不构成确定性预测，也不替代医疗、心理咨询、法律或投资建议。</view>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
+    <view class="content with-nav journal-content">
+      <view class="topbar journal-topbar">
+        <view>
+          <text class="h1">情绪轨迹</text>
+          <text class="sub">记录不是反刍，是看见变化</text>
+        </view>
+      </view>
+      <view class="journal-calendar">
+        <view
+          wx:for="{{journalCalendarDays}}"
+          wx:key="key"
+          class="journal-calendar-item type-{{item.type}} {{item.selected ? 'is-selected' : ''}}"
+          data-date="{{item.key}}"
+          data-type="{{item.type}}"
+          bindtap="selectJournalDate"
+        >
+          <text wx:if="{{item.week}}">{{item.week}}</text>
+          <text class="calendar-day">{{item.day}}</text>
+        </view>
+      </view>
+      <view class="panel mood-panel">
+        <text class="panel-title">本周情绪波动</text>
+        <view class="mood-bar">
+          <view wx:for="{{moodBars}}" wx:key="index" class="bar {{item.cls}}" style="height: {{item.height}}rpx"></view>
+        </view>
+        <view class="mood-legend"><text class="anxiety">焦虑</text><text class="calm">平静</text><text class="hesitate">犹豫</text><text class="hope">期待</text></view>
+        <text class="muted">焦虑减少 1 次，平静记录增加 2 次。</text>
+      </view>
+      <view class="timeline">
+        <button wx:for="{{filteredDiaries}}" wx:key="id" class="timeline-item" data-id="{{item.id}}" bindtap="openDiary">
+          <view class="timeline-dot {{item.moodClass}}"></view>
+          <text class="panel-title">{{item.date}} · {{item.sceneName}} · {{item.firstEmotion}}</text>
+          <text class="muted">{{item.summary}}</text>
+        </button>
+        <view wx:if="{{!journalHasFilteredDiaries}}" class="timeline-empty">这一天还没有记录。</view>
+      </view>
+    </view>
+    <view wx:if="{{journalCalendarOpen}}" class="journal-calendar-mask" bindtap="closeJournalCalendar"></view>
+    <view wx:if="{{journalCalendarOpen}}" class="journal-date-sheet">
+      <view class="journal-date-sheet-head">
+        <text class="panel-title">选择日期</text>
+        <view class="sheet-close" bindtap="closeJournalCalendar">×</view>
+      </view>
+      <view class="journal-date-grid">
+        <view
+          wx:for="{{journalAllDates}}"
+          wx:key="key"
+          class="journal-date-option {{item.selected ? 'is-selected' : ''}}"
+          data-date="{{item.key}}"
+          data-type="date"
+          bindtap="selectJournalDate"
+        >
+          <text>{{item.week}}</text>
+          <text>{{item.key}}</text>
+        </view>
+      </view>
+      <view wx:if="{{!journalAllDates.length}}" class="timeline-empty sheet-empty">还没有可筛选的日记日期。</view>
+    </view>
+  </view>
+
+  <view wx:elif="{{screen === 'diary'}}" class="screen app-screen">
+    <view class="content">
+      <view class="topbar">
+        <button class="icon-btn" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
+        <view>
+          <text class="h1">{{activeDiary.title}}</text>
+          <text class="sub">{{activeDiary.date}}</text>
+        </view>
+      </view>
+      <view class="chips">
+        <text class="chip on">{{activeDiary.sceneName}}</text>
+        <text wx:for="{{activeDiary.emotionTags}}" wx:key="*this" class="chip">{{item}}</text>
+      </view>
+      <view class="result-block accent">
+        <text class="panel-title">系统摘要</text>
+        <text class="muted">{{activeDiary.summary}}</text>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">我的补充</text>
+        <text class="muted">{{activeDiary.userInput}}</text>
+      </view>
+      <view class="result-block">
+        <text class="panel-title">关联牌阵</text>
+        <text class="muted">{{activeDiary.cardsText}}</text>
+      </view>
+      <view class="result-block warn">
+        <text class="panel-title">下次回来可以看</text>
+        <text class="muted">{{activeDiary.suggestion}}</text>
+      </view>
+      <button class="ghost" bindtap="openDiaryReport">查看完整塔罗报告</button>
+      <button wx:if="{{healingEnabled}}" class="primary" bindtap="openHealing">查看水晶推荐</button>
+    </view>
+  </view>
+
+  <view wx:if="{{showTab}}" class="bottom-nav">
+    <view class="nav-item {{activeNav === 'home' ? 'active' : ''}}" data-screen="home" data-nav="home" bindtap="go">
+      <text>首页</text>
+      <view class="nav-indicator"></view>
+    </view>
+    <view class="nav-item {{activeNav === 'reading' ? 'active' : ''}}" data-screen="question" data-nav="reading" bindtap="go">
+      <text>测算</text>
+      <view class="nav-indicator"></view>
+    </view>
+    <view class="nav-item {{activeNav === 'journal' ? 'active' : ''}}" data-screen="journal" data-nav="journal" bindtap="go">
+      <text>日记</text>
+      <view class="nav-indicator"></view>
+    </view>
+    <view wx:if="{{healingEnabled}}" class="nav-item {{activeNav === 'healing' ? 'active' : ''}}" data-screen="healing" data-nav="healing" bindtap="go">
+      <text>疗愈</text>
+      <view class="nav-indicator"></view>
+    </view>
+  </view>
+</view>
