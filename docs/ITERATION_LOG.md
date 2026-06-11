@@ -131,5 +131,16 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：`homeEmotionText` 仅用于首页最近日记展示，不改变日记存储和详情页；Tab 背景高度由固定 `92rpx` 控制，需真机确认视觉高度。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-card-bg.png miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：`cce7ccf Fix home journal tags and tab bar height`
+- 远端状态：已同步到 `origin/main`
+
+## 2026-06-12 - 首页第六轮日期右对齐与 Tab 容器修复
+
+- 页面/模块：首页 `home-v2`
+- 改动文件：`miniprogram/assets/home-v2/tab-card-bg.png`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：修复最近日记日期只在窄 `.list-copy` 内对齐的问题，为最近日记单独扩展右侧内容宽度；将 Tab 直角背景图从 `92` 高调整为 `118` 高，并让底图和 `nav-item` 同高贴底，避免 icon/文字溢出到底图外。
+- 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：最近日记宽度用首页尺寸公式控制，目标是让日期贴近小卡右侧；需真机确认是否与右侧装饰重叠到可接受范围。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-card-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
