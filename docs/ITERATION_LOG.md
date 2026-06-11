@@ -67,3 +67,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-*.png docs/ITERATION_LOG.md`
 - 提交：本提交 `Optimize home tab icon assets`
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 首页现有图片尺寸与透明背景修复
+
+- 页面/模块：首页 `home-v2` 图片资源
+- 改动文件：`miniprogram/assets/home-v2/home-bg-clean.jpg`、`miniprogram/assets/home-v2/home-card-hero-bg.png`、`miniprogram/assets/home-v2/home-card-small-bg.png`、`miniprogram/assets/home-v2/home-icon-question.png`、`miniprogram/assets/home-v2/home-icon-diary.png`、`miniprogram/pages/index/index.wxml`、`docs/ITERATION_LOG.md`
+- 改动摘要：仅处理 `/Users/shimiao/Desktop/Moon-Island-homepage01/` 已有图片，不重新生成；将首页背景改为长屏 `750x1624` 并压缩为 JPG 以满足微信预览包 2MB 限制，将大小卡片裁切为透明 PNG 并保持现有小程序尺寸，将问/记图标裁切为透明 `128x128`。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/home-v2/home-*.png`、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`
+- 风险/待确认：背景源图为 `1024x1536`，为适配 `750x1624` 长屏，底部使用模糊延展补足；背景最终采用 JPG 压缩，需真机预览确认是否接受。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/home-* miniprogram/pages/index/index.wxml docs/ITERATION_LOG.md`
+- 提交：本提交 `Fix home image asset sizing`
+- 远端状态：待用户确认是否 push

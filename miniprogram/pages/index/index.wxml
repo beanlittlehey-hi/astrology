@@ -33,7 +33,7 @@
   </view>
 
   <view wx:elif="{{screen === 'home'}}" class="screen app-screen home-v2-screen">
-    <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.png" mode="aspectFill"></image>
+    <image class="home-v2-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="content with-nav home-v2-content">
       <button class="home-v2-profile" bindtap="toggleDrawer">
         <text class="avatar home-v2-avatar">M</text>
