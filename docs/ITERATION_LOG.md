@@ -45,3 +45,14 @@
 - 基线/对比：`git diff 84f1a75..ab1a278 -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/home-v2 docs/ITERATION_LOG.md`
 - 提交：`ab1a278 Restore editable home v2 UI`、`36d40b3 Record home v2 commit in iteration log`
 - 远端状态：已在本轮同步到 `origin/main`，GitHub 可通过上述提交号和 diff 基线复查首页差异。
+
+## 2026-06-11 - Codex push 规则固化
+
+- 页面/模块：协作流程与版本管理
+- 改动文件：`AGENTS.md`、`docs/ITERATION_LOG.md`
+- 改动摘要：新增 Codex 项目协作规则，明确默认中文、命令前说明目的和风险、push 前确认、发现 `[ahead N]` 时必须提示远端不可见并询问是否 push。
+- 验证：待本次提交前运行 Git 状态和文档差异检查。
+- 风险/待确认：这是流程文档，不影响小程序运行；本地提交后仍需用户确认才 push。
+- 基线/对比：`git diff -- AGENTS.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
