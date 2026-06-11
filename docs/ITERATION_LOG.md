@@ -56,3 +56,14 @@
 - 基线/对比：`git diff -- AGENTS.md docs/ITERATION_LOG.md`
 - 提交：`79b22eb Add Codex project guardrails`
 - 远端状态：已同步到 `origin/main`
+
+## 2026-06-11 - 首页 Tab 图标资源轻量化接入
+
+- 页面/模块：首页底部 Tab
+- 改动文件：`miniprogram/assets/home-v2/tab-home-active.png`、`miniprogram/assets/home-v2/tab-home-default.png`、`miniprogram/assets/home-v2/tab-reading-active.png`、`miniprogram/assets/home-v2/tab-reading-default.png`、`miniprogram/assets/home-v2/tab-diary-active.png`、`miniprogram/assets/home-v2/tab-diary-default.png`、`docs/ITERATION_LOG.md`
+- 改动摘要：从 `/Users/shimiao/Desktop/Moon-Island-homepage01/` 提取 6 张 Tab 源图主体，去除边缘棋盘格背景，裁切为透明 `128x128` PNG，单张大小控制在约 `21K-31K`。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/home-v2/tab-*.png`、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`
+- 风险/待确认：源图本身没有透明通道，当前为自动去除边缘浅色棋盘格后的轻量版本；需真机预览确认细节边缘是否满足视觉要求。
+- 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-*.png docs/ITERATION_LOG.md`
+- 提交：本提交 `Optimize home tab icon assets`
+- 远端状态：待用户确认是否 push
