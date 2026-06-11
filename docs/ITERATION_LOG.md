@@ -40,4 +40,4 @@
 - 改动摘要：将首页切换为 `home-v2` 可编辑结构，使用 `miniprogram/assets/home-v2/` PNG 背景、卡片、塔罗卡背、问/记图标和三栏 Tab 图标；保留头像抽屉、今日抽牌、专属牌阵、最近日记和底部导航原有点击绑定。
 - 验证：`git status --short --branch`、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、`miniprogram/assets/home-v2/*` 资源存在性检查、微信开发者工具 `cli preview` 均已通过；预览包约 `2.0 MB`。
 - 风险/待确认：PNG 资源保持原格式，需通过微信开发者工具预览确认首页视觉与包体大小；本次不改其它页面。
-- 提交：本次提交
+- 提交：`ab1a278 Restore editable home v2 UI`
