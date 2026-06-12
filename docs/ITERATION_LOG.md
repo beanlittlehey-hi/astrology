@@ -239,3 +239,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 导航栏与标题栏位置冻结规则
+
+- 页面/模块：项目 UI 协作规则、自定义导航
+- 改动文件：`AGENTS.md`、`docs/ITERATION_LOG.md`
+- 改动摘要：按用户确认，将本轮导航与标题栏实现固化为后续默认规则：所有后续页面和视觉改动不得调整自定义导航栏高度、返回按钮位置、标题起点、标题垂直对齐和右侧胶囊避让规则；除非用户明确指出要修改导航或标题位置。
+- 验证：文档规则更新，无业务代码改动。
+- 风险/待确认：后续 UI 迭代必须避开导航/标题位置，页面主体内容需要以现有 `navLayout` 和 `custom-nav` 为固定边界继续设计。
+- 基线/对比：`git diff --stat -- AGENTS.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待 push
