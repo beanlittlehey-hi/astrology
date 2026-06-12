@@ -196,11 +196,11 @@
 ## 2026-06-12 - 今日单张牌导航对齐与上移修复
 
 - 页面/模块：今日单张牌、二级页面顶部导航
-- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
-- 改动摘要：新增 `wx.getMenuButtonBoundingClientRect()` 导航测量，统一今日单张牌、测算/牌阵、抽牌、结果、日记列表和日记详情的顶部标题/返回按钮与微信右上角胶囊按钮垂直居中；删除今日单张牌副标题「给今天一个温和提醒」；将今日卡牌卡片、今日行动卡片和两个按钮上移到标题下方，减少大块留白。
-- 根因：此前所有二级页导航都依赖固定 `rpx` 顶部间距，没有读取微信原生胶囊按钮位置；今日页还叠加了多轮历史 `daily-content`/`daily-topbar` WXSS override，导致标题和卡片区域被反复顶下去。
-- 验证：`node --check miniprogram/pages/index/index.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2074272` Byte，主包约 `1041172` Byte。
-- 风险/待确认：导航位置改为运行时读取微信胶囊位置，需真机确认不同机型上今日单张牌、测算、抽牌、结果、日记列表、日记详情的标题行均与右上角胶囊同线；首页和启动页不纳入二级导航规则。
-- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 改动文件：`miniprogram/utils/navLayout.js`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：新增可复用 `getNavLayout()` 工具，使用 `wx.getMenuButtonBoundingClientRect()` 与 `wx.getWindowInfo()` 计算微信胶囊真实坐标、标题区、返回按钮尺寸和导航总高度；今日单张牌、测算/牌阵、抽牌、结果、日记列表和日记详情统一改用 fixed `.custom-nav`，返回按钮和标题直接使用 px 坐标与右上角胶囊垂直居中；删除今日单张牌副标题「给今天一个温和提醒」，并让今日卡牌卡片、今日行动卡片和按钮贴近导航标题下方。
+- 根因：此前页面导航仍在内容流里靠 `rpx` padding 和负 margin 回拉，即使读取了胶囊高度，也会被页面 padding、历史 `.topbar` 样式和标题副标题高度影响；正确做法是公共工具计算真实 px 坐标，导航层 fixed 到屏幕顶部，内容区只按 `navTotalHeight` 避让。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2076062` Byte，主包约 `1042962` Byte。
+- 风险/待确认：标题区会同时预留左侧返回按钮安全区和右侧胶囊安全区，较长标题会省略显示；需真机/模拟器确认刘海屏和普通安卓尺寸下，今日单张牌、测算、抽牌、结果、日记列表、日记详情标题/返回按钮均与右上角胶囊同线。首页欢迎区和启动页不纳入二级导航规则，底部 tab 未改。
+- 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push

@@ -99,14 +99,13 @@
   </view>
 
   <view wx:elif="{{screen === 'daily'}}" class="screen app-screen">
-    <view class="content native-nav-content daily-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar daily-topbar">
-        <view class="daily-round-btn" data-screen="home" data-nav="home" bindtap="go">‹</view>
-        <view class="daily-title">
-          <text class="h1">今日单张牌</text>
-        </view>
-        <view class="daily-round-placeholder"></view>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <view class="custom-nav-back daily-round-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
+      <view class="custom-nav-title daily-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">今日单张牌</text>
       </view>
+    </view>
+    <view class="content custom-nav-content daily-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
 
       <view class="today-card">
         <view class="today-image-wrap">
@@ -130,15 +129,15 @@
 
   <view wx:elif="{{screen === 'question'}}" class="screen app-screen reading-v2-screen">
     <image class="reading-v2-bg" src="/assets/reading-v2/reading-bg-clean.jpg" mode="aspectFill"></image>
-    <view class="content with-nav native-nav-content question-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar question-topbar">
-        <button class="icon-btn" data-screen="home" data-nav="home" bindtap="go">
-          <text>‹</text>
-        </button>
-        <view>
-          <text class="h1">进一步探索真实的内心</text>
-        </view>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <button class="custom-nav-back icon-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
+        <text>‹</text>
+      </button>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">进一步探索真实的内心</text>
       </view>
+    </view>
+    <view class="content with-nav custom-nav-content question-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
       <view class="question-label">选择您想深度问答的方向</view>
       <view class="chips question-tabs">
         <button wx:for="{{scenes}}" wx:key="id" class="chip {{selectedScene === item.id ? 'on' : ''}}" data-scene="{{item.id}}" bindtap="chooseScene">
@@ -166,15 +165,14 @@
   </view>
 
   <view wx:elif="{{screen === 'draw'}}" class="screen app-screen">
-    <view class="content native-nav-content draw-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar draw-topbar">
-        <view class="draw-round-btn" data-screen="question" data-nav="reading" bindtap="go">×</view>
-        <view class="draw-title">
-          <text class="h1">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
-          <text class="sub">{{drawSubtitle}}</text>
-        </view>
-        <view class="draw-round-placeholder"></view>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <view class="custom-nav-back draw-round-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">×</view>
+      <view class="custom-nav-title draw-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
       </view>
+    </view>
+    <view class="content custom-nav-content draw-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
+      <text class="draw-subtitle-inline">{{drawSubtitle}}</text>
 
       <view wx:if="{{hasShuffled}}" class="draw-guide">滑动牌轮，点击你第一眼被吸引的牌</view>
 
@@ -215,14 +213,13 @@
   </view>
 
   <view wx:elif="{{screen === 'result'}}" class="screen app-screen">
-    <view class="content native-nav-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar result-topbar">
-        <view>
-          <text class="h1">{{currentSession.title}}</text>
-          <text class="sub">{{currentSession.spreadName}} · 情绪解读</text>
-        </view>
-        <button class="icon-btn" bindtap="showDisclaimer">享</button>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <view class="custom-nav-title result-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">{{currentSession.title}}</text>
       </view>
+    </view>
+    <view class="content custom-nav-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
+      <text class="result-subtitle-inline">{{currentSession.spreadName}} · 情绪解读</text>
       <view class="result-block accent">
         <text class="panel-title">问题摘要</text>
         <text class="muted">{{currentSession.question}}</text>
@@ -259,13 +256,13 @@
   </view>
 
   <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
-    <view class="content with-nav native-nav-content journal-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar journal-topbar">
-        <view>
-          <text class="h1">情绪轨迹</text>
-          <text class="sub">记录不是反刍，是看见变化</text>
-        </view>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <view class="custom-nav-title journal-topbar" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">情绪轨迹</text>
       </view>
+    </view>
+    <view class="content with-nav custom-nav-content journal-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
+      <text class="journal-subtitle-inline">记录不是反刍，是看见变化</text>
       <view class="journal-calendar">
         <view
           wx:for="{{journalCalendarDays}}"
@@ -320,14 +317,14 @@
   </view>
 
   <view wx:elif="{{screen === 'diary'}}" class="screen app-screen">
-    <view class="content native-nav-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
-      <view class="topbar native-topbar diary-topbar">
-        <button class="icon-btn" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
-        <view>
-          <text class="h1">{{activeDiary.title}}</text>
-          <text class="sub">{{activeDiary.date}}</text>
-        </view>
+    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+      <button class="custom-nav-back icon-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
+      <view class="custom-nav-title diary-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="h1">{{activeDiary.title}}</text>
       </view>
+    </view>
+    <view class="content custom-nav-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
+      <text class="diary-subtitle-inline">{{activeDiary.date}}</text>
       <view class="chips">
         <text class="chip on">{{activeDiary.sceneName}}</text>
         <text wx:for="{{activeDiary.emotionTags}}" wx:key="*this" class="chip">{{item}}</text>
