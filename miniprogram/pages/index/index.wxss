@@ -877,62 +877,6 @@
   background: #1f2430;
 }
 
-.crystal-hero {
-  min-height: 356rpx;
-  padding: 32rpx;
-  display: grid;
-  grid-template-columns: 180rpx 1fr;
-  gap: 28rpx;
-  align-items: center;
-  background: #eee5f9;
-  border: 2rpx solid #d7c7f1;
-  border-radius: 16rpx;
-}
-
-.crystal-art {
-  width: 180rpx;
-  height: 220rpx;
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-  font-size: 56rpx;
-  font-weight: 900;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.28), transparent 36%),
-    linear-gradient(160deg, #7d67f2 0%, #b55e9e 100%);
-  border: 6rpx solid rgba(255, 255, 255, 0.72);
-  border-radius: 56rpx 56rpx 36rpx 36rpx;
-  box-shadow: 0 28rpx 56rpx rgba(107, 92, 255, 0.18);
-}
-
-.crystal-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20rpx;
-  margin-top: 24rpx;
-}
-
-.crystal-option {
-  padding: 20rpx;
-  border: 2rpx solid #d8d2c8;
-  border-radius: 16rpx;
-  background: #fffaf1;
-}
-
-.crystal-photo {
-  height: 144rpx;
-  margin-bottom: 16rpx;
-  border-radius: 20rpx;
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-  font-size: 36rpx;
-  font-weight: 900;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent 38%),
-    #6b5cff;
-}
-
 .reader-cta {
   padding: 24rpx;
   margin-top: 24rpx;
@@ -1172,7 +1116,6 @@
 .today-card,
 .tarot-mini,
 .result-card,
-.crystal-option,
 .textarea-input {
   background: rgba(255, 255, 255, 0.72);
   border: 2rpx solid rgba(202, 181, 255, 0.34);
@@ -1544,8 +1487,6 @@
 .deck-hint,
 .tarot-mini,
 .result-card,
-.crystal-hero,
-.crystal-option,
 .today-card,
 .timeline-item {
   background: rgba(255, 255, 255, 0.72);
@@ -1819,192 +1760,6 @@
   color: #8b55ff;
   background: rgba(255, 255, 255, 0.82);
   border: 3rpx solid rgba(216, 198, 255, 0.82);
-}
-
-/* Healing crystal page */
-.healing-content {
-  padding-top: 42rpx;
-  padding-bottom: calc(168rpx + env(safe-area-inset-bottom));
-  background:
-    radial-gradient(circle at 0% 10%, rgba(214, 247, 255, 0.92), transparent 36%),
-    radial-gradient(circle at 94% 7%, rgba(255, 239, 249, 0.86), transparent 35%),
-    linear-gradient(180deg, #fbf8ff 0%, #f2edff 100%);
-}
-
-.healing-topbar {
-  margin-bottom: 30rpx;
-}
-
-.healing-topbar > view {
-  flex: none;
-  width: 100%;
-}
-
-.healing-topbar .h1 {
-  color: #282342;
-  font-size: 38rpx;
-  line-height: 1.25;
-  font-weight: 900;
-}
-
-.healing-topbar .sub {
-  margin-top: 10rpx;
-  color: #89839f;
-  font-size: 25rpx;
-  line-height: 1.42;
-  font-weight: 800;
-}
-
-.healing-content .crystal-hero {
-  min-height: 0;
-  padding: 28rpx 30rpx 34rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 28rpx;
-  border-radius: 20rpx;
-  background:
-    radial-gradient(circle at 86% 8%, rgba(222, 247, 255, 0.9), transparent 38%),
-    radial-gradient(circle at 14% 48%, rgba(255, 244, 252, 0.78), transparent 42%),
-    rgba(255, 255, 255, 0.62);
-  border: 2rpx solid rgba(216, 198, 255, 0.72);
-  box-shadow: 0 24rpx 58rpx rgba(126, 97, 210, 0.07);
-}
-
-.healing-content .section-title {
-  display: block;
-  color: #282342;
-  font-size: 31rpx;
-  line-height: 1.3;
-  font-weight: 900;
-}
-
-.bead-bracelet {
-  position: relative;
-  width: 250rpx;
-  height: 188rpx;
-  margin: 12rpx auto 4rpx;
-}
-
-.bracelet-bead,
-.bracelet-core {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.bracelet-bead {
-  width: 42rpx;
-  height: 42rpx;
-  background:
-    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.72), transparent 22%),
-    linear-gradient(145deg, #df8ab1 0%, #be5d83 100%);
-  box-shadow:
-    inset 0 -6rpx 12rpx rgba(132, 50, 83, 0.16),
-    0 12rpx 26rpx rgba(190, 93, 131, 0.16);
-}
-
-.bracelet-core {
-  width: 52rpx;
-  height: 52rpx;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.84), transparent 24%),
-    linear-gradient(145deg, #f3ecff 0%, #b7a2ff 100%);
-  box-shadow: 0 14rpx 26rpx rgba(142, 100, 255, 0.16);
-}
-
-.bead-0 { transform: translate(-50%, -50%) translate(-84rpx, -30rpx); }
-.bead-1 { transform: translate(-50%, -50%) translate(-48rpx, -66rpx); }
-.bead-2 { transform: translate(-50%, -50%) translate(0, -78rpx); }
-.bead-3 { transform: translate(-50%, -50%) translate(48rpx, -66rpx); }
-.bead-4 { transform: translate(-50%, -50%) translate(84rpx, -30rpx); }
-.bead-5 { transform: translate(-50%, -50%) translate(88rpx, 22rpx); }
-.bead-6 { transform: translate(-50%, -50%) translate(48rpx, 64rpx); }
-.bead-7 { transform: translate(-50%, -50%) translate(0, 76rpx); }
-.bead-8 { transform: translate(-50%, -50%) translate(-48rpx, 64rpx); }
-.bead-9 { transform: translate(-50%, -50%) translate(-88rpx, 22rpx); }
-
-.crystal-copy .section-title {
-  margin-bottom: 16rpx;
-}
-
-.crystal-copy .muted {
-  display: block;
-  color: #89839f;
-  font-size: 25rpx;
-  line-height: 1.55;
-  font-weight: 700;
-}
-
-.healing-content .presale-section {
-  margin-top: 28rpx;
-  padding: 30rpx;
-  border-radius: 18rpx;
-  background: rgba(255, 255, 255, 0.74);
-  border: 2rpx solid rgba(238, 228, 255, 0.84);
-  box-shadow: 0 20rpx 48rpx rgba(126, 97, 210, 0.06);
-}
-
-.healing-content .alt-list {
-  display: grid;
-  gap: 20rpx;
-  margin-top: 24rpx;
-}
-
-.healing-content .alt-jewelry {
-  width: 100%;
-  min-height: 160rpx;
-  box-sizing: border-box;
-  padding: 22rpx;
-  display: grid;
-  grid-template-columns: 118rpx minmax(0, 1fr);
-  gap: 24rpx;
-  align-items: center;
-  text-align: left;
-  border-radius: 16rpx;
-  background: rgba(255, 251, 244, 0.84);
-  border: 2rpx solid rgba(226, 211, 255, 0.82);
-  box-shadow: none;
-}
-
-.healing-content .jewelry-stone {
-  width: 104rpx;
-  height: 104rpx;
-  border-radius: 30rpx;
-  color: #ffffff;
-  font-size: 36rpx;
-  font-weight: 900;
-  box-shadow:
-    inset 0 0 0 6rpx rgba(255, 255, 255, 0.22),
-    0 16rpx 32rpx rgba(126, 97, 210, 0.12);
-}
-
-.healing-content .alt-jewelry .panel-title {
-  display: block;
-  color: #282342;
-  font-size: 28rpx;
-  line-height: 1.35;
-  font-weight: 900;
-}
-
-.healing-content .alt-jewelry .muted {
-  display: block;
-  margin-top: 10rpx;
-  color: #89839f;
-  font-size: 23rpx;
-  line-height: 1.45;
-  font-weight: 700;
-}
-
-.healing-content .alt-jewelry .presale {
-  display: block;
-  margin-top: 10rpx;
-  color: #bf5b75;
-  font-size: 24rpx;
-  line-height: 1.35;
-  font-weight: 900;
 }
 
 /* Draw interaction page */
@@ -2376,19 +2131,6 @@
   background:
     radial-gradient(circle at 50% 30%, rgba(255, 191, 72, 0.9) 0 11rpx, transparent 13rpx),
     linear-gradient(135deg, rgba(135, 72, 255, 0.94), rgba(125, 202, 244, 0.86));
-}
-
-.crystal-hero {
-  background:
-    radial-gradient(circle at 88% 4%, rgba(255, 223, 240, 0.72), transparent 38%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(242, 237, 255, 0.76));
-}
-
-.crystal-art,
-.crystal-photo {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 38%),
-    linear-gradient(160deg, #8f70ff 0%, #7bd3eb 100%);
 }
 
 .reader-cta {
@@ -3220,176 +2962,6 @@
   box-shadow: inset 0 0 0 2rpx rgba(202, 181, 255, 0.24);
 }
 
-/* Crystal presale recommendation */
-.jewelry-reco,
-.presale-section,
-.custom-hero,
-.form-section {
-  margin-top: 24rpx;
-  padding: 24rpx;
-  border: 2rpx solid #d8d2c8;
-  border-radius: 16rpx;
-  background: #fffaf1;
-}
-
-.jewelry-reco {
-  background: #f7f0fb;
-  border-color: #d7c7f1;
-}
-
-.jewelry-card {
-  width: 100%;
-  margin-top: 22rpx;
-  padding: 22rpx;
-  border: 2rpx solid rgba(216, 210, 200, 0.9);
-  border-radius: 16rpx;
-  display: grid;
-  grid-template-columns: 96rpx minmax(0, 1fr);
-  gap: 20rpx;
-  align-items: start;
-  text-align: left;
-  background: rgba(255, 253, 248, 0.86);
-}
-
-.primary-jewelry {
-  box-shadow: 0 18rpx 42rpx rgba(93, 73, 142, 0.1);
-}
-
-.jewelry-stone,
-.crystal-dot {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-weight: 900;
-}
-
-.jewelry-stone {
-  width: 96rpx;
-  height: 96rpx;
-  border-radius: 28rpx;
-  font-size: 30rpx;
-  box-shadow: inset 0 0 0 4rpx rgba(255, 255, 255, 0.34);
-}
-
-.jewelry-stone.big {
-  width: 132rpx;
-  height: 132rpx;
-  border-radius: 36rpx;
-  font-size: 38rpx;
-}
-
-.jewelry-copy {
-  min-width: 0;
-}
-
-.price {
-  flex: 0 0 auto;
-  color: #bf5b75;
-  font-size: 26rpx;
-  font-weight: 900;
-  white-space: nowrap;
-}
-
-.large-price {
-  display: block;
-  margin-top: 14rpx;
-  font-size: 34rpx;
-}
-
-.presale {
-  display: block;
-  margin-top: 12rpx;
-  color: #b87913;
-  font-size: 22rpx;
-  line-height: 1.45;
-  font-weight: 900;
-}
-
-.mini-legal {
-  margin-top: 18rpx;
-  font-size: 20rpx;
-}
-
-.alt-list {
-  display: grid;
-  gap: 16rpx;
-  margin-top: 20rpx;
-}
-
-.alt-jewelry {
-  width: 100%;
-  min-height: 104rpx;
-  padding: 20rpx;
-  border: 2rpx solid #d8d2c8;
-  border-radius: 16rpx;
-  display: grid;
-  grid-template-columns: 44rpx minmax(0, 1fr);
-  gap: 16rpx;
-  align-items: center;
-  text-align: left;
-  background: #fffdf8;
-}
-
-.crystal-dot {
-  width: 44rpx;
-  height: 44rpx;
-  border-radius: 50%;
-}
-
-.custom-hero {
-  display: grid;
-  grid-template-columns: 132rpx minmax(0, 1fr);
-  gap: 24rpx;
-  align-items: start;
-  background: #f7f0fb;
-  border-color: #d7c7f1;
-}
-
-.form-section {
-  background: rgba(255, 250, 241, 0.86);
-}
-
-.text-input {
-  width: 100%;
-  min-height: 80rpx;
-  margin-top: 16rpx;
-  padding: 0 20rpx;
-  border: 2rpx solid #d8d2c8;
-  border-radius: 16rpx;
-  color: #1f2430;
-  background: #fffdf8;
-  font-size: 26rpx;
-}
-
-.chips.compact {
-  margin-bottom: 0;
-}
-
-.toggle-row {
-  width: 100%;
-  min-height: 86rpx;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20rpx;
-  color: #1f2430;
-  border-bottom: 2rpx solid #d8d2c8;
-  font-size: 25rpx;
-  font-weight: 800;
-  text-align: left;
-}
-
-.toggle-row:last-child {
-  border-bottom: 0;
-}
-
-.toggle-row text:last-child {
-  color: #177e89;
-  white-space: nowrap;
-}
-
 /* Fixed bottom tab */
 .bottom-nav {
   position: fixed;
@@ -3792,24 +3364,11 @@
 .draw-title .h1,
 .journal-topbar .h1,
 .question-topbar .h1,
-.healing-topbar .h1 {
-  color: #282342;
-  font-size: 40rpx;
-  line-height: 1.16;
-  font-weight: 900;
-}
 
 .app-screen .topbar:not(.home-topbar) .sub,
 .daily-title .sub,
 .draw-title .sub,
 .journal-topbar .sub,
-.healing-topbar .sub {
-  margin-top: 8rpx;
-  color: #89839f;
-  font-size: 24rpx;
-  line-height: 1.35;
-  font-weight: 800;
-}
 
 /* Daily page final full-screen balance */
 .app-screen .daily-content {
@@ -3923,8 +3482,7 @@
 .daily-content,
 .question-content,
 .draw-content,
-.journal-content,
-.healing-content {
+.journal-content {
   color: var(--ink);
   background:
     radial-gradient(circle at 18% 0%, rgba(196, 215, 233, 0.34), transparent 34%),
@@ -3981,15 +3539,11 @@
 .today-card,
 .tarot-mini,
 .result-card,
-.crystal-option,
 .textarea-input,
 .deck-area,
 .deck-hint,
 .mood-panel,
-.presale-section,
-.custom-hero,
-.form-section,
-.alt-jewelry {
+.form-section {
   color: var(--ink);
   border-color: var(--line);
   background:
@@ -4001,7 +3555,6 @@
 .hero-card,
 .today-card,
 .deck-area,
-.crystal-hero,
 .result-report,
 .draw-content .deck-area,
 .daily-content .today-card {
@@ -4282,8 +3835,7 @@
 .daily-content,
 .question-content,
 .draw-content,
-.journal-content,
-.healing-content {
+.journal-content {
   background:
     repeating-radial-gradient(ellipse at 50% 0%, transparent 0 44rpx, rgba(143, 154, 198, 0.12) 46rpx 50rpx, transparent 52rpx 92rpx),
     radial-gradient(circle at 12% 4%, rgba(196, 215, 233, 0.24), transparent 34%),
@@ -4373,8 +3925,7 @@
 .daily-content,
 .question-content,
 .draw-content,
-.journal-content,
-.healing-content {
+.journal-content {
   background:
     radial-gradient(circle at 12% 4%, rgba(196, 215, 233, 0.2), transparent 34%),
     radial-gradient(circle at 88% 14%, rgba(226, 214, 234, 0.18), transparent 32%),
@@ -4416,8 +3967,7 @@
 .daily-content,
 .question-content,
 .draw-content,
-.journal-content,
-.healing-content {
+.journal-content {
   background-image:
     radial-gradient(circle at 12% 4%, rgba(196, 215, 233, 0.2), transparent 34%),
     radial-gradient(circle at 88% 14%, rgba(226, 214, 234, 0.18), transparent 32%),

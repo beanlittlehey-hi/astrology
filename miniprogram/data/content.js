@@ -4,7 +4,7 @@ const tarotDeck = [
     "name": "愚者",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/00-the-fool.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/00-the-fool.jpg",
     "keywords": [
       "开始",
       "自由",
@@ -22,7 +22,7 @@ const tarotDeck = [
     "name": "魔术师",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/01-the-magician.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/01-the-magician.jpg",
     "keywords": [
       "行动",
       "表达",
@@ -40,7 +40,7 @@ const tarotDeck = [
     "name": "女祭司",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/02-the-high-priestess.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/02-the-high-priestess.jpg",
     "keywords": [
       "直觉",
       "沉静",
@@ -58,7 +58,7 @@ const tarotDeck = [
     "name": "女皇",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/03-the-empress.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/03-the-empress.jpg",
     "keywords": [
       "滋养",
       "照顾",
@@ -76,7 +76,7 @@ const tarotDeck = [
     "name": "皇帝",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/04-the-emperor.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/04-the-emperor.jpg",
     "keywords": [
       "秩序",
       "边界",
@@ -94,7 +94,7 @@ const tarotDeck = [
     "name": "教皇",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/05-the-hierophant.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/05-the-hierophant.jpg",
     "keywords": [
       "传统",
       "信念",
@@ -112,7 +112,7 @@ const tarotDeck = [
     "name": "恋人",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/06-the-lovers.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/06-the-lovers.jpg",
     "keywords": [
       "连接",
       "选择",
@@ -130,7 +130,7 @@ const tarotDeck = [
     "name": "战车",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/07-the-chariot.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/07-the-chariot.jpg",
     "keywords": [
       "推进",
       "意志",
@@ -148,7 +148,7 @@ const tarotDeck = [
     "name": "力量",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/08-strength.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/08-strength.jpg",
     "keywords": [
       "温柔坚定",
       "耐心",
@@ -166,7 +166,7 @@ const tarotDeck = [
     "name": "隐士",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/09-the-hermit.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/09-the-hermit.jpg",
     "keywords": [
       "独处",
       "内省",
@@ -184,7 +184,7 @@ const tarotDeck = [
     "name": "命运之轮",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/10-wheel-of-fortune.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/10-wheel-of-fortune.jpg",
     "keywords": [
       "变化",
       "周期",
@@ -202,7 +202,7 @@ const tarotDeck = [
     "name": "正义",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/11-justice.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/11-justice.jpg",
     "keywords": [
       "公平",
       "事实",
@@ -220,7 +220,7 @@ const tarotDeck = [
     "name": "倒吊人",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/12-the-hanged-man.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/12-the-hanged-man.jpg",
     "keywords": [
       "暂停",
       "换角度",
@@ -238,7 +238,7 @@ const tarotDeck = [
     "name": "死神",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/13-death.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/13-death.jpg",
     "keywords": [
       "结束",
       "转化",
@@ -256,7 +256,7 @@ const tarotDeck = [
     "name": "节制",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/14-temperance.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/14-temperance.jpg",
     "keywords": [
       "调和",
       "等待",
@@ -274,7 +274,7 @@ const tarotDeck = [
     "name": "恶魔",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/15-the-devil.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/15-the-devil.jpg",
     "keywords": [
       "执念",
       "诱惑",
@@ -292,7 +292,7 @@ const tarotDeck = [
     "name": "高塔",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/16-the-tower.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/16-the-tower.jpg",
     "keywords": [
       "崩塌",
       "真相",
@@ -310,7 +310,7 @@ const tarotDeck = [
     "name": "星星",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/17-the-star.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/17-the-star.jpg",
     "keywords": [
       "修复",
       "希望",
@@ -328,7 +328,7 @@ const tarotDeck = [
     "name": "月亮",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/18-the-moon.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/18-the-moon.jpg",
     "keywords": [
       "不确定",
       "想象",
@@ -346,7 +346,7 @@ const tarotDeck = [
     "name": "太阳",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/19-the-sun.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/19-the-sun.jpg",
     "keywords": [
       "清晰",
       "能量",
@@ -364,7 +364,7 @@ const tarotDeck = [
     "name": "审判",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/20-judgement.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/20-judgement.jpg",
     "keywords": [
       "觉醒",
       "召唤",
@@ -382,7 +382,7 @@ const tarotDeck = [
     "name": "世界",
     "suit": "major",
     "arcana": "major",
-    "image": "/assets/tarot/21-the-world.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/21-the-world.jpg",
     "keywords": [
       "阶段完成",
       "整合",
@@ -400,7 +400,7 @@ const tarotDeck = [
     "name": "圣杯王牌",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-01-ace.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-01-ace.jpg",
     "keywords": [
       "柔软",
       "开始",
@@ -418,7 +418,7 @@ const tarotDeck = [
     "name": "圣杯二",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-02-two.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-02-two.jpg",
     "keywords": [
       "连接",
       "互相",
@@ -436,7 +436,7 @@ const tarotDeck = [
     "name": "圣杯三",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-03-three.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-03-three.jpg",
     "keywords": [
       "庆祝",
       "朋友",
@@ -454,7 +454,7 @@ const tarotDeck = [
     "name": "圣杯四",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-04-four.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-04-four.jpg",
     "keywords": [
       "柔软",
       "稳定",
@@ -472,7 +472,7 @@ const tarotDeck = [
     "name": "圣杯五",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-05-five.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-05-five.jpg",
     "keywords": [
       "失落",
       "遗憾",
@@ -490,7 +490,7 @@ const tarotDeck = [
     "name": "圣杯六",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-06-six.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-06-six.jpg",
     "keywords": [
       "柔软",
       "修复",
@@ -508,7 +508,7 @@ const tarotDeck = [
     "name": "圣杯七",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-07-seven.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-07-seven.jpg",
     "keywords": [
       "柔软",
       "评估",
@@ -526,7 +526,7 @@ const tarotDeck = [
     "name": "圣杯八",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-08-eight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-08-eight.jpg",
     "keywords": [
       "离开",
       "寻找",
@@ -544,7 +544,7 @@ const tarotDeck = [
     "name": "圣杯九",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-09-nine.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-09-nine.jpg",
     "keywords": [
       "柔软",
       "成熟",
@@ -562,7 +562,7 @@ const tarotDeck = [
     "name": "圣杯十",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-10-ten.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-10-ten.jpg",
     "keywords": [
       "圆满",
       "亲密",
@@ -580,7 +580,7 @@ const tarotDeck = [
     "name": "圣杯侍从",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-11-page.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-11-page.jpg",
     "keywords": [
       "柔软",
       "学习",
@@ -598,7 +598,7 @@ const tarotDeck = [
     "name": "圣杯骑士",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-12-knight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-12-knight.jpg",
     "keywords": [
       "柔软",
       "推进",
@@ -616,7 +616,7 @@ const tarotDeck = [
     "name": "圣杯王后",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-13-queen.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-13-queen.jpg",
     "keywords": [
       "柔软",
       "承接",
@@ -634,7 +634,7 @@ const tarotDeck = [
     "name": "圣杯国王",
     "suit": "cups",
     "arcana": "minor",
-    "image": "/assets/tarot/cups-14-king.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/cups-14-king.jpg",
     "keywords": [
       "柔软",
       "掌控",
@@ -652,7 +652,7 @@ const tarotDeck = [
     "name": "权杖王牌",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-01-ace.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-01-ace.jpg",
     "keywords": [
       "行动",
       "开始",
@@ -670,7 +670,7 @@ const tarotDeck = [
     "name": "权杖二",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-02-two.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-02-two.jpg",
     "keywords": [
       "计划",
       "选择",
@@ -688,7 +688,7 @@ const tarotDeck = [
     "name": "权杖三",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-03-three.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-03-three.jpg",
     "keywords": [
       "行动",
       "扩展",
@@ -706,7 +706,7 @@ const tarotDeck = [
     "name": "权杖四",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-04-four.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-04-four.jpg",
     "keywords": [
       "行动",
       "稳定",
@@ -724,7 +724,7 @@ const tarotDeck = [
     "name": "权杖五",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-05-five.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-05-five.jpg",
     "keywords": [
       "行动",
       "冲突",
@@ -742,7 +742,7 @@ const tarotDeck = [
     "name": "权杖六",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-06-six.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-06-six.jpg",
     "keywords": [
       "行动",
       "修复",
@@ -760,7 +760,7 @@ const tarotDeck = [
     "name": "权杖七",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-07-seven.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-07-seven.jpg",
     "keywords": [
       "行动",
       "评估",
@@ -778,7 +778,7 @@ const tarotDeck = [
     "name": "权杖八",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-08-eight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-08-eight.jpg",
     "keywords": [
       "快速",
       "消息",
@@ -796,7 +796,7 @@ const tarotDeck = [
     "name": "权杖九",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-09-nine.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-09-nine.jpg",
     "keywords": [
       "行动",
       "成熟",
@@ -814,7 +814,7 @@ const tarotDeck = [
     "name": "权杖十",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-10-ten.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-10-ten.jpg",
     "keywords": [
       "行动",
       "完成",
@@ -832,7 +832,7 @@ const tarotDeck = [
     "name": "权杖侍从",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-11-page.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-11-page.jpg",
     "keywords": [
       "行动",
       "学习",
@@ -850,7 +850,7 @@ const tarotDeck = [
     "name": "权杖骑士",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-12-knight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-12-knight.jpg",
     "keywords": [
       "行动",
       "推进",
@@ -868,7 +868,7 @@ const tarotDeck = [
     "name": "权杖王后",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-13-queen.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-13-queen.jpg",
     "keywords": [
       "行动",
       "承接",
@@ -886,7 +886,7 @@ const tarotDeck = [
     "name": "权杖国王",
     "suit": "wands",
     "arcana": "minor",
-    "image": "/assets/tarot/wands-14-king.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/wands-14-king.jpg",
     "keywords": [
       "行动",
       "掌控",
@@ -904,7 +904,7 @@ const tarotDeck = [
     "name": "宝剑王牌",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-01-ace.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-01-ace.jpg",
     "keywords": [
       "清明",
       "开始",
@@ -922,7 +922,7 @@ const tarotDeck = [
     "name": "宝剑二",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-02-two.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-02-two.jpg",
     "keywords": [
       "清明",
       "选择",
@@ -940,7 +940,7 @@ const tarotDeck = [
     "name": "宝剑三",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-03-three.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-03-three.jpg",
     "keywords": [
       "心痛",
       "真相",
@@ -958,7 +958,7 @@ const tarotDeck = [
     "name": "宝剑四",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-04-four.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-04-four.jpg",
     "keywords": [
       "清明",
       "稳定",
@@ -976,7 +976,7 @@ const tarotDeck = [
     "name": "宝剑五",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-05-five.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-05-five.jpg",
     "keywords": [
       "清明",
       "冲突",
@@ -994,7 +994,7 @@ const tarotDeck = [
     "name": "宝剑六",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-06-six.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-06-six.jpg",
     "keywords": [
       "清明",
       "修复",
@@ -1012,7 +1012,7 @@ const tarotDeck = [
     "name": "宝剑七",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-07-seven.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-07-seven.jpg",
     "keywords": [
       "清明",
       "评估",
@@ -1030,7 +1030,7 @@ const tarotDeck = [
     "name": "宝剑八",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-08-eight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-08-eight.jpg",
     "keywords": [
       "受限",
       "想太多",
@@ -1048,7 +1048,7 @@ const tarotDeck = [
     "name": "宝剑九",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-09-nine.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-09-nine.jpg",
     "keywords": [
       "焦虑",
       "失眠",
@@ -1066,7 +1066,7 @@ const tarotDeck = [
     "name": "宝剑十",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-10-ten.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-10-ten.jpg",
     "keywords": [
       "结束",
       "疲惫",
@@ -1084,7 +1084,7 @@ const tarotDeck = [
     "name": "宝剑侍从",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-11-page.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-11-page.jpg",
     "keywords": [
       "清明",
       "学习",
@@ -1102,7 +1102,7 @@ const tarotDeck = [
     "name": "宝剑骑士",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-12-knight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-12-knight.jpg",
     "keywords": [
       "清明",
       "推进",
@@ -1120,7 +1120,7 @@ const tarotDeck = [
     "name": "宝剑王后",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-13-queen.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-13-queen.jpg",
     "keywords": [
       "清明",
       "承接",
@@ -1138,7 +1138,7 @@ const tarotDeck = [
     "name": "宝剑国王",
     "suit": "swords",
     "arcana": "minor",
-    "image": "/assets/tarot/swords-14-king.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/swords-14-king.jpg",
     "keywords": [
       "清明",
       "掌控",
@@ -1156,7 +1156,7 @@ const tarotDeck = [
     "name": "星币王牌",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-01-ace.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-01-ace.jpg",
     "keywords": [
       "稳定",
       "开始",
@@ -1174,7 +1174,7 @@ const tarotDeck = [
     "name": "星币二",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-02-two.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-02-two.jpg",
     "keywords": [
       "稳定",
       "选择",
@@ -1192,7 +1192,7 @@ const tarotDeck = [
     "name": "星币三",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-03-three.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-03-three.jpg",
     "keywords": [
       "稳定",
       "扩展",
@@ -1210,7 +1210,7 @@ const tarotDeck = [
     "name": "星币四",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-04-four.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-04-four.jpg",
     "keywords": [
       "抓紧",
       "安全感",
@@ -1228,7 +1228,7 @@ const tarotDeck = [
     "name": "星币五",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-05-five.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-05-five.jpg",
     "keywords": [
       "稳定",
       "冲突",
@@ -1246,7 +1246,7 @@ const tarotDeck = [
     "name": "星币六",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-06-six.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-06-six.jpg",
     "keywords": [
       "稳定",
       "修复",
@@ -1264,7 +1264,7 @@ const tarotDeck = [
     "name": "星币七",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-07-seven.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-07-seven.jpg",
     "keywords": [
       "等待",
       "评估",
@@ -1282,7 +1282,7 @@ const tarotDeck = [
     "name": "星币八",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-08-eight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-08-eight.jpg",
     "keywords": [
       "稳定",
       "推进",
@@ -1300,7 +1300,7 @@ const tarotDeck = [
     "name": "星币九",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-09-nine.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-09-nine.jpg",
     "keywords": [
       "独立",
       "价值",
@@ -1318,7 +1318,7 @@ const tarotDeck = [
     "name": "星币十",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-10-ten.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-10-ten.jpg",
     "keywords": [
       "稳定",
       "完成",
@@ -1336,7 +1336,7 @@ const tarotDeck = [
     "name": "星币侍从",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-11-page.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-11-page.jpg",
     "keywords": [
       "稳定",
       "学习",
@@ -1354,7 +1354,7 @@ const tarotDeck = [
     "name": "星币骑士",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-12-knight.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-12-knight.jpg",
     "keywords": [
       "稳定",
       "推进",
@@ -1372,7 +1372,7 @@ const tarotDeck = [
     "name": "星币王后",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-13-queen.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-13-queen.jpg",
     "keywords": [
       "稳定",
       "承接",
@@ -1390,7 +1390,7 @@ const tarotDeck = [
     "name": "星币国王",
     "suit": "pentacles",
     "arcana": "minor",
-    "image": "/assets/tarot/pentacles-14-king.jpg",
+    "image": "/packages/tarot-assets/assets/tarot/pentacles-14-king.jpg",
     "keywords": [
       "稳定",
       "掌控",
@@ -1498,208 +1498,6 @@ const emotionTemplates = {
   }
 }
 
-const crystals = [
-  {
-    id: "amethyst",
-    name: "紫水晶",
-    tone: "紫",
-    color: "#7a63c7",
-    emotions: ["焦虑", "内耗", "压力"],
-    meaning: "平静、直觉、守护边界",
-    reason: "适合在反复确认、心里很乱的时候作为情绪锚点，提醒自己先安定，再判断。",
-    usage: "可以放在书桌或床头，配合 4-6 呼吸练习使用。",
-    disclaimer: "仅作为仪式感、审美陪伴和情绪提醒，不承诺实际功效。"
-  },
-  {
-    id: "rose",
-    name: "粉水晶",
-    tone: "粉",
-    color: "#bf6f84",
-    emotions: ["失落", "期待"],
-    meaning: "柔软、自我接纳、关系修复",
-    reason: "适合关系议题后的自我照顾，提醒自己先稳定自我价值感。",
-    usage: "可以在写情绪日记时放在手边，作为温柔提醒。",
-    disclaimer: "不能保证关系结果，只作为陪伴型物件。"
-  },
-  {
-    id: "clear",
-    name: "白水晶",
-    tone: "白",
-    color: "#4f9aa0",
-    emotions: ["犹豫", "平静"],
-    meaning: "清明、整理、区分事实",
-    reason: "适合需要把事实和猜测拆开时使用，帮助建立记录感。",
-    usage: "搭配清单书写：我知道的事实 / 我猜测的内容。",
-    disclaimer: "不替代现实行动、专业建议或医疗帮助。"
-  },
-  {
-    id: "citrine",
-    name: "黄水晶",
-    tone: "黄",
-    color: "#b87913",
-    emotions: ["疲惫", "期待"],
-    meaning: "行动力、信心、资源感",
-    reason: "适合工作与财富议题，提醒自己先完成可控的小行动。",
-    usage: "可以和 24 小时行动清单放在一起，提醒自己完成一个小任务。",
-    disclaimer: "不承诺财富结果，不构成投资建议。"
-  }
-]
-
-const crystalJewelrySkus = [
-  {
-    id: "soft-relationship",
-    name: "粉晶月光手链",
-    stones: "粉晶 + 月光石",
-    form: "手链",
-    theme: "温柔关系",
-    price: "¥159",
-    presale: "预计 7-10 天发货",
-    style: "温柔、日常、适合通勤叠戴",
-    sceneIds: ["love"],
-    emotions: ["期待", "失落", "内耗", "焦虑"],
-    cardIds: ["lovers", "cups-02-two", "moon", "temperance"],
-    keywords: ["温柔", "接纳", "直觉", "关系观察"],
-    reason: "适合作为这段关系里的随身提醒：先稳定自己，再看清对方。",
-    ritual: "连续 7 天佩戴时，给自己一句提醒：我先照顾好自己的感受。",
-    cta: "定制我的关系疗愈手链",
-    tone: "粉",
-    color: "#bf6f84"
-  },
-  {
-    id: "self-healing",
-    name: "紫晶净心手串",
-    stones: "紫水晶 + 白水晶",
-    form: "手链",
-    theme: "情绪安顿",
-    price: "¥139",
-    presale: "预计 7-10 天发货",
-    style: "清透、安静、适合独处和睡前仪式",
-    sceneIds: ["other"],
-    emotions: ["焦虑", "内耗", "压力", "失落"],
-    cardIds: ["star", "temperance", "swords-09-nine", "moon", "high-priestess"],
-    keywords: ["安顿", "清明", "修复", "内在秩序"],
-    reason: "适合作为安顿情绪的仪式感陪伴，提醒自己先慢下来。",
-    ritual: "睡前握住手链做 3 次深呼吸，再写下一句今天已经完成的小事。",
-    cta: "定制我的自我疗愈手链",
-    tone: "紫",
-    color: "#7a63c7"
-  },
-  {
-    id: "boundary-guard",
-    name: "边界守护款",
-    stones: "黑曜石 + 茶晶",
-    form: "手链",
-    theme: "关系边界",
-    price: "¥169",
-    presale: "预计 10-14 天发货",
-    style: "冷静、利落、适合需要边界感的阶段",
-    sceneIds: ["love", "other"],
-    emotions: ["压力", "内耗", "犹豫"],
-    cardIds: ["strength", "empress", "moon"],
-    keywords: ["边界", "稳定", "安全感", "止损"],
-    reason: "适合作为提醒：可以温柔，但不必持续消耗自己。",
-    ritual: "每次想反复确认前，先摸一下手链，问自己：这是事实，还是想象？",
-    cta: "定制我的边界守护手链",
-    tone: "黑",
-    color: "#354052"
-  },
-  {
-    id: "clear-expression",
-    name: "海蓝表达项链",
-    stones: "海蓝宝 + 白水晶",
-    form: "项链 / 手链",
-    theme: "沟通表达",
-    price: "¥189",
-    presale: "预计 10-14 天发货",
-    style: "清爽、克制、适合沟通前佩戴",
-    sceneIds: ["love", "work"],
-    emotions: ["犹豫", "焦虑", "期待"],
-    cardIds: ["magician", "sun", "temperance", "swords-01-ace"],
-    keywords: ["沟通", "表达", "柔和说清楚"],
-    reason: "适合作为表达前的提醒：先说事实，再说感受。",
-    ritual: "发送重要消息前，先写下你真正想表达的一句话。",
-    cta: "定制我的清晰表达首饰",
-    tone: "蓝",
-    color: "#4f9aa0"
-  },
-  {
-    id: "action-power",
-    name: "行动力款",
-    stones: "虎眼石 + 黄水晶",
-    form: "手链",
-    theme: "事业选择",
-    price: "¥159",
-    presale: "预计 7-10 天发货",
-    style: "利落、明亮、适合工作日佩戴",
-    sceneIds: ["work", "wealth"],
-    emotions: ["疲惫", "犹豫", "压力", "期待"],
-    cardIds: ["magician", "pentacles-seven", "sun", "pentacles-01-ace", "wands-01-ace"],
-    keywords: ["行动力", "判断力", "目标感"],
-    reason: "适合作为目标感和行动力的随身锚点，提醒自己完成一个小决定。",
-    ritual: "连续 21 天，每天写下并完成一个 30 分钟内能推进的小任务。",
-    cta: "定制我的行动力手链",
-    tone: "黄",
-    color: "#b87913"
-  },
-  {
-    id: "new-chapter",
-    name: "新阶段款",
-    stones: "拉长石 + 月光石",
-    form: "手链 / 吊坠",
-    theme: "阶段转变",
-    price: "¥199",
-    presale: "预计 10-14 天发货",
-    style: "微光、神秘、适合人生转折期",
-    sceneIds: ["work", "other"],
-    emotions: ["期待", "犹豫", "平静"],
-    cardIds: ["fool", "star", "world"],
-    keywords: ["新的开始", "希望", "转变"],
-    reason: "适合作为新阶段的纪念，提醒自己允许变化慢慢发生。",
-    ritual: "在抽牌日期后 30 天回看：我往新方向迈出了哪一步？",
-    cta: "定制我的新阶段首饰",
-    tone: "月",
-    color: "#6b5cff"
-  },
-  {
-    id: "premium-custom",
-    name: "高价值定制款",
-    stones: "根据牌阵组合定制",
-    form: "手链 + 专属牌阵小卡",
-    theme: "深度报告",
-    price: "¥399 起",
-    presale: "预计 14-21 天发货",
-    style: "一人一款，适合重要关系或人生阶段",
-    sceneIds: ["love", "work", "wealth", "other"],
-    emotions: ["焦虑", "期待", "犹豫", "压力", "失落", "内耗"],
-    cardIds: [],
-    keywords: ["专属", "深度", "纪念", "陪伴"],
-    reason: "适合把本次牌阵、主题和抽牌日期做成一件专属首饰。",
-    ritual: "随盒附上你的牌阵关键词，作为这一阶段的回看提醒。",
-    cta: "生成我的高价值定制方案",
-    tone: "定",
-    color: "#3b7a57"
-  },
-  {
-    id: "ritual-gift",
-    name: "礼盒款",
-    stones: "手链 + 塔罗卡片 + 仪式说明",
-    form: "礼盒",
-    theme: "节日送礼",
-    price: "¥299 起",
-    presale: "预计 14-21 天发货",
-    style: "适合生日、七夕、新月和满月仪式",
-    sceneIds: ["love", "other"],
-    emotions: ["期待", "平静", "失落"],
-    cardIds: ["lovers", "star", "moon", "empress"],
-    keywords: ["礼物", "仪式", "祝福", "纪念"],
-    reason: "适合作为一份有故事的礼物，把祝福写进牌面小卡里。",
-    ritual: "礼盒内可加入一句专属祝福语，作为送给自己或对方的温柔提醒。",
-    cta: "定制我的仪式礼盒",
-    tone: "礼",
-    color: "#bf5b75"
-  }
-]
-
 const sampleDiaries = [
   {
     id: "sample-love",
@@ -1730,7 +1528,5 @@ module.exports = {
   scenes,
   spreads,
   emotionTemplates,
-  crystals,
-  crystalJewelrySkus,
   sampleDiaries
 }

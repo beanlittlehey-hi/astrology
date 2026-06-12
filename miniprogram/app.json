@@ -8,5 +8,21 @@
     "backgroundTextStyle": "dark"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "subpackages": [
+    {
+      "root": "packages/tarot-assets",
+      "pages": [
+        "pages/holder/holder"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "packages/tarot-assets"
+      ]
+    }
+  }
 }

@@ -3,8 +3,6 @@ const {
   scenes,
   spreads,
   emotionTemplates,
-  crystals,
-  crystalJewelrySkus,
   sampleDiaries
 } = require("../../data/content")
 const cloudApi = require("../../services/cloudApi")
@@ -314,62 +312,6 @@ function ensureProfessionalSession(session) {
   }
 }
 
-function scoreJewelrySku(sku, session) {
-  const cardIds = session.cards.map((item) => item.id)
-  const cardNames = session.cards.map((item) => item.name)
-  let score = 0
-  if (sku.sceneIds.includes(session.sceneId)) score += 4
-  score += sku.emotions.filter((emotion) => session.emotionTags.includes(emotion)).length * 3
-  score += sku.cardIds.filter((id) => cardIds.includes(id)).length * 5
-  score += sku.cardIds.filter((id) => cardNames.includes(id)).length * 2
-  if (session.sceneId === "love" && sku.id === "soft-relationship") score += 2
-  if ((session.sceneId === "work" || session.sceneId === "wealth") && sku.id === "action-power") score += 2
-  return score
-}
-
-function buildJewelryRecommendation(session) {
-  const ranked = crystalJewelrySkus
-    .map((sku) => ({ ...sku, score: scoreJewelrySku(sku, session) }))
-    .sort((a, b) => b.score - a.score)
-  const primary = ranked[0] || crystalJewelrySkus[0]
-  const alternatives = ranked
-    .filter((item) => item.id !== primary.id)
-    .slice(0, 2)
-  const firstCard = session.cards[0]
-  return {
-    title: "塔罗给你的水晶建议",
-    intro: `你抽到的${firstCard.name}${firstCard.orientation}，核心提醒是${firstCard.keywordText}。`,
-    empathy: session.mirror,
-    explanation: `所以这次更适合你的水晶首饰是「${primary.name}」，主石为${primary.stones}。`,
-    ritual: primary.ritual,
-    softCta: "如果你想把这次指引做成一个随身提醒，可以生成一份定制预售方案。",
-    primary,
-    alternatives,
-    disclaimer: "塔罗解读和水晶推荐仅作为情绪陪伴、文化娱乐和自我探索参考，不构成确定性预测，也不替代医疗、心理咨询、法律或投资建议。"
-  }
-}
-
-function buildDefaultJewelryRecommendation() {
-  const primary =
-    crystalJewelrySkus.find((item) => item.id === "soft-relationship") ||
-    crystalJewelrySkus[0]
-  const preferredIds = ["self-healing", "clear-expression"]
-  const alternatives = preferredIds
-    .map((id) => crystalJewelrySkus.find((item) => item.id === id))
-    .filter(Boolean)
-  return {
-    title: "塔罗给你的水晶建议",
-    intro: "基于焦虑、期待和关系不确定，此刻更适合先稳定节奏。",
-    empathy: "你可以温柔表达，也可以先照顾自己的感受。",
-    explanation: `所以这次更适合你的水晶首饰是「${primary.name}」，主石为${primary.stones}。`,
-    ritual: primary.ritual,
-    softCta: "如果你想把这次指引做成一个随身提醒，可以生成一份定制预售方案。",
-    primary,
-    alternatives,
-    disclaimer: "塔罗解读和水晶推荐仅作为情绪陪伴、文化娱乐和自我探索参考，不构成确定性预测，也不替代医疗、心理咨询、法律或投资建议。"
-  }
-}
-
 function buildDiaryFromSession(session, userInput) {
   return decorateDiary({
     id: `diary-${Date.now()}`,
@@ -489,8 +431,6 @@ Page({
     scenes,
     spreads,
     tarotDeck,
-    crystals,
-    crystalJewelrySkus,
     selectedScene: "love",
     selectedSceneName: "感情",
     selectedSceneHint: "推荐关系走向、爱情十字、二选一等牌阵。",
@@ -522,22 +462,7 @@ Page({
     filteredDiaries: [],
     journalHasFilteredDiaries: false,
     activeDiary: null,
-    recommendedCrystal: crystals[0],
-    jewelryRecommendation: buildDefaultJewelryRecommendation(),
-    selectedJewelry: buildDefaultJewelryRecommendation().primary,
-    braceletBeads: Array.from({ length: 10 }, (_, index) => index),
-    orderForm: {
-      wristSize: "15",
-      metal: "金色",
-      style: "简约",
-      includeCard: true,
-      includeDate: true,
-      blessing: "愿我先安顿自己，再看清答案。"
-    },
-    orderSummary: null,
     drawHint: "先洗牌，再选择牌",
-    healingWriting: "写下：我现在最需要被照顾的是什么？",
-    healingEnabled: false,
     navItems: [
       { id: "home", label: "首页", screen: "home" },
       { id: "reading", label: "测算", screen: "question" },
@@ -690,10 +615,6 @@ Page({
   go(event) {
     const screen = event.currentTarget.dataset.screen
     const nav = event.currentTarget.dataset.nav
-    if (screen === "healing") {
-      this.openHealing()
-      return
-    }
     this.setData({
       screen,
       showTab: shouldShowTab(screen),
@@ -1081,8 +1002,6 @@ Page({
       drawnCards: cards,
       drawSlots,
       resultNote: "我真正害怕的是不是被忽视？",
-      recommendedCrystal: this.pickCrystal(finalSession.emotionTags),
-      healingWriting: finalSession.writing,
       currentDrawPosition: spread.positions[spread.positions.length - 1] || "关系",
       screen: "result",
       showTab: true,
@@ -1093,10 +1012,6 @@ Page({
 
   onResultNote(event) {
     this.setData({ resultNote: event.detail.value })
-  },
-
-  pickCrystal(tags) {
-    return crystals.find((item) => item.emotions.some((emotion) => tags.includes(emotion))) || crystals[0]
   },
 
   async saveSessionDiary() {
@@ -1163,39 +1078,11 @@ Page({
     })
   },
 
-  openHealing() {
-    if (!this.data.healingEnabled) {
-      wx.showToast({ title: "疗愈板块暂未开放", icon: "none" })
-      return
-    }
-    const session = this.data.currentSession
-    const activeDiary = this.data.activeDiary || {}
-    const tags = session ? session.emotionTags : activeDiary.emotionTags || ["焦虑"]
-    const jewelryRecommendation = session
-      ? buildJewelryRecommendation(session)
-      : this.data.jewelryRecommendation || buildDefaultJewelryRecommendation()
-    this.setData({
-      recommendedCrystal: this.pickCrystal(tags),
-      jewelryRecommendation,
-      selectedJewelry: jewelryRecommendation ? jewelryRecommendation.primary : this.data.selectedJewelry,
-      healingWriting: session ? session.writing : "写下：我现在最需要被照顾的是什么？",
-      screen: "healing",
-      showTab: true,
-      activeNav: "healing",
-      drawerOpen: false
-    })
-  },
-
   openDiaryReport() {
     if (this.data.activeDiary && this.data.activeDiary.session) {
       const session = ensureProfessionalSession(this.data.activeDiary.session)
-      const jewelryRecommendation = buildJewelryRecommendation(session)
       this.setData({
         currentSession: session,
-        recommendedCrystal: this.pickCrystal(session.emotionTags),
-        jewelryRecommendation,
-        selectedJewelry: jewelryRecommendation.primary,
-        healingWriting: session.writing,
         screen: "result",
         showTab: true,
         activeNav: "reading"
@@ -1205,84 +1092,10 @@ Page({
     wx.showToast({ title: "这条示例日记没有完整报告，请先完成一次测算", icon: "none" })
   },
 
-  openCustomOrder(event) {
-    if (!this.data.healingEnabled) {
-      wx.showToast({ title: "疗愈板块暂未开放", icon: "none" })
-      return
-    }
-    const skuId = event.currentTarget.dataset.sku
-    const selectedJewelry =
-      crystalJewelrySkus.find((item) => item.id === skuId) ||
-      this.data.selectedJewelry ||
-      (this.data.jewelryRecommendation && this.data.jewelryRecommendation.primary) ||
-      crystalJewelrySkus[0]
-    this.setData({
-      selectedJewelry,
-      screen: "custom",
-      showTab: false,
-      activeNav: "healing"
-    })
-  },
-
-  onOrderInput(event) {
-    const field = event.currentTarget.dataset.field
-    this.setData({
-      [`orderForm.${field}`]: event.detail.value
-    })
-  },
-
-  chooseOrderOption(event) {
-    const field = event.currentTarget.dataset.field
-    const value = event.currentTarget.dataset.value
-    this.setData({
-      [`orderForm.${field}`]: value
-    })
-  },
-
-  toggleOrderOption(event) {
-    const field = event.currentTarget.dataset.field
-    this.setData({
-      [`orderForm.${field}`]: !this.data.orderForm[field]
-    })
-  },
-
-  submitCustomOrder() {
-    const sku = this.data.selectedJewelry
-    if (!sku) {
-      wx.showToast({ title: "请先选择一款首饰", icon: "none" })
-      return
-    }
-    const orderSummary = {
-      id: `preorder-${Date.now()}`,
-      skuName: sku.name,
-      stones: sku.stones,
-      price: sku.price,
-      presale: sku.presale,
-      form: this.data.orderForm,
-      sessionTitle: this.data.currentSession ? this.data.currentSession.title : "今日疗愈测算"
-    }
-    this.setData({ orderSummary })
-    wx.showModal({
-      title: "已生成预售方案",
-      content: `${sku.name} · ${sku.stones}\n${sku.price}，${sku.presale}\nV0.1 暂不接支付，后续可接微信支付或客服私域确认。`,
-      showCancel: false,
-      confirmText: "知道了"
-    })
-  },
-
-  contactReader() {
-    wx.showModal({
-      title: "水晶设计师入口占位",
-      content: "V0.1 暂不接支付和外部账号。这里后续可配置企微、客服或商品小程序入口，承接专属水晶定制咨询。",
-      showCancel: false,
-      confirmText: "知道了"
-    })
-  },
-
   showDisclaimer() {
     wx.showModal({
       title: "内容说明",
-      content: "内容仅供娱乐、情绪陪伴和自我探索参考，不构成医疗、心理诊断、法律或投资建议。水晶等实物只作为仪式感和审美陪伴，不承诺功效。",
+      content: "内容仅供娱乐、情绪陪伴和自我探索参考，不构成医疗、心理诊断、法律或投资建议。",
       showCancel: false,
       confirmText: "我知道了"
     })

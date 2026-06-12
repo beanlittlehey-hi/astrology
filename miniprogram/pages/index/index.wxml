@@ -259,119 +259,6 @@
     </view>
   </view>
 
-  <view wx:elif="{{healingEnabled && screen === 'healing'}}" class="screen app-screen">
-    <view class="content with-nav healing-content">
-      <view class="topbar healing-topbar">
-        <view>
-          <text class="h1">给此刻的心情选一颗水晶</text>
-          <text class="sub">基于焦虑、期待和关系不确定</text>
-        </view>
-      </view>
-
-      <view wx:if="{{jewelryRecommendation}}" class="crystal-hero">
-        <text class="section-title">{{jewelryRecommendation.title}}</text>
-        <view class="bead-bracelet">
-          <view wx:for="{{braceletBeads}}" wx:key="*this" class="bracelet-bead bead-{{index}}"></view>
-          <view class="bracelet-core"></view>
-        </view>
-        <view class="crystal-copy">
-          <text class="section-title">推荐：{{jewelryRecommendation.primary.name}}</text>
-          <text class="muted">根据「恋人」与「节制」的提醒，这颗手链更适合帮你在关系里保持温柔表达，也提醒自己先稳定节奏，再靠近答案。</text>
-        </view>
-      </view>
-
-      <view wx:if="{{jewelryRecommendation}}" class="presale-section">
-        <text class="section-title">其他水晶推荐</text>
-        <view class="alt-list">
-          <button class="alt-jewelry" data-sku="{{jewelryRecommendation.primary.id}}" bindtap="openCustomOrder">
-            <view class="jewelry-stone" style="background: {{jewelryRecommendation.primary.color}}">{{jewelryRecommendation.primary.tone}}</view>
-            <view>
-              <text class="panel-title">{{jewelryRecommendation.primary.name}}</text>
-              <text class="muted">{{jewelryRecommendation.primary.stones}} · {{jewelryRecommendation.primary.theme}}</text>
-              <text class="presale">{{jewelryRecommendation.primary.price}} | {{jewelryRecommendation.primary.presale}}</text>
-            </view>
-          </button>
-          <button wx:for="{{jewelryRecommendation.alternatives}}" wx:key="id" class="alt-jewelry" data-sku="{{item.id}}" bindtap="openCustomOrder">
-            <view class="jewelry-stone" style="background: {{item.color}}">{{item.tone}}</view>
-            <view>
-              <text class="panel-title">{{item.name}}</text>
-              <text class="muted">{{item.stones}} · {{item.theme}}</text>
-              <text class="presale">{{item.price}} | {{item.presale}}</text>
-            </view>
-          </button>
-        </view>
-      </view>
-    </view>
-  </view>
-
-  <view wx:elif="{{healingEnabled && screen === 'custom'}}" class="screen app-screen">
-    <view class="content">
-      <view class="topbar">
-        <button class="icon-btn" bindtap="openHealing">‹</button>
-        <view>
-          <text class="h1">定制属于你的塔罗能量首饰</text>
-          <text class="sub">定制预售 · 先生成方案，后续可接客服或微信支付</text>
-        </view>
-      </view>
-      <view class="custom-hero">
-        <view class="jewelry-stone big" style="background: {{selectedJewelry.color}}">{{selectedJewelry.tone}}</view>
-        <view>
-          <text class="section-title">{{selectedJewelry.name}}</text>
-          <text class="tags">{{selectedJewelry.stones}} · {{selectedJewelry.form}}</text>
-          <text class="muted">{{selectedJewelry.reason}}</text>
-          <text class="price large-price">{{selectedJewelry.price}}</text>
-          <text class="presale">{{selectedJewelry.presale}}</text>
-        </view>
-      </view>
-      <view class="form-section">
-        <text class="panel-title">手围</text>
-        <input class="text-input" type="digit" value="{{orderForm.wristSize}}" data-field="wristSize" bindinput="onOrderInput" placeholder="例如 15"></input>
-      </view>
-      <view class="form-section">
-        <text class="panel-title">金属配件颜色</text>
-        <view class="chips compact">
-          <button class="chip {{orderForm.metal === '金色' ? 'on' : ''}}" data-field="metal" data-value="金色" bindtap="chooseOrderOption">金色</button>
-          <button class="chip {{orderForm.metal === '银色' ? 'on' : ''}}" data-field="metal" data-value="银色" bindtap="chooseOrderOption">银色</button>
-          <button class="chip {{orderForm.metal === '玫瑰金' ? 'on' : ''}}" data-field="metal" data-value="玫瑰金" bindtap="chooseOrderOption">玫瑰金</button>
-        </view>
-      </view>
-      <view class="form-section">
-        <text class="panel-title">风格</text>
-        <view class="chips compact">
-          <button class="chip {{orderForm.style === '简约' ? 'on' : ''}}" data-field="style" data-value="简约" bindtap="chooseOrderOption">简约</button>
-          <button class="chip {{orderForm.style === '甜美' ? 'on' : ''}}" data-field="style" data-value="甜美" bindtap="chooseOrderOption">甜美</button>
-          <button class="chip {{orderForm.style === '通勤' ? 'on' : ''}}" data-field="style" data-value="通勤" bindtap="chooseOrderOption">通勤</button>
-          <button class="chip {{orderForm.style === '神秘' ? 'on' : ''}}" data-field="style" data-value="神秘" bindtap="chooseOrderOption">神秘</button>
-        </view>
-      </view>
-      <view class="form-section">
-        <button class="toggle-row" data-field="includeCard" bindtap="toggleOrderOption">
-          <text>加入个人塔罗牌名小卡</text>
-          <text>{{orderForm.includeCard ? '已选' : '未选'}}</text>
-        </button>
-        <button class="toggle-row" data-field="includeDate" bindtap="toggleOrderOption">
-          <text>加入生日/星座/抽牌日期</text>
-          <text>{{orderForm.includeDate ? '已选' : '未选'}}</text>
-        </button>
-      </view>
-      <view class="form-section">
-        <text class="panel-title">专属祝福语</text>
-        <textarea class="textarea-input" value="{{orderForm.blessing}}" data-field="blessing" bindinput="onOrderInput" placeholder="写一句送给自己的提醒"></textarea>
-      </view>
-      <view class="result-block accent">
-        <text class="panel-title">预售说明</text>
-        <text class="muted">这不是改变结果的道具，而是一件提醒你回到自己节奏里的随身首饰。V0.1 暂不接支付，提交后仅生成方案。</text>
-      </view>
-      <button class="primary" bindtap="submitCustomOrder">生成预售方案</button>
-      <view wx:if="{{orderSummary}}" class="result-block">
-        <text class="panel-title">已生成方案</text>
-        <text class="muted">{{orderSummary.skuName}} · {{orderSummary.stones}} · {{orderSummary.price}}</text>
-        <text class="muted">{{orderSummary.presale}}</text>
-      </view>
-      <view class="legal">塔罗解读和水晶推荐仅作为情绪陪伴、文化娱乐和自我探索参考，不构成确定性预测，也不替代医疗、心理咨询、法律或投资建议。</view>
-    </view>
-  </view>
-
   <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
     <view class="content with-nav journal-content">
       <view class="topbar journal-topbar">
@@ -463,7 +350,6 @@
         <text class="muted">{{activeDiary.suggestion}}</text>
       </view>
       <button class="ghost" bindtap="openDiaryReport">查看完整塔罗报告</button>
-      <button wx:if="{{healingEnabled}}" class="primary" bindtap="openHealing">查看水晶推荐</button>
     </view>
   </view>
 
@@ -480,10 +366,6 @@
     <view class="nav-item {{activeNav === 'journal' ? 'active' : ''}}" data-screen="journal" data-nav="journal" bindtap="go">
       <image class="nav-icon" src="{{activeNav === 'journal' ? '/assets/home-v2/tab-diary-active.png' : '/assets/home-v2/tab-diary-default.png'}}" mode="aspectFit"></image>
       <text>日记</text>
-    </view>
-    <view wx:if="{{healingEnabled}}" class="nav-item {{activeNav === 'healing' ? 'active' : ''}}" data-screen="healing" data-nav="healing" bindtap="go">
-      <text>疗愈</text>
-      <view class="nav-indicator"></view>
     </view>
   </view>
 </view>

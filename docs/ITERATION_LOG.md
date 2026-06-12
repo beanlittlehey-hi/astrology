@@ -180,3 +180,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/reading-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 主包体积架构优化
+
+- 页面/模块：主包架构、塔罗牌资源、已关闭疗愈商城
+- 改动文件：`miniprogram/app.json`、`miniprogram/packages/tarot-assets/`、`miniprogram/assets/tarot/`、`miniprogram/data/content.js`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`
+- 改动摘要：不压缩首页/启动页/塔罗牌视觉资源，改用代码层优化释放主包空间。删除当前不可达的 `healing/custom` 疗愈商城 WXML、JS、WXSS 和水晶首饰数据；将 78 张塔罗正面牌图从主包 `assets/tarot` 迁移到 `packages/tarot-assets` 分包，主包只保留抽牌牌背 `card-back.jpg`；`content.js` 中牌面图片路径同步改为分包路径，并在 `app.json` 增加分包与预下载规则。
+- 包体结果：优化前最近预览总包约 `2094743` Byte 且无分包；剥离疗愈商城后约 `2068307` Byte；迁移塔罗正面牌图后预览成功，主包约 `1037181` Byte，塔罗资源分包约 `1033100` Byte，总包约 `2070281` Byte。主包释放约 `1MB`，为后续高还原页面预留空间。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；图片引用完整性检查无缺失；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`。
+- 风险/待确认：主包页面会引用分包内塔罗正面图，微信预览已接受；已配置 `preloadRule` 在主页面预下载 `packages/tarot-assets`，但真机首次进入抽牌结果时仍需肉眼确认牌图是否有短暂加载空白。若后续要进一步提升稳定性，可把抽牌/结果页也拆入业务分包。
+- 基线/对比：`git diff --stat -- miniprogram/app.json miniprogram/packages/tarot-assets miniprogram/assets/tarot miniprogram/data/content.js miniprogram/pages/index`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
