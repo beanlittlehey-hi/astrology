@@ -168,3 +168,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/splash-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 牌阵选择页视觉资源接入
+
+- 页面/模块：测算 / 牌阵选择页 `question`
+- 改动文件：`miniprogram/assets/reading-v2/reading-bg-clean.jpg`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：按 `readingpage- reference.png` 接入牌阵页整屏背景，并将标题、分类、牌阵名称、描述、推荐标签全部保留为前端渲染；底部 Tab 继续复用首页视觉，不采用参考图里的底部 tab。为避免包体超过微信 2MB 限制，分类胶囊、返回按钮、标签和牌阵缩略图改用 WXSS 玻璃拟态与轻量卡牌符号重建，未把 GPT Image 2 的透明组件 PNG 放入主包。
+- 资源处理：原始 GPT Image 2 生成图保留在 `output/imagegen/reading-v2/` 供复查；小程序主包只保留压缩后的 `reading-bg-clean.jpg`，尺寸为 `548x960`，约 `20KB`，避免再次触发 `source size exceed max limit 2MB`。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；微信开发者工具 `cli preview` 成功，二维码输出到 `output/wechat-preview/preview-qrcode.png`，上传包体显示 `2094743` Byte。
+- 风险/待确认：牌阵页卡片缩略图为 CSS 重建，不是参考图单独切图；这是为了在不影响首页和启动页已确认视觉的前提下通过微信 2MB 主包限制。后续若要更高还原度，建议做分包或迁移部分塔罗牌图到云端/CDN。
+- 基线/对比：`git diff --stat -- miniprogram/assets/reading-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

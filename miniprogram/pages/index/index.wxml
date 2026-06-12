@@ -129,26 +129,38 @@
     </view>
   </view>
 
-  <view wx:elif="{{screen === 'question'}}" class="screen app-screen">
+  <view wx:elif="{{screen === 'question'}}" class="screen app-screen reading-v2-screen">
+    <image class="reading-v2-bg" src="/assets/reading-v2/reading-bg-clean.jpg" mode="aspectFill"></image>
     <view class="content with-nav question-content">
       <view class="topbar question-topbar">
-        <button class="icon-btn" data-screen="home" data-nav="home" bindtap="go">‹</button>
+        <button class="icon-btn" data-screen="home" data-nav="home" bindtap="go">
+          <text>‹</text>
+        </button>
         <view>
           <text class="h1">进一步探索真实的内心</text>
         </view>
       </view>
       <view class="question-label">选择您想深度问答的方向</view>
       <view class="chips question-tabs">
-        <button wx:for="{{scenes}}" wx:key="id" class="chip {{selectedScene === item.id ? 'on' : ''}}" data-scene="{{item.id}}" bindtap="chooseScene">{{item.name}}</button>
+        <button wx:for="{{scenes}}" wx:key="id" class="chip {{selectedScene === item.id ? 'on' : ''}}" data-scene="{{item.id}}" bindtap="chooseScene">
+          <text>{{item.name}}</text>
+        </button>
       </view>
       <view class="question-hint">已选择「{{selectedSceneName}}」，自动选中推荐牌阵：{{selectedSpread.name}}。</view>
       <view class="spread-list question-spread-list">
         <button wx:for="{{filteredSpreads}}" wx:key="id" class="choice {{selectedSpreadId === item.id ? 'active' : ''}} {{item.disabled ? 'disabled' : ''}}" data-spread="{{item.id}}" bindtap="chooseSpread">
-          <view>
+          <view class="spread-thumb spread-thumb-{{item.id}}">
+            <view class="spread-card-mini one"></view>
+            <view class="spread-card-mini two"></view>
+            <view class="spread-card-mini three"></view>
+          </view>
+          <view class="spread-copy">
             <text class="panel-title">{{item.name}}</text>
             <text class="muted">{{item.summary}}</text>
           </view>
-          <text class="badge">{{item.recommended ? '推荐' : item.badge}}</text>
+          <view class="badge">
+            <text>{{item.recommended ? '推荐' : item.badge}}</text>
+          </view>
         </button>
       </view>
     </view>
