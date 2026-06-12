@@ -5365,7 +5365,7 @@
   pointer-events: none;
   box-sizing: border-box;
   overflow: hidden;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
 }
 
@@ -5377,6 +5377,7 @@
   font-weight: 900;
   line-height: inherit;
   overflow: hidden;
+  text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
 }

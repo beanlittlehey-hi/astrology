@@ -216,3 +216,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 自定义导航标题统一左对齐规则
+
+- 页面/模块：二级页面自定义顶部导航、项目 UI 规则
+- 改动文件：`miniprogram/pages/index/index.wxss`、`AGENTS.md`、`docs/ITERATION_LOG.md`
+- 改动摘要：在现有 `navLayout + custom-nav` 公共导航基础上，将 `.custom-nav-title` 与 `.custom-nav-title-text` 显式改为左对齐；保留返回按钮、标题区和微信右上角胶囊的 px 测量规则不变，避免标题继续居中显示或被历史样式覆盖。项目规则同步新增：所有二级页自定义顶部导航标题必须左对齐，首页欢迎文案也必须保持视觉左对齐。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：本轮只改变所有 `custom-nav-title` 标题的文本对齐方式，不改导航测量和业务逻辑；需肉眼确认今日单张牌、测算/牌阵、抽牌、结果页、日记列表、日记详情标题均左对齐且不压到右侧胶囊。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
