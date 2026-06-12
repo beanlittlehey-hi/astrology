@@ -5476,12 +5476,16 @@
 }
 
 .app-screen.has-shared-bg > .content,
-.app-screen.has-shared-bg > .custom-nav,
 .app-screen.has-shared-bg > .bottom-nav,
 .app-screen.has-shared-bg > .drawer,
 .app-screen.has-shared-bg > .drawer-layer {
   position: relative;
   z-index: 3;
+}
+
+.app-screen.has-shared-bg > .custom-nav {
+  position: fixed;
+  z-index: 900;
 }
 
 .draw-subtitle-inline,

@@ -274,3 +274,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 修复共享背景导致导航占位重复
+
+- 页面/模块：自定义导航冻结规则、共享背景层
+- 改动文件：`miniprogram/pages/index/index.wxss`、`AGENTS.md`、`docs/ITERATION_LOG.md`
+- 根因：上一轮为了把内容层提升到固定背景上方，使用了 `.app-screen.has-shared-bg > .content, .app-screen.has-shared-bg > .custom-nav, ... { position: relative; z-index: 3; }`，这条规则覆盖了冻结导航的 `.custom-nav { position: fixed; }`。导航重新进入文档流后，内容区仍保留 `padding-top: navLayout.navTotalHeight`，导致顶部导航高度被计算两次，卡片和标题栏之间出现过大留白。
+- 改动摘要：从共享背景层级规则中移除 `.custom-nav`，单独声明 `.app-screen.has-shared-bg > .custom-nav { position: fixed; z-index: 900; }`，确保导航继续固定在顶部且不参与文档流；项目规则补充禁止后续覆盖 `.custom-nav` 的固定定位。
+- 验证：`rg -n "has-shared-bg > \\.custom-nav|has-shared-bg > \\.content|custom-nav \\{|position: fixed|position: relative|navLayout.navTotalHeight" miniprogram/pages/index/index.wxss miniprogram/pages/index/index.wxml AGENTS.md` 确认 `.custom-nav` 在共享背景页仍保持 `position: fixed`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2058644` Byte，主包约 `1025544` Byte。
+- 风险/待确认：只恢复导航 fixed 定位，不改 `navLayout`、标题坐标、内容卡片样式和底部 tab。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
