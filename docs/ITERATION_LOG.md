@@ -155,3 +155,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 启动页心绪小岛视觉还原
+
+- 页面/模块：启动页 `splash`
+- 改动文件：`miniprogram/assets/splash-v2/`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：按 `splash-reference.png` 将启动页重做为「心绪小岛」视觉；新增整屏插画背景、免责声明玻璃卡片背景和按钮背景，文字仍由前端渲染；保留点击「开启治愈之旅」拉起微信授权面板的原登录流程。
+- 资源处理：`splash-bg-clean.png` 转为高质量 JPG 控制包体；`splash-disclaimer-card-bg.png` 和 `splash-start-button-bg.png` 先去除烘进图里的棋盘格/白边，最终保留为小尺寸真透明 PNG。曾尝试 WebP 以控包体，但真机预览中底图肉眼不可见，因此改回 PNG 兼容方案；后续复查发现 PNG 有 alpha 但没有真实透明像素，已重做四周透明和裁边，并放大免责声明卡片高度。
+- 包体处理：删除无引用旧启动页品牌 logo，给微信 2MB 预览包保留余量。
+- 验证：待本次提交前运行资源尺寸/alpha 检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
+- 风险/待确认：启动页品牌文案按用户确认改为「心绪小岛」，首页等其它页面暂不改品牌名；需真机肉眼确认背景压缩质量、标题位置和底部卡片比例。
+- 基线/对比：`git diff --stat -- miniprogram/assets/splash-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

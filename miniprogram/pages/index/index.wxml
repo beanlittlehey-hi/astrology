@@ -1,19 +1,21 @@
 <view class="page">
   <view wx:if="{{screen === 'splash'}}" class="splash screen">
+    <image class="splash-bg" src="/assets/splash-v2/splash-bg-clean.jpg" mode="aspectFill"></image>
     <view class="splash-panel">
-      <view class="splash-dots"></view>
       <view class="splash-main">
-        <view class="brand-mark">
-          <image class="brand-logo" src="/assets/brand/yuexi-logo-option-02-breath-ripple-small.jpg" mode="aspectFit"></image>
-        </view>
         <view class="splash-copy">
-          <text class="title">月息塔罗</text>
+          <text class="title">心绪小岛</text>
+          <view class="title-rule"></view>
           <text class="desc">把一段不安的情绪，整理成今天可以完成的一小步。</text>
         </view>
       </view>
       <view class="bottom-actions">
+        <image class="legal-bg" src="/assets/splash-v2/splash-disclaimer-card-bg.png" mode="scaleToFill"></image>
         <view class="legal" bindtap="showDisclaimer">内容仅供娱乐、情绪陪伴和自我探索参考，不构成医疗、心理诊断、法律或投资建议。</view>
-        <button class="primary splash-primary" bindtap="enterApp">开启治愈之旅</button>
+        <button class="primary splash-primary" bindtap="enterApp">
+          <image class="splash-primary-bg" src="/assets/splash-v2/splash-start-button-bg.png" mode="scaleToFill"></image>
+          <text>✦ 开启治愈之旅 ✦</text>
+        </button>
       </view>
     </view>
     <view wx:if="{{authSheetOpen}}" class="auth-mask" bindtap="closeAuthSheet"></view>
@@ -23,7 +25,7 @@
         <view class="wechat-login-mark">微</view>
         <view>
           <text class="panel-title">微信授权登录</text>
-          <text class="muted">授权后即可进入月息塔罗。</text>
+          <text class="muted">授权后即可进入心绪小岛。</text>
         </view>
       </view>
       <button class="primary auth-primary" loading="{{authLoading}}" bindtap="startWechatLogin">微信一键登录</button>
