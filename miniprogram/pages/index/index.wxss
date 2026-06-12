@@ -5342,7 +5342,7 @@
 }
 
 .custom-nav-back {
-  position: fixed;
+  position: absolute;
   z-index: 902;
   box-sizing: border-box;
   margin: 0;
@@ -5359,14 +5359,21 @@
 }
 
 .custom-nav-title {
-  position: fixed;
-  left: 112px;
+  position: absolute;
   z-index: 901;
   pointer-events: none;
   box-sizing: border-box;
   overflow: hidden;
   text-align: left;
   white-space: nowrap;
+}
+
+.custom-nav-left-title .custom-nav-title {
+  text-align: left;
+}
+
+.custom-nav-center-title .custom-nav-title {
+  text-align: center;
 }
 
 .custom-nav-title-text {
@@ -5380,6 +5387,10 @@
   text-align: left;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.custom-nav-center-title .custom-nav-title-text {
+  text-align: center;
 }
 
 .custom-nav-content {

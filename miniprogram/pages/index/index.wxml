@@ -99,7 +99,7 @@
   </view>
 
   <view wx:elif="{{screen === 'daily'}}" class="screen app-screen">
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">今日单张牌</text>
@@ -129,7 +129,7 @@
 
   <view wx:elif="{{screen === 'question'}}" class="screen app-screen reading-v2-screen">
     <image class="reading-v2-bg" src="/assets/reading-v2/reading-bg-clean.jpg" mode="aspectFill"></image>
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
         <text>‹</text>
       </button>
@@ -165,7 +165,7 @@
   </view>
 
   <view wx:elif="{{screen === 'draw'}}" class="screen app-screen">
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <view class="custom-nav-back draw-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">×</view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
@@ -213,7 +213,7 @@
   </view>
 
   <view wx:elif="{{screen === 'result'}}" class="screen app-screen">
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" bindtap="backFromResult">‹</button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{currentSession.title}}</text>
@@ -257,8 +257,8 @@
   </view>
 
   <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeftNoBack}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">情绪轨迹</text>
       </view>
     </view>
@@ -318,7 +318,7 @@
   </view>
 
   <view wx:elif="{{screen === 'diary'}}" class="screen app-screen">
-    <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
+    <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{activeDiary.title}}</text>

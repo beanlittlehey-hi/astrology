@@ -3,8 +3,15 @@ const DEFAULT_STATUS_BAR_HEIGHT = 44
 const DEFAULT_MENU_BUTTON_HEIGHT = 32
 const DEFAULT_MENU_BUTTON_WIDTH = 88
 const DEFAULT_MENU_BUTTON_RIGHT_GAP = 10
+const DESIGN_WIDTH_RPX = 750
+const NAV_EDGE_RPX = 32
+const NAV_TITLE_GAP_RPX = 16
 
 const fallbackWindowWidth = 375
+
+function rpxToPx(rpx, windowWidth) {
+  return Math.round((windowWidth || fallbackWindowWidth) * rpx / DESIGN_WIDTH_RPX)
+}
 
 function getWindowInfo() {
   if (wx.getWindowInfo) return wx.getWindowInfo()
@@ -57,10 +64,10 @@ function getNavLayout() {
     const navContentTop = menuButtonRect.top
     const navContentHeight = menuButtonRect.height
     const navTotalHeight = menuButtonRect.bottom + SAFE_BOTTOM_PADDING
-    const menuButtonSafeWidth = Math.max(windowWidth - menuButtonRect.left, menuButtonRect.width)
-    const edgeGap = Math.max(windowWidth - menuButtonRect.right, 16)
-    const leftButtonLeft = edgeGap
-    const leftTitleSafeWidth = Math.max(menuButtonSafeWidth, leftButtonLeft + menuButtonRect.height + 12)
+    const titleRight = Math.max(windowWidth - menuButtonRect.left + rpxToPx(NAV_TITLE_GAP_RPX, windowWidth), menuButtonRect.width)
+    const leftButtonLeft = rpxToPx(NAV_EDGE_RPX, windowWidth)
+    const titleLeftNoBack = leftButtonLeft
+    const titleLeft = leftButtonLeft + menuButtonRect.height + rpxToPx(NAV_TITLE_GAP_RPX, windowWidth)
 
     return {
       statusBarHeight,
@@ -77,14 +84,16 @@ function getNavLayout() {
       leftButtonTop: menuButtonRect.top,
       titleTop: menuButtonRect.top,
       titleHeight: menuButtonRect.height,
-      titleLeft: leftTitleSafeWidth,
-      titleRight: menuButtonSafeWidth
+      titleLeft,
+      titleLeftNoBack,
+      titleRight
     }
   } catch (error) {
     const fallback = getFallbackMenuButton()
-    const menuButtonSafeWidth = Math.max(fallbackWindowWidth - fallback.left, fallback.width)
-    const leftButtonLeft = Math.max(fallbackWindowWidth - fallback.right, 16)
-    const leftTitleSafeWidth = Math.max(menuButtonSafeWidth, leftButtonLeft + fallback.height + 12)
+    const titleRight = Math.max(fallbackWindowWidth - fallback.left + rpxToPx(NAV_TITLE_GAP_RPX, fallbackWindowWidth), fallback.width)
+    const leftButtonLeft = rpxToPx(NAV_EDGE_RPX, fallbackWindowWidth)
+    const titleLeftNoBack = leftButtonLeft
+    const titleLeft = leftButtonLeft + fallback.height + rpxToPx(NAV_TITLE_GAP_RPX, fallbackWindowWidth)
     return {
       statusBarHeight: DEFAULT_STATUS_BAR_HEIGHT,
       menuButtonTop: fallback.top,
@@ -100,8 +109,9 @@ function getNavLayout() {
       leftButtonTop: fallback.top,
       titleTop: fallback.top,
       titleHeight: fallback.height,
-      titleLeft: leftTitleSafeWidth,
-      titleRight: menuButtonSafeWidth
+      titleLeft,
+      titleLeftNoBack,
+      titleRight
     }
   }
 }

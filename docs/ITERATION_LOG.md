@@ -227,3 +227,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 自定义导航标题真实左边距修复
+
+- 页面/模块：今日单张牌、测算/牌阵、抽牌、结果页、日记列表、日记详情、自定义导航
+- 改动文件：`miniprogram/utils/navLayout.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`AGENTS.md`、`docs/ITERATION_LOG.md`
+- 根因：上一轮只把标题文本 `text-align` 改成左对齐，但 `navLayout.titleLeft` 仍用 `Math.max(右侧胶囊安全宽度, 左侧返回按钮宽度)` 计算；在部分机型上右侧胶囊安全宽度更大，导致标题容器起点被整体推到右侧，看起来仍然没有真正左对齐。
+- 改动摘要：将自定义导航拆出 `custom-nav-left-title` / `custom-nav-center-title` 模式；左标题模式以内容主边距 `32rpx` 为基准，返回按钮固定从 `32rpx` 开始，有返回按钮的标题从 `32rpx + 返回按钮宽度 + 16rpx` 开始，无返回按钮的标题从 `32rpx` 开始；右侧胶囊只影响 `titleRight` 避让距离，不再参与标题左起点计算。返回按钮和标题改为相对 `.custom-nav` 的 absolute 定位，避免子元素继续脱离导航容器。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：标题会比上一版明显向左移动；长标题仍会在右侧胶囊避让前省略，需真机肉眼确认各二级页标题不压到胶囊。
+- 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
