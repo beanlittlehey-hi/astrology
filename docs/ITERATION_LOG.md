@@ -204,3 +204,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 自定义导航标题可见性与结果页返回修复
+
+- 页面/模块：今日单张牌、抽牌页、结果页、日记列表、日记详情、自定义导航
+- 改动文件：`miniprogram/utils/navLayout.js`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：导航标题统一改为中性 `custom-nav-title-text`，不再复用 `daily-title`、`draw-title`、`journal-topbar` 等历史页面类名；返回按钮改用 `navLayout.leftButtonLeft` 的 px 坐标；塔罗结果页补回左侧返回按钮，并根据来源从抽牌结果返回抽牌页、从日记报告返回日记详情；结果页右侧「享」按钮按用户要求继续删除。
+- 根因：上一轮 fixed 导航仍把标题节点挂在旧业务类名上，历史 WXSS 会继续干扰标题显示；结果页左侧返回按钮是 WXML 结构缺失，不是样式隐藏。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2076636` Byte，主包约 `1043536` Byte。
+- 风险/待确认：结果页返回目标依赖 `resultBackScreen/resultBackNav`，需真机确认从抽牌进入和从日记详情进入两条路径都返回正确；标题改为统一中性样式后，需肉眼确认各页标题字号颜色符合当前视觉。
+- 基线/对比：`git diff --stat -- miniprogram/utils/navLayout.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

@@ -455,6 +455,8 @@ Page({
     drawQuestionConfirmed: false,
     drawSubtitle: "关系走向牌阵",
     currentSession: null,
+    resultBackScreen: "draw",
+    resultBackNav: "reading",
     resultNote: "我真正害怕的是不是被忽视？",
     diaries: [],
     selectedJournalDate: "all",
@@ -1014,6 +1016,8 @@ Page({
       drawSlots,
       resultNote: "我真正害怕的是不是被忽视？",
       currentDrawPosition: spread.positions[spread.positions.length - 1] || "关系",
+      resultBackScreen: "draw",
+      resultBackNav: "reading",
       screen: "result",
       showTab: true,
       activeNav: "reading"
@@ -1094,6 +1098,8 @@ Page({
       const session = ensureProfessionalSession(this.data.activeDiary.session)
       this.setData({
         currentSession: session,
+        resultBackScreen: "diary",
+        resultBackNav: "journal",
         screen: "result",
         showTab: true,
         activeNav: "reading"
@@ -1101,6 +1107,16 @@ Page({
       return
     }
     wx.showToast({ title: "这条示例日记没有完整报告，请先完成一次测算", icon: "none" })
+  },
+
+  backFromResult() {
+    const screen = this.data.resultBackScreen || "draw"
+    const nav = this.data.resultBackNav || this.navForScreen(screen)
+    this.setData({
+      screen,
+      showTab: shouldShowTab(screen),
+      activeNav: nav
+    })
   },
 
   showDisclaimer() {

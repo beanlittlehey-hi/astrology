@@ -5343,7 +5343,6 @@
 
 .custom-nav-back {
   position: fixed;
-  left: 36rpx;
   z-index: 902;
   box-sizing: border-box;
   margin: 0;
@@ -5370,10 +5369,12 @@
   white-space: nowrap;
 }
 
-.custom-nav-title .h1,
-.custom-nav-title.h1 {
+.custom-nav-title-text {
   display: block;
   height: 100%;
+  color: #282342;
+  font-size: 38rpx;
+  font-weight: 900;
   line-height: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5394,22 +5395,6 @@
 .daily-content {
   padding-left: 36rpx;
   padding-right: 36rpx;
-}
-
-.daily-content .daily-title,
-.custom-nav-title.daily-title {
-  display: block;
-  text-align: center;
-}
-
-.custom-nav-title.daily-title .h1 {
-  color: #282342;
-  font-size: 38rpx;
-  font-weight: 900;
-}
-
-.custom-nav-title .sub {
-  display: none;
 }
 
 .daily-content .today-card {
@@ -5435,18 +5420,6 @@
 .reading-v2-screen .question-label,
 .question-label {
   margin-top: 22rpx;
-}
-
-.custom-nav-title.draw-title .h1,
-.custom-nav-title.result-title .h1,
-.custom-nav-title.diary-title .h1,
-.custom-nav-title.journal-topbar .h1,
-.custom-nav-title .h1 {
-  line-height: inherit;
-}
-
-.custom-nav-title.draw-title .h1 {
-  font-size: 38rpx;
 }
 
 .draw-subtitle-inline,

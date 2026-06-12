@@ -100,9 +100,9 @@
 
   <view wx:elif="{{screen === 'daily'}}" class="screen app-screen">
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-back daily-round-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
-      <view class="custom-nav-title daily-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">今日单张牌</text>
+      <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="custom-nav-title-text">今日单张牌</text>
       </view>
     </view>
     <view class="content custom-nav-content daily-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
@@ -130,11 +130,11 @@
   <view wx:elif="{{screen === 'question'}}" class="screen app-screen reading-v2-screen">
     <image class="reading-v2-bg" src="/assets/reading-v2/reading-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <button class="custom-nav-back icon-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
+      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
         <text>‹</text>
       </button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">进一步探索真实的内心</text>
+        <text class="custom-nav-title-text">进一步探索真实的内心</text>
       </view>
     </view>
     <view class="content with-nav custom-nav-content question-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
@@ -166,9 +166,9 @@
 
   <view wx:elif="{{screen === 'draw'}}" class="screen app-screen">
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-back draw-round-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">×</view>
-      <view class="custom-nav-title draw-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
+      <view class="custom-nav-back draw-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">×</view>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="custom-nav-title-text">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
       </view>
     </view>
     <view class="content custom-nav-content draw-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
@@ -214,8 +214,9 @@
 
   <view wx:elif="{{screen === 'result'}}" class="screen app-screen">
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-title result-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">{{currentSession.title}}</text>
+      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" bindtap="backFromResult">‹</button>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="custom-nav-title-text">{{currentSession.title}}</text>
       </view>
     </view>
     <view class="content custom-nav-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
@@ -257,8 +258,8 @@
 
   <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-title journal-topbar" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">情绪轨迹</text>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="custom-nav-title-text">情绪轨迹</text>
       </view>
     </view>
     <view class="content with-nav custom-nav-content journal-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
@@ -318,9 +319,9 @@
 
   <view wx:elif="{{screen === 'diary'}}" class="screen app-screen">
     <view class="custom-nav" style="height: {{navLayout.navTotalHeight}}px;">
-      <button class="custom-nav-back icon-btn" style="top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
-      <view class="custom-nav-title diary-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="h1">{{activeDiary.title}}</text>
+      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
+      <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
+        <text class="custom-nav-title-text">{{activeDiary.title}}</text>
       </view>
     </view>
     <view class="content custom-nav-content" style="padding-top: {{navLayout.navTotalHeight}}px;">

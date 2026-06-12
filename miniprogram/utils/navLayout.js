@@ -33,7 +33,12 @@ function normalizeMenuButton(menuButtonRect, windowInfo) {
     menuButtonRect &&
     Number.isFinite(menuButtonRect.top) &&
     Number.isFinite(menuButtonRect.height) &&
-    menuButtonRect.height > 0
+    Number.isFinite(menuButtonRect.left) &&
+    Number.isFinite(menuButtonRect.right) &&
+    Number.isFinite(menuButtonRect.width) &&
+    Number.isFinite(menuButtonRect.bottom) &&
+    menuButtonRect.height > 0 &&
+    menuButtonRect.width > 0
   ) {
     return menuButtonRect
   }
@@ -53,6 +58,9 @@ function getNavLayout() {
     const navContentHeight = menuButtonRect.height
     const navTotalHeight = menuButtonRect.bottom + SAFE_BOTTOM_PADDING
     const menuButtonSafeWidth = Math.max(windowWidth - menuButtonRect.left, menuButtonRect.width)
+    const edgeGap = Math.max(windowWidth - menuButtonRect.right, 16)
+    const leftButtonLeft = edgeGap
+    const leftTitleSafeWidth = Math.max(menuButtonSafeWidth, leftButtonLeft + menuButtonRect.height + 12)
 
     return {
       statusBarHeight,
@@ -65,15 +73,18 @@ function getNavLayout() {
       navContentHeight,
       navTotalHeight,
       leftButtonSize: menuButtonRect.height,
+      leftButtonLeft,
       leftButtonTop: menuButtonRect.top,
       titleTop: menuButtonRect.top,
       titleHeight: menuButtonRect.height,
-      titleLeft: menuButtonSafeWidth,
+      titleLeft: leftTitleSafeWidth,
       titleRight: menuButtonSafeWidth
     }
   } catch (error) {
     const fallback = getFallbackMenuButton()
     const menuButtonSafeWidth = Math.max(fallbackWindowWidth - fallback.left, fallback.width)
+    const leftButtonLeft = Math.max(fallbackWindowWidth - fallback.right, 16)
+    const leftTitleSafeWidth = Math.max(menuButtonSafeWidth, leftButtonLeft + fallback.height + 12)
     return {
       statusBarHeight: DEFAULT_STATUS_BAR_HEIGHT,
       menuButtonTop: fallback.top,
@@ -85,10 +96,11 @@ function getNavLayout() {
       navContentHeight: fallback.height,
       navTotalHeight: fallback.bottom + SAFE_BOTTOM_PADDING,
       leftButtonSize: fallback.height,
+      leftButtonLeft,
       leftButtonTop: fallback.top,
       titleTop: fallback.top,
       titleHeight: fallback.height,
-      titleLeft: menuButtonSafeWidth,
+      titleLeft: leftTitleSafeWidth,
       titleRight: menuButtonSafeWidth
     }
   }
