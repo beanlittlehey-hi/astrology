@@ -250,3 +250,15 @@
 - 基线/对比：`git diff --stat -- AGENTS.md docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待 push
+
+## 2026-06-12 - 非启动页统一复用首页背景
+
+- 页面/模块：今日单张牌、测算/牌阵、抽牌、结果页、日记列表、日记详情、页面背景资源
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`miniprogram/assets/reading-v2/reading-bg-clean.jpg`、`docs/ITERATION_LOG.md`
+- 改动摘要：除启动页/登录授权区域外，所有内容页统一复用首页背景 `/assets/home-v2/home-bg-clean.jpg`；首页本身保持原背景引用不变。新增公共 `shared-page-bg` 背景层，测算页旧 `reading-bg-clean.jpg` 不再引用并删除，避免复制首页背景导致包体增加。
+- 包体策略：复用已有首页背景文件，不新增背景图片；删除约 `20KB` 的旧测算页背景资源，控制主包体积。
+- 验证：`rg -n "reading-bg-clean|shared-page-bg|home-bg-clean|splash-bg-clean" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/pages/index/index.js miniprogram/app.json` 确认旧测算背景无引用；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2057810` Byte，主包约 `1024710` Byte。
+- 风险/待确认：测算页原独立背景被替换为首页背景，页面卡片和内容层保持原样；导航栏/标题栏冻结规则未改动。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/reading-v2 docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
