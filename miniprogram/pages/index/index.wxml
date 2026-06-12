@@ -99,12 +99,11 @@
   </view>
 
   <view wx:elif="{{screen === 'daily'}}" class="screen app-screen">
-    <view class="content daily-content">
-      <view class="topbar daily-topbar">
+    <view class="content native-nav-content daily-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar daily-topbar">
         <view class="daily-round-btn" data-screen="home" data-nav="home" bindtap="go">‹</view>
         <view class="daily-title">
           <text class="h1">今日单张牌</text>
-          <text class="sub">给今天一个温和提醒</text>
         </view>
         <view class="daily-round-placeholder"></view>
       </view>
@@ -131,8 +130,8 @@
 
   <view wx:elif="{{screen === 'question'}}" class="screen app-screen reading-v2-screen">
     <image class="reading-v2-bg" src="/assets/reading-v2/reading-bg-clean.jpg" mode="aspectFill"></image>
-    <view class="content with-nav question-content">
-      <view class="topbar question-topbar">
+    <view class="content with-nav native-nav-content question-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar question-topbar">
         <button class="icon-btn" data-screen="home" data-nav="home" bindtap="go">
           <text>‹</text>
         </button>
@@ -167,8 +166,8 @@
   </view>
 
   <view wx:elif="{{screen === 'draw'}}" class="screen app-screen">
-    <view class="content draw-content">
-      <view class="topbar draw-topbar">
+    <view class="content native-nav-content draw-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar draw-topbar">
         <view class="draw-round-btn" data-screen="question" data-nav="reading" bindtap="go">×</view>
         <view class="draw-title">
           <text class="h1">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
@@ -216,8 +215,8 @@
   </view>
 
   <view wx:elif="{{screen === 'result'}}" class="screen app-screen">
-    <view class="content">
-      <view class="topbar">
+    <view class="content native-nav-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar result-topbar">
         <view>
           <text class="h1">{{currentSession.title}}</text>
           <text class="sub">{{currentSession.spreadName}} · 情绪解读</text>
@@ -260,8 +259,8 @@
   </view>
 
   <view wx:elif="{{screen === 'journal'}}" class="screen app-screen">
-    <view class="content with-nav journal-content">
-      <view class="topbar journal-topbar">
+    <view class="content with-nav native-nav-content journal-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar journal-topbar">
         <view>
           <text class="h1">情绪轨迹</text>
           <text class="sub">记录不是反刍，是看见变化</text>
@@ -321,8 +320,8 @@
   </view>
 
   <view wx:elif="{{screen === 'diary'}}" class="screen app-screen">
-    <view class="content">
-      <view class="topbar">
+    <view class="content native-nav-content" style="--native-nav-height: {{nativeNav.height}}px; --native-content-top: {{nativeNav.contentTop}}px; --native-topbar-pull: {{nativeNav.topbarPull}}px;">
+      <view class="topbar native-topbar diary-topbar">
         <button class="icon-btn" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
         <view>
           <text class="h1">{{activeDiary.title}}</text>

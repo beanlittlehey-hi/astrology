@@ -9,6 +9,13 @@ const cloudApi = require("../../services/cloudApi")
 
 const STORAGE_KEY = "tarot_healing_v03_fresh_login"
 const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
+const DEFAULT_NATIVE_NAV = {
+  top: 44,
+  height: 32,
+  bottom: 76,
+  contentTop: 88,
+  topbarPull: -44
+}
 
 function pad(value) {
   return String(value).padStart(2, "0")
@@ -420,10 +427,30 @@ function shouldShowTab(screen) {
   return screen !== "splash"
 }
 
+function getNativeNavMetrics() {
+  try {
+    const menu = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null
+    const info = wx.getWindowInfo ? wx.getWindowInfo() : wx.getSystemInfoSync()
+    const statusBarHeight = info && info.statusBarHeight ? info.statusBarHeight : 44
+    const top = menu && menu.top ? menu.top : statusBarHeight + 4
+    const height = menu && menu.height ? menu.height : 32
+    return {
+      top,
+      height,
+      bottom: top + height,
+      contentTop: top + height + 12,
+      topbarPull: -(height + 12)
+    }
+  } catch (error) {
+    return DEFAULT_NATIVE_NAV
+  }
+}
+
 Page({
   data: {
     screen: "splash",
     showTab: false,
+    nativeNav: DEFAULT_NATIVE_NAV,
     loggedIn: false,
     drawerOpen: false,
     authSheetOpen: false,
@@ -480,12 +507,17 @@ Page({
   },
 
   onLoad() {
+    this.refreshNativeNav()
     this.restoreState()
     this.refreshSpreadOptions()
     this.drawDaily(false)
     if (this.data.loggedIn) {
       this.syncCloudAfterLogin(false)
     }
+  },
+
+  refreshNativeNav() {
+    this.setData({ nativeNav: getNativeNavMetrics() })
   },
 
   restoreState() {

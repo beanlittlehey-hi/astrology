@@ -5330,3 +5330,136 @@
   z-index: 1;
   line-height: 1;
 }
+
+/* Native capsule aligned navigation */
+.app-screen > .native-nav-content {
+  padding-top: var(--native-content-top);
+}
+
+.app-screen .native-topbar {
+  min-height: var(--native-nav-height);
+  margin-top: var(--native-topbar-pull);
+  margin-bottom: 32rpx;
+  display: grid;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.app-screen .native-topbar .h1 {
+  line-height: var(--native-nav-height);
+}
+
+.app-screen .native-topbar .sub {
+  margin-top: 8rpx;
+}
+
+.app-screen .native-topbar .icon-btn,
+.app-screen .native-topbar .daily-round-btn,
+.app-screen .native-topbar .draw-round-btn {
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+}
+
+.app-screen .native-topbar .daily-round-placeholder,
+.app-screen .native-topbar .draw-round-placeholder {
+  align-self: start;
+  justify-self: end;
+}
+
+.daily-content {
+  padding-left: 36rpx;
+  padding-right: 36rpx;
+}
+
+.daily-content .native-topbar.daily-topbar {
+  grid-template-columns: 68rpx minmax(0, 1fr) 68rpx;
+  gap: 16rpx;
+  margin-bottom: 22rpx;
+}
+
+.daily-content .daily-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--native-nav-height);
+  text-align: center;
+}
+
+.daily-content .daily-title .h1 {
+  font-size: 38rpx;
+  white-space: nowrap;
+}
+
+.daily-content .daily-title .sub {
+  display: none;
+}
+
+.daily-content .today-card {
+  margin-top: 0;
+  margin-bottom: 16rpx;
+}
+
+.daily-content .daily-action-card {
+  margin-top: 0;
+  margin-bottom: 12rpx;
+}
+
+.daily-content .daily-actions {
+  margin-top: 0;
+}
+
+.question-content,
+.reading-v2-screen .question-content,
+.draw-content,
+.journal-content {
+  padding-top: var(--native-content-top);
+}
+
+.question-content .native-topbar,
+.reading-v2-screen .question-content .native-topbar,
+.draw-content .native-topbar,
+.journal-content .native-topbar {
+  margin-top: var(--native-topbar-pull);
+}
+
+.question-content .native-topbar,
+.reading-v2-screen .question-content .native-topbar {
+  grid-template-columns: 72rpx minmax(0, 1fr);
+  gap: 36rpx;
+  margin-bottom: 38rpx;
+}
+
+.draw-content .native-topbar {
+  grid-template-columns: 76rpx minmax(0, 1fr) 76rpx;
+  align-items: start;
+  margin-bottom: 24rpx;
+}
+
+.draw-content .draw-title {
+  align-self: start;
+}
+
+.draw-content .native-topbar .draw-title .h1 {
+  line-height: var(--native-nav-height);
+}
+
+.journal-content .native-topbar {
+  align-items: start;
+  margin-bottom: 30rpx;
+}
+
+.result-topbar {
+  grid-template-columns: minmax(0, 1fr) 68rpx;
+  gap: 24rpx;
+}
+
+.diary-topbar {
+  grid-template-columns: 68rpx minmax(0, 1fr);
+  gap: 24rpx;
+}
+
+.result-topbar > view,
+.diary-topbar > view {
+  min-width: 0;
+}

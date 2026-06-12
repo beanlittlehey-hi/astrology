@@ -192,3 +192,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/app.json miniprogram/packages/tarot-assets miniprogram/assets/tarot miniprogram/data/content.js miniprogram/pages/index`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 今日单张牌导航对齐与上移修复
+
+- 页面/模块：今日单张牌、二级页面顶部导航
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：新增 `wx.getMenuButtonBoundingClientRect()` 导航测量，统一今日单张牌、测算/牌阵、抽牌、结果、日记列表和日记详情的顶部标题/返回按钮与微信右上角胶囊按钮垂直居中；删除今日单张牌副标题「给今天一个温和提醒」；将今日卡牌卡片、今日行动卡片和两个按钮上移到标题下方，减少大块留白。
+- 根因：此前所有二级页导航都依赖固定 `rpx` 顶部间距，没有读取微信原生胶囊按钮位置；今日页还叠加了多轮历史 `daily-content`/`daily-topbar` WXSS override，导致标题和卡片区域被反复顶下去。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2074272` Byte，主包约 `1041172` Byte。
+- 风险/待确认：导航位置改为运行时读取微信胶囊位置，需真机确认不同机型上今日单张牌、测算、抽牌、结果、日记列表、日记详情的标题行均与右上角胶囊同线；首页和启动页不纳入二级导航规则。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
