@@ -262,3 +262,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/reading-v2 docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-12 - 固定首页背景并清除旧染色层
+
+- 页面/模块：今日单张牌、测算/牌阵、抽牌、结果页、日记列表、日记详情、页面背景渲染
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：上一轮复用首页背景时只替换了图片路径，但背景 `<image>` 仍作为页面内布局层使用 `height: 100% + aspectFill`，长内容页会按内容高度缩放造成拉伸；同时历史 `.screen::before`、`.app-screen::after` 和内容区渐变背景仍叠在图片上，导致颜色看起来和首页不一致。
+- 改动摘要：给所有非启动/登录内容页增加 `has-shared-bg` 标记；将 `shared-page-bg` 改成固定视口 `position: fixed; width: 100vw; height: 100vh`，背景不再随页面滚动或长内容拉伸；关闭 `has-shared-bg` 下的旧伪元素染色层，并把内容容器背景强制透明。导航栏/标题栏冻结规则未改动。
+- 验证：`rg -n "shared-page-bg|has-shared-bg|reading-bg-clean|home-bg-clean|splash-bg-clean" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/pages/index/index.js miniprogram/app.json` 确认非启动页使用固定首页背景且旧测算背景无引用；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2058617` Byte，主包约 `1025517` Byte。
+- 风险/待确认：背景图固定后，长页面滚动时组件会在同一张静态背景上移动；需真机确认各内容页背景颜色与首页一致，启动页/登录页不受影响。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

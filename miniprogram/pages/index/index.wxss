@@ -28,10 +28,10 @@
 }
 
 .shared-page-bg {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   pointer-events: none;
 }
@@ -5445,6 +5445,43 @@
 .reading-v2-screen .question-label,
 .question-label {
   margin-top: 22rpx;
+}
+
+/* Shared fixed background: keep homepage image color and prevent long-page stretch */
+.app-screen.has-shared-bg {
+  background: transparent;
+}
+
+.app-screen.has-shared-bg::before,
+.app-screen.has-shared-bg::after {
+  display: none;
+}
+
+.app-screen.has-shared-bg > .shared-page-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.app-screen.has-shared-bg > .content,
+.app-screen.has-shared-bg .daily-content,
+.app-screen.has-shared-bg .question-content,
+.app-screen.has-shared-bg .draw-content,
+.app-screen.has-shared-bg .journal-content {
+  background: transparent;
+  background-image: none;
+}
+
+.app-screen.has-shared-bg > .content,
+.app-screen.has-shared-bg > .custom-nav,
+.app-screen.has-shared-bg > .bottom-nav,
+.app-screen.has-shared-bg > .drawer,
+.app-screen.has-shared-bg > .drawer-layer {
+  position: relative;
+  z-index: 3;
 }
 
 .draw-subtitle-inline,
