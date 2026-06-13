@@ -135,7 +135,7 @@
         <text>‹</text>
       </button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="custom-nav-title-text">进一步探索真实的内心</text>
+        <text class="custom-nav-title-text">专属牌阵</text>
       </view>
     </view>
     <view class="content with-nav custom-nav-content question-content" style="padding-top: {{navLayout.navTotalHeight}}px;">

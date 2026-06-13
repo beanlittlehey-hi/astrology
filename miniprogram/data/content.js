@@ -1406,26 +1406,17 @@ const tarotDeck = [
 ]
 
 const scenes = [
-  { id: "love", name: "感情", hint: "推荐关系走向、爱情十字、二选一等牌阵。" },
-  { id: "work", name: "工作", hint: "推荐事业财富、三张牌和阻碍建议牌阵。" },
-  { id: "wealth", name: "财富", hint: "推荐事业财富、二选一和三张牌阵。" },
-  { id: "other", name: "其他", hint: "推荐三张牌、单张指引和阻碍建议牌阵。" }
+  { id: "love", name: "感情", hint: "推荐爱情十字、二选一和三张牌阵。" },
+  { id: "work", name: "工作", hint: "推荐事业财富牌阵，也可使用三张牌阵梳理阶段。" },
+  { id: "other", name: "其他", hint: "推荐三张牌阵，也可用二选一抉择牌阵。" }
 ]
 
 const spreads = [
   {
-    id: "single",
-    name: "单张指引",
-    badge: "快速",
-    scenes: ["love", "work", "wealth", "other"],
-    summary: "适合快速获得当下提醒。",
-    positions: ["当下提醒"]
-  },
-  {
     id: "three",
     name: "三张牌阵",
     badge: "通用",
-    scenes: ["love", "work", "wealth", "other"],
+    scenes: ["love", "work", "other"],
     summary: "过去 / 现在 / 未来，适合快速梳理阶段变化。",
     positions: ["过去", "现在", "未来"]
   },
@@ -1438,18 +1429,10 @@ const spreads = [
     positions: ["现状", "阻碍", "对方态度", "建议", "可能走向"]
   },
   {
-    id: "relation",
-    name: "关系走向牌阵",
-    badge: "感情",
-    scenes: ["love"],
-    summary: "看见你、对方、关系近况和下一步变化。",
-    positions: ["你", "对方", "关系"]
-  },
-  {
     id: "choice",
     name: "二选一抉择牌阵",
     badge: "可选",
-    scenes: ["love", "work", "wealth", "other"],
+    scenes: ["love", "work", "other"],
     summary: "比较两个选择的机会、代价和更适合的行动。",
     positions: ["选择 A", "选择 B", "建议"]
   },
@@ -1457,17 +1440,9 @@ const spreads = [
     id: "career",
     name: "事业财富牌阵",
     badge: "工作",
-    scenes: ["work", "wealth"],
+    scenes: ["work"],
     summary: "适合工作选择、机会判断、收入压力和资源整理。",
     positions: ["当前资源", "主要压力", "下一步"]
-  },
-  {
-    id: "block",
-    name: "阻碍与建议牌阵",
-    badge: "安抚",
-    scenes: ["love", "work", "wealth", "other"],
-    summary: "拆解卡住的原因、可控边界和当下行动建议。",
-    positions: ["阻碍", "可控边界", "今日建议"]
   }
 ]
 

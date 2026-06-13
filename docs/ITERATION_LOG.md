@@ -286,3 +286,14 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss AGENTS.md docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-13 - 牌阵页分类与牌阵删减
+
+- 页面/模块：测算 / 专属牌阵页
+- 改动文件：`miniprogram/data/content.js`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`docs/ITERATION_LOG.md`
+- 改动摘要：将页面标题从「进一步探索真实的内心」改为「专属牌阵」；分类删除「财富」，保留「感情 / 工作 / 其他」；牌阵列表删除「关系走向牌阵」「阻碍与建议牌阵」和原本未要求保留的「单张指引」，只展示「三张牌阵」「爱情十字牌阵」「二选一抉择牌阵」「事业财富牌阵」。点击「工作」时自动选中并高亮「事业财富牌阵」，感情默认高亮「爱情十字牌阵」，其他默认高亮「三张牌阵」。
+- 验证：`rg -n "进一步探索真实的内心|财富\\\"|name: \\\"财富\\\"|id: \\\"wealth\\\"|关系走向牌阵|阻碍与建议牌阵|id: \\\"relation\\\"|id: \\\"block\\\"|id: \\\"single\\\"|questionOrder|recommended|专属牌阵|事业财富牌阵" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.js miniprogram/data/content.js` 确认分类和牌阵删减结果；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2058043` Byte，主包约 `1024943` Byte。
+- 风险/待确认：历史日记或旧会话中如果曾保存被删除牌阵的名称，结果详情仍展示旧记录文本；本轮只调整牌阵选择页和新抽牌流程，不迁移历史数据。
+- 基线/对比：`git diff --stat -- miniprogram/data/content.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

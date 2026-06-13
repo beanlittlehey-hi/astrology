@@ -435,7 +435,7 @@ Page({
     tarotDeck,
     selectedScene: "love",
     selectedSceneName: "感情",
-    selectedSceneHint: "推荐关系走向、爱情十字、二选一等牌阵。",
+    selectedSceneHint: "推荐爱情十字、二选一和三张牌阵。",
     selectedSpreadId: "cross",
     question: "对方最近忽冷忽热，我应该继续主动吗？",
     selectedSpread: spreads.find((item) => item.id === "cross"),
@@ -453,7 +453,7 @@ Page({
     currentDrawPosition: "你",
     drawQuestionDraft: "",
     drawQuestionConfirmed: false,
-    drawSubtitle: "关系走向牌阵",
+    drawSubtitle: "爱情十字牌阵",
     currentSession: null,
     resultBackScreen: "draw",
     resultBackNav: "reading",
@@ -773,7 +773,7 @@ Page({
 
   chooseScene(event) {
     const selectedScene = event.currentTarget.dataset.scene
-    const recommended = selectedScene === "love" ? "cross" : "three"
+    const recommended = selectedScene === "love" ? "cross" : (selectedScene === "work" ? "career" : "three")
     this.setData({
       selectedScene,
       selectedSpreadId: recommended
@@ -783,21 +783,28 @@ Page({
 
   refreshSpreadOptions() {
     const currentScene = scenes.find((scene) => scene.id === this.data.selectedScene) || scenes[0]
-    const questionOrder = ["three", "cross", "choice", "relation", "block", "career"]
+    const recommendByScene = {
+      love: "cross",
+      work: "career",
+      other: "three"
+    }
+    const recommendedSpreadId = recommendByScene[this.data.selectedScene] || "three"
+    const questionOrder = ["three", "cross", "choice", "career"]
     const filteredSpreads = questionOrder
       .map((id) => spreads.find((spread) => spread.id === id))
       .filter(Boolean)
       .map((spread) => ({
         ...spread,
         disabled: false,
-        recommended:
-          (this.data.selectedScene === "love" && spread.id === "cross") ||
-          (this.data.selectedScene !== "love" && spread.id === "three")
+        recommended: spread.id === recommendedSpreadId
       }))
     const selectedSpread =
-      spreads.find((spread) => spread.id === this.data.selectedSpreadId) || filteredSpreads.find((spread) => !spread.disabled)
+      filteredSpreads.find((spread) => spread.id === this.data.selectedSpreadId) ||
+      filteredSpreads.find((spread) => spread.id === recommendedSpreadId) ||
+      filteredSpreads.find((spread) => !spread.disabled)
     this.setData({
       filteredSpreads,
+      selectedSpreadId: selectedSpread ? selectedSpread.id : this.data.selectedSpreadId,
       selectedSpread,
       selectedSceneName: currentScene.name,
       selectedSceneHint: currentScene.hint
