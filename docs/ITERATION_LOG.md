@@ -441,6 +441,20 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-14 - 日记详情页切图接入
+
+- 页面/模块：情绪日记 / 日记详情 `diary` screen
+- 改动文件：`miniprogram/assets/diary-detail-v2/*`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 切图范围：按参考图 `/Users/shimiao/Desktop/Moon-Island/日记详情.png` 只接入顶部标签背景、四个卡片左侧 icon 和“查看完整塔罗报告”按钮背景；顶部标题栏、底部 tab 和整体固定 homepage 背景保持不变。
+- 包体确认：新增 `diary-detail-v2` 透明 PNG 共 `96K`，未复制整屏背景；四个详情卡片继续复用 homepage 的 `/assets/home-v2/home-card-small-bg.png`。
+- 实现方式：所有本地图片均通过 WXML `<image>` 图层加载，没有使用 WXSS `background-image`；日记详情四个卡片使用图片绝对铺底、文字正常撑高，因此卡片高度可随内容自适应；旧 `.chip/.result-block/.ghost` 视觉背景通过 `.diary-detail-*` 局部 class 隔离。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、日记数据和打开完整塔罗报告的业务逻辑。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/diary-detail-v2/*.png` 确认 7 张组件资源均为目标尺寸且 `hasAlpha: yes`；`du -ch miniprogram/assets/diary-detail-v2/*.png | tail -1` 显示 `96K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2916007` Byte，主包约 `1882907` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：标签和 icon 为 GPT 图生图后本地透明化处理，需真机确认与参考图的细节还原度；主包仍低于 2MB，但后续新增视觉资源仍需继续按页面组件粒度控包。
+- 基线/对比：`git diff --stat -- miniprogram/assets/diary-detail-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-14 - 牌阵抽牌槽位背景根因修复
 
 - 页面/模块：牌阵抽牌 / draw screen 抽牌槽位

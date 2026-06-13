@@ -347,29 +347,54 @@
         <text class="custom-nav-title-text">{{activeDiary.title}}</text>
       </view>
     </view>
-    <view class="content custom-nav-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
+    <view class="content custom-nav-content diary-detail-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
       <text class="diary-subtitle-inline">{{activeDiary.date}}</text>
-      <view class="chips">
-        <text class="chip on">{{activeDiary.sceneName}}</text>
-        <text wx:for="{{activeDiary.emotionTags}}" wx:key="*this" class="chip">{{item}}</text>
+      <view class="chips diary-detail-tags">
+        <view class="diary-detail-tag diary-detail-tag-active">
+          <image class="diary-detail-tag-bg" src="/assets/diary-detail-v2/diary-tag-active-bg.png" mode="scaleToFill"></image>
+          <text>{{activeDiary.sceneName}}</text>
+        </view>
+        <view wx:for="{{activeDiary.emotionTags}}" wx:key="*this" class="diary-detail-tag">
+          <image class="diary-detail-tag-bg" src="/assets/diary-detail-v2/diary-tag-default-bg.png" mode="scaleToFill"></image>
+          <text>{{item}}</text>
+        </view>
       </view>
-      <view class="result-block accent">
-        <text class="panel-title">系统摘要</text>
-        <text class="muted">{{activeDiary.summary}}</text>
+      <view class="result-block diary-detail-card">
+        <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-summary.png" mode="aspectFit"></image>
+        <view class="diary-detail-card-copy">
+          <text class="panel-title">系统摘要</text>
+          <text class="muted">{{activeDiary.summary}}</text>
+        </view>
       </view>
-      <view class="result-block">
-        <text class="panel-title">我的补充</text>
-        <text class="muted">{{activeDiary.userInput}}</text>
+      <view class="result-block diary-detail-card">
+        <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-note.png" mode="aspectFit"></image>
+        <view class="diary-detail-card-copy">
+          <text class="panel-title">我的补充</text>
+          <text class="muted">{{activeDiary.userInput}}</text>
+        </view>
       </view>
-      <view class="result-block">
-        <text class="panel-title">关联牌阵</text>
-        <text class="muted">{{activeDiary.cardsText}}</text>
+      <view class="result-block diary-detail-card">
+        <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-spread.png" mode="aspectFit"></image>
+        <view class="diary-detail-card-copy">
+          <text class="panel-title">关联牌阵</text>
+          <text class="muted">{{activeDiary.cardsText}}</text>
+        </view>
       </view>
-      <view class="result-block warn">
-        <text class="panel-title">下次回来可以看</text>
-        <text class="muted">{{activeDiary.suggestion}}</text>
+      <view class="result-block diary-detail-card">
+        <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
+        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-next.png" mode="aspectFit"></image>
+        <view class="diary-detail-card-copy">
+          <text class="panel-title">下次回来可以看</text>
+          <text class="muted">{{activeDiary.suggestion}}</text>
+        </view>
       </view>
-      <button class="ghost" bindtap="openDiaryReport">查看完整塔罗报告</button>
+      <button class="ghost diary-report-button" bindtap="openDiaryReport">
+        <image class="diary-report-button-bg" src="/assets/diary-detail-v2/diary-report-button-bg.png" mode="scaleToFill"></image>
+        <text>查看完整塔罗报告</text>
+      </button>
     </view>
   </view>
 
