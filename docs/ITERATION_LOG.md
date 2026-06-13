@@ -441,6 +441,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-14 - 日记详情页报告按钮高度修复
+
+- 页面/模块：情绪日记 / 日记详情 `diary` screen
+- 改动文件：`miniprogram/assets/diary-detail-v2/diary-report-button-bg.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：用户要求保留日记详情页自己的按钮背景图，只把按钮背景图高度调到和 homepage 抽取卡牌按钮一致。上一版误将 WXML 图片路径替换为 homepage 按钮图；另外 `diary-report-button-bg.png` 虽为 `430x96`，但可见 alpha 高度只到约 `y=90`，底部透明留白让按钮看起来仍偏窄。
+- 改动摘要：将“查看完整塔罗报告”按钮背景路径改回 `/assets/diary-detail-v2/diary-report-button-bg.png`；本地重排该 PNG，裁掉上下透明留白后重新铺满 `430x96` 透明画布，让原按钮背景自身高度接近 homepage 按钮的 `96px` 视觉高度；根据真机截图将按钮文案下移 `4rpx`，使文字视觉垂直居中。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、日记详情卡片和打开完整塔罗报告的业务逻辑。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/diary-detail-v2/diary-report-button-bg.png` 确认仍为 `430x96` 且 `hasAlpha: yes`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2937752` Byte，主包约 `1904652` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：按钮背景仍是日记详情页原风格，只做纵向铺满处理；需真机确认高度是否符合预期。
+- 基线/对比：`git diff --stat -- miniprogram/assets/diary-detail-v2/diary-report-button-bg.png miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-14 - 日记详情页卡片文字与报告按钮修复
 
 - 页面/模块：情绪日记 / 日记详情 `diary` screen

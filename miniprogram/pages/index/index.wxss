@@ -5739,7 +5739,7 @@
 .diary-report-button {
   position: relative;
   box-sizing: border-box;
-  width: 430rpx;
+  width: 330rpx;
   height: 96rpx;
   min-height: 96rpx;
   margin: 24rpx auto 0;
@@ -5771,10 +5771,11 @@
 
 .diary-report-button text {
   position: relative;
+  top: 4rpx;
   z-index: 1;
   display: block;
   color: #ffffff;
-  font-size: 28rpx;
+  font-size: 27rpx;
   font-weight: 900;
   line-height: 96rpx;
   text-align: center;
