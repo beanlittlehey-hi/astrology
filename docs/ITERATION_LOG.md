@@ -453,3 +453,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/draw-v2/draw-slot-card-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：本地 `main` 已 ahead，远端暂不可见
+
+## 2026-06-14 - 牌阵抽牌槽位背景未显示补查
+
+- 页面/模块：牌阵抽牌 / draw screen 抽牌槽位背景层
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：新版 `draw-slot-card-bg.png` 已经进包，但它是放在 `.tarot-mini` 内的 `<image>`，仍命中早期全局规则 `.tarot-mini image, .card-back`，该规则给所有槽位内 image 元素加了紫色渐变背景和旧尺寸/margin；透明槽位 PNG 的半透明区域透出了这个旧紫色背景，所以真机看起来仍是“上白下紫”的旧卡片，误以为新背景没显示。
+- 改动摘要：对 `.draw-slot-card-bg` 明确覆盖 `background: transparent`、`margin: 0`、`display: block`、`color: transparent`、`box-shadow: none` 和目标圆角，隔离早期 `.tarot-mini image` 的旧视觉背景，只让槽位 PNG 自己显示。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌流程和结果页。
+- 验证：`rg -n "draw-slot-card-bg|tarot-mini image" miniprogram/pages/index/index.wxss` 确认覆盖规则位于旧规则之后；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2824568` Byte，主包约 `1791468` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本轮修复的是背景图被旧 CSS 污染的问题，需要真机确认紫色旧背景是否完全消失。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：本地 `main` 已 ahead，远端暂不可见
