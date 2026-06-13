@@ -494,3 +494,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：本地 `main` 已 ahead，远端暂不可见
+
+## 2026-06-14 - 牌阵抽牌页抽牌状态背景与解读按钮
+
+- 页面/模块：牌阵抽牌 / draw screen 抽牌状态
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：抽牌状态不再显示旧的纯色/白色 `deck-wheel-panel` 背景，改为让底层 `draw-deck-panel-bg.png` 继续作为抽牌背景；抽牌状态 `deck-status` 的位置与洗牌状态一致，统一贴近底部荷花装饰栏；“查看解读”按钮新增图片背景层，复用 homepage 的 `/assets/home-v2/home-draw-button-bg.png`，并清除原有 `.primary/.draw-result-btn` 渐变底色和 button 默认边框。
+- 防复发处理：本轮没有使用 WXSS `background-image` 引用本地图片，背景和按钮均通过 `<image>` 加载资源；对旧 `.deck-wheel-panel` 白底和旧 `.draw-content .deck-area.is-wheel .deck-status { bottom: 14rpx; }` 规则使用后置高优先级局部覆盖。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌逻辑和结果页。
+- 验证：`rg -n "deck-wheel-panel|deck-area\\.is-wheel \\.deck-status|draw-result-btn|draw-result-btn-bg|draw-deck-panel-bg|background-image: url\\(\\\"/assets" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 确认本地图片均走 `<image>`，且 wheel 面板和提示文案覆盖在旧规则之后；`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/home-v2/home-draw-button-bg.png miniprogram/assets/draw-v2/draw-deck-panel-bg.png` 确认复用资源存在且有 alpha；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2825689` Byte，主包约 `1792589` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：抽牌状态使用洗牌背景后，牌轮视觉会更接近洗牌面板，需要真机确认牌轮与玻璃背景的层次感。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

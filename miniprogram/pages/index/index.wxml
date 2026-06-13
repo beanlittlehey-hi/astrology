@@ -215,7 +215,10 @@
         </view>
       </view>
 
-      <button wx:if="{{hasShuffled}}" class="primary draw-result-btn" bindtap="viewResult">查看解读</button>
+      <button wx:if="{{hasShuffled}}" class="primary draw-result-btn" bindtap="viewResult">
+        <image class="draw-result-btn-bg" src="/assets/home-v2/home-draw-button-bg.png" mode="scaleToFill"></image>
+        <text>查看解读</text>
+      </button>
     </view>
     <view class="draw-input-pill">
       <image class="draw-input-pill-bg" src="/assets/draw-v2/draw-input-pill-bg.png" mode="scaleToFill"></image>
