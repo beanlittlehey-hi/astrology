@@ -5231,8 +5231,9 @@
 .reading-v2-screen .question-spread-list .badge {
   position: relative;
   z-index: 1;
-  min-width: 104rpx;
-  height: 64rpx;
+  width: 118rpx;
+  min-width: 118rpx;
+  height: 72rpx;
   padding: 0;
   display: flex;
   align-items: center;
@@ -5249,6 +5250,7 @@
 
 .reading-v2-screen .question-spread-list .choice.active .badge {
   width: 118rpx;
+  min-width: 118rpx;
   height: 72rpx;
   color: #ffffff;
   background: transparent;

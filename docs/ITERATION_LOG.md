@@ -310,3 +310,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/reading-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：`9e037b9`（资源接入提交）
 - 远端状态：本地 `main` ahead 1，远端暂时看不到该版本，待用户确认是否 push
+
+## 2026-06-14 - 专属牌阵右侧按钮默认态高度修复
+
+- 页面/模块：测算 / 专属牌阵页卡片右侧按钮
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将牌阵卡片右侧按钮默认态容器从约 `104rpx x 64rpx` 调整为 `118rpx x 72rpx`，与 active/推荐态高度一致，避免默认态背景图被压得过窄、缺少呼吸感；active 态尺寸保持一致。
+- 冻结范围：未修改顶部返回按钮、标题栏、`navLayout`、底部 tab、整体页面固定背景和业务逻辑。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。微信开发者工具 `cli preview` 连续两次在 preparing 阶段返回 `TypeError: Failed to fetch (code 10)`，未生成新二维码，需待工具网络恢复后重试。
+- 风险/待确认：默认态按钮宽高变大后，需真机确认右侧按钮文字和牌阵描述之间仍有足够间距。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
