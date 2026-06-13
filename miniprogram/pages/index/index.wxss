@@ -5637,6 +5637,7 @@
 
 .draw-deck-panel-bg,
 .draw-slot-card-bg,
+.draw-slot-card-bg-layer,
 .draw-input-pill-bg,
 .draw-send-button-bg,
 .draw-deck-caption-ornament {
@@ -5695,16 +5696,23 @@
   overflow: hidden;
 }
 
-.draw-slot-card-bg {
+.app-screen.has-shared-bg .draw-content .draw-slots .draw-slot-card-bg-layer {
+  position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   margin: 0;
   border-radius: 26rpx;
   background: transparent;
+  background-image: url("/assets/draw-v2/draw-slot-card-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   display: block;
   color: transparent;
   box-shadow: none;
+  pointer-events: none;
 }
 
 .app-screen.has-shared-bg .draw-content .draw-slots .card-back,

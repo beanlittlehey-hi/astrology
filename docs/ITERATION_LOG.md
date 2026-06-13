@@ -466,3 +466,17 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：本地 `main` 已 ahead，远端暂不可见
+
+## 2026-06-14 - 牌阵抽牌槽位背景全链路隔离
+
+- 页面/模块：牌阵抽牌 / draw screen 抽牌槽位背景层
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 全链路排查：`miniprogram/assets/draw-v2/draw-slot-card-bg.png` 为 `210x330`、`hasAlpha: yes`，深色底预览肉眼可见；WXML 原引用路径为 `/assets/draw-v2/draw-slot-card-bg.png`，包内无其他同名小程序资源；真正污染来自旧规则 `.tarot-mini image, .card-back`，它设置了 `width: 100%`、`height: 188rpx`、`margin-bottom: 16rpx`、`border-radius: 16rpx` 和紫色渐变 `background`，且选择器优先级高于上一版 `.draw-slot-card-bg` 单类覆盖。
+- 改动摘要：不再用 `<image class="draw-slot-card-bg">` 承载槽位背景，改为 `<view class="draw-slot-card-bg-layer">` 专用背景层，并通过 `background-image: url("/assets/draw-v2/draw-slot-card-bg.png")` 渲染；该层使用局部高优先级规则固定 `position:absolute; inset:0; z-index:0; width/height:100%; margin:0; background-size:100% 100%; box-shadow:none; pointer-events:none`，彻底避开 `.tarot-mini image` 旧规则。
+- 层级确认：卡背、抽中牌图、牌位标题和状态文字继续使用 `position: relative; z-index: 1`，均位于专用背景层之上并保留在 `.tarot-mini` 容器内。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌流程和结果页。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/draw-v2/draw-slot-card-bg.png` 确认资源尺寸与 alpha；生成深色底预览确认资源本身可见；`rg -n "draw-slot-card-bg|draw-slot-card-bg-layer|tarot-mini image|card-back|draw-slots" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 确认背景层不再是 `<image>`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2824780` Byte，主包约 `1791680` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本轮修复的是 CSS 匹配链路，不改图片；如真机仍显示旧紫色，需要继续查微信开发者工具缓存或另一个元素的 computed 样式，而不能再判断为资源问题。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：本地 `main` 已 ahead，远端暂不可见
