@@ -157,10 +157,6 @@
             <text class="panel-title">{{item.name}}</text>
             <text class="muted">{{item.summary}}</text>
           </view>
-          <view class="badge">
-            <image class="reading-card-action-bg" src="{{item.recommended ? '/assets/reading-v2/reading-card-action-active-bg.png' : '/assets/reading-v2/reading-card-action-default-bg.png'}}" mode="scaleToFill"></image>
-            <text>{{item.recommended ? '推荐' : item.badge}}</text>
-          </view>
         </button>
       </view>
     </view>

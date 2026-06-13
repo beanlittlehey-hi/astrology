@@ -322,3 +322,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 专属牌阵卡片右侧按钮删除
+
+- 页面/模块：测算 / 专属牌阵页牌阵卡片
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`miniprogram/assets/reading-v2/*`、`docs/ITERATION_LOG.md`
+- 改动摘要：删除每张牌阵卡片右侧按钮节点，不再展示「推荐/通用/工作」等右侧按钮；将牌阵卡片布局从三列改为缩略图 + 文案两列，说明小字占满原按钮所在的横向空间，避免右侧留白。
+- 包体策略：删除不再引用的 `reading-card-action-active-bg.png` 和 `reading-card-action-default-bg.png`，`reading-v2` 资源目录从约 `176KB` 降至约 `164KB`。
+- 冻结范围：未修改顶部返回按钮、标题栏、`navLayout`、底部 tab、整体页面固定背景和业务逻辑。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/reading-v2/*.png` 确认剩余 8 个组件尺寸正确且均有 alpha；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2204051` Byte，主包约 `1170951` Byte。
+- 风险/待确认：右侧推荐信息已完全取消，当前选中态只通过高亮卡片背景体现；需真机肉眼确认小字说明没有撞到右侧卡片边缘。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/reading-v2 docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

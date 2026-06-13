@@ -5158,7 +5158,7 @@
   padding: 24rpx 28rpx;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 190rpx minmax(0, 1fr) 104rpx;
+  grid-template-columns: 190rpx minmax(0, 1fr);
   gap: 20rpx;
   align-items: center;
   border: 0;
@@ -5226,50 +5226,6 @@
   font-size: 27rpx;
   line-height: 1.48;
   font-weight: 700;
-}
-
-.reading-v2-screen .question-spread-list .badge {
-  position: relative;
-  z-index: 1;
-  width: 118rpx;
-  min-width: 118rpx;
-  height: 72rpx;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 999rpx;
-  background: transparent;
-  color: #6170bd;
-  font-size: 28rpx;
-  font-weight: 900;
-  box-shadow: none;
-  overflow: visible;
-}
-
-.reading-v2-screen .question-spread-list .choice.active .badge {
-  width: 118rpx;
-  min-width: 118rpx;
-  height: 72rpx;
-  color: #ffffff;
-  background: transparent;
-  box-shadow: none;
-}
-
-.reading-v2-screen .question-spread-list .reading-card-action-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.reading-v2-screen .question-spread-list .badge text {
-  position: relative;
-  z-index: 1;
-  line-height: 1;
 }
 
 /* Native capsule aligned navigation */
@@ -5385,17 +5341,14 @@
 .reading-v2-screen .question-tabs .chip,
 .reading-v2-screen .question-tabs .chip.on,
 .reading-v2-screen .question-spread-list .choice,
-.reading-v2-screen .question-spread-list .choice.active,
-.reading-v2-screen .question-spread-list .badge,
-.reading-v2-screen .question-spread-list .choice.active .badge {
+.reading-v2-screen .question-spread-list .choice.active {
   background: transparent;
   border-color: transparent;
   box-shadow: none;
 }
 
 .reading-v2-screen .reading-category-bg,
-.reading-v2-screen .reading-spread-card-bg,
-.reading-v2-screen .reading-card-action-bg {
+.reading-v2-screen .reading-spread-card-bg {
   display: block;
 }
 
