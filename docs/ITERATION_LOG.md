@@ -142,8 +142,8 @@
 - 验证：待本次提交前运行资源尺寸检查、`node --check miniprogram/pages/index/index.js`、`python3 -m json.tool project.config.json >/dev/null`、微信开发者工具 `cli preview`。
 - 风险/待确认：最近日记宽度用首页尺寸公式控制，目标是让日期贴近小卡右侧；需真机确认是否与右侧装饰重叠到可接受范围。
 - 基线/对比：`git diff --stat -- miniprogram/assets/home-v2/tab-card-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
-- 提交：待提交
-- 远端状态：待用户确认是否 push
+- 提交：`df6e2ab`
+- 远端状态：本地 `main` ahead 1，远端暂时看不到该版本，待用户确认是否 push
 
 ## 2026-06-12 - 首页 Tab 最大高度覆盖恢复
 
@@ -295,5 +295,18 @@
 - 验证：`rg -n "进一步探索真实的内心|财富\\\"|name: \\\"财富\\\"|id: \\\"wealth\\\"|关系走向牌阵|阻碍与建议牌阵|id: \\\"relation\\\"|id: \\\"block\\\"|id: \\\"single\\\"|questionOrder|recommended|专属牌阵|事业财富牌阵" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.js miniprogram/data/content.js` 确认分类和牌阵删减结果；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2058043` Byte，主包约 `1024943` Byte。
 - 风险/待确认：历史日记或旧会话中如果曾保存被删除牌阵的名称，结果详情仍展示旧记录文本；本轮只调整牌阵选择页和新抽牌流程，不迁移历史数据。
 - 基线/对比：`git diff --stat -- miniprogram/data/content.js miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 专属牌阵页切图资源接入
+
+- 页面/模块：测算 / 专属牌阵页组件视觉
+- 改动文件：`miniprogram/assets/reading-v2/*`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：按已确认的 `reading-v3` 切图方案接入分类 tab 默认/选中背景、牌阵卡片默认/高亮背景、右侧按钮默认/推荐背景，以及三张牌阵、爱情十字、二选一抉择、事业财富四个左侧缩略插画。文字、推荐状态、分类状态、牌阵点击逻辑仍由 WXML/JS 动态渲染。
+- 冻结范围：未修改顶部返回按钮、标题栏、`navLayout`、底部 tab、整体页面固定首页背景和业务流程。
+- 包体策略：未生成整屏背景，不复制首页背景；新增 `reading-v2` 透明 PNG 资源总量约 `176KB`，全部通过 `hasAlpha: yes` 检查。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/reading-v2/*.png` 确认 10 个组件尺寸正确且均有 alpha；`du -ch miniprogram/assets/reading-v2/*.png | tail -1` 显示总量约 `176K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2215072` Byte，主包约 `1181972` Byte。
+- 风险/待确认：轻量版 PNG 使用调色板压缩控制包体，大卡玻璃纹理较原始生成图略有简化；需真机肉眼确认专属牌阵页卡片、分类 tab、右侧按钮和缩略图与参考图接近。
+- 基线/对比：`git diff --stat -- miniprogram/assets/reading-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push

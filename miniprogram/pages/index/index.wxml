@@ -142,22 +142,23 @@
       <view class="question-label">选择您想深度问答的方向</view>
       <view class="chips question-tabs">
         <button wx:for="{{scenes}}" wx:key="id" class="chip {{selectedScene === item.id ? 'on' : ''}}" data-scene="{{item.id}}" bindtap="chooseScene">
+          <image class="reading-category-bg" src="{{selectedScene === item.id ? '/assets/reading-v2/reading-category-active-bg.png' : '/assets/reading-v2/reading-category-default-bg.png'}}" mode="scaleToFill"></image>
           <text>{{item.name}}</text>
         </button>
       </view>
       <view class="question-hint">已选择「{{selectedSceneName}}」，自动选中推荐牌阵：{{selectedSpread.name}}。</view>
       <view class="spread-list question-spread-list">
         <button wx:for="{{filteredSpreads}}" wx:key="id" class="choice {{selectedSpreadId === item.id ? 'active' : ''}} {{item.disabled ? 'disabled' : ''}}" data-spread="{{item.id}}" bindtap="chooseSpread">
+          <image class="reading-spread-card-bg" src="{{selectedSpreadId === item.id ? '/assets/reading-v2/reading-spread-card-active-bg.png' : '/assets/reading-v2/reading-spread-card-default-bg.png'}}" mode="scaleToFill"></image>
           <view class="spread-thumb spread-thumb-{{item.id}}">
-            <view class="spread-card-mini one"></view>
-            <view class="spread-card-mini two"></view>
-            <view class="spread-card-mini three"></view>
+            <image class="reading-spread-thumb-img" src="/assets/reading-v2/reading-thumb-{{item.id}}.png" mode="aspectFit"></image>
           </view>
           <view class="spread-copy">
             <text class="panel-title">{{item.name}}</text>
             <text class="muted">{{item.summary}}</text>
           </view>
           <view class="badge">
+            <image class="reading-card-action-bg" src="{{item.recommended ? '/assets/reading-v2/reading-card-action-active-bg.png' : '/assets/reading-v2/reading-card-action-default-bg.png'}}" mode="scaleToFill"></image>
             <text>{{item.recommended ? '推荐' : item.badge}}</text>
           </view>
         </button>
