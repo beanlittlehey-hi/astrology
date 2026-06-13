@@ -348,3 +348,17 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 单张卡牌页下半区紧凑与按钮高度修复
+
+- 页面/模块：单张卡牌 / daily screen 下半区布局
+- 改动文件：`miniprogram/assets/single-card-v2/single-primary-button-bg.png`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将「今日小行动」标题改为行动卡片内水平居中；收紧主卡片、行动卡片、主按钮、次按钮之间的垂直间距；行动卡片高度从约 `190rpx` 压到 `160rpx`，输入框高度压到 `74rpx`；主按钮和次按钮统一为 `88rpx` 高，按钮组 gap 收到 `8rpx`，让下半区更容易在首屏内完整露出。
+- 资源处理：本地重排 `single-primary-button-bg.png`，从原 `690x96` 调整为 `690x88` 且保留 `hasAlpha: yes`，让「生成今日情绪日记」按钮背景不再被容器压成细条，并与「进一步询问」按钮视觉高度一致。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景、登录/抽牌/日记业务逻辑；不使用 `single-copy-panel-bg.png` 的规则保持不变。
+- 包体策略：`single-card-v2` 资源总量仍约 `292KB`，未新增资源，主按钮重排后单文件约 `12KB`。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/single-card-v2/*.png` 确认 5 个组件尺寸正确且均有 alpha，其中 `single-primary-button-bg.png` 为 `690x88`；`du -ch miniprogram/assets/single-card-v2/*.png | tail -1` 显示总量约 `292K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2494664` Byte，主包约 `1461564` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：行动卡片仍使用原 `690x190` 背景图按更矮容器展示，需真机肉眼确认玻璃装饰裁切后仍自然；如果仍觉得下半区偏高，下一步只能进一步压缩主卡内部内容或塔罗牌视觉高度。
+- 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2/single-primary-button-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：本地 `main` 已包含未 push 的单张卡牌主体视觉提交，本轮提交后远端仍看不到这些版本差异，待用户确认是否 push
