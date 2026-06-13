@@ -5662,6 +5662,17 @@
   box-shadow: none;
 }
 
+.app-screen.has-shared-bg .draw-content .deck-wheel-scroll {
+  left: 56rpx;
+  right: 56rpx;
+  width: auto;
+  overflow: hidden;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-wheel {
+  width: 1480rpx;
+}
+
 .app-screen.has-shared-bg .draw-content .draw-deck-caption-ornament {
   left: 50%;
   bottom: 54rpx;
@@ -5827,7 +5838,7 @@
 
 .app-screen.has-shared-bg .draw-content .draw-result-btn {
   position: relative;
-  width: 690rpx;
+  width: 330rpx;
   height: 96rpx;
   min-height: 96rpx;
   margin: 18rpx auto 0;

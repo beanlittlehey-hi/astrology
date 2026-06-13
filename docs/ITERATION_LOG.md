@@ -507,3 +507,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 牌阵抽牌页牌轮边界与解读按钮尺寸
+
+- 页面/模块：牌阵抽牌 / draw screen 牌轮与查看解读按钮
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将抽牌状态的横向牌轮滚动视窗收进玻璃背景图内部，左右各保留 `56rpx` 裁剪边界，避免牌轮头尾越过背景图边缘；牌轮内容宽度保持原值，仍可横向滑动选择卡牌。将“查看解读”按钮宽度从 `690rpx` 改为 homepage 抽取卡牌按钮原始视觉宽度 `330rpx`，不再横向拉伸背景图。
+- 防复发处理：牌轮边界通过 `scroll-view.deck-wheel-scroll` 裁剪窗口控制，不移动卡牌资源本身；按钮仍通过 `<image>` 加载 `/assets/home-v2/home-draw-button-bg.png`，没有使用 WXSS `background-image`。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌逻辑和结果页。
+- 验证：`rg -n "deck-wheel-scroll|deck-wheel \\{|draw-result-btn \\{|draw-result-btn-bg|home-draw-button-bg" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 确认牌轮滚动视窗和按钮尺寸覆盖在旧规则之后；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2825864` Byte，主包约 `1792764` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：牌轮滑动区域收窄后，真机需确认首尾卡牌可通过横向滑动完整触达。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
