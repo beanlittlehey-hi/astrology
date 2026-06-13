@@ -441,6 +441,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-14 - 日记详情页卡片文字与报告按钮修复
+
+- 页面/模块：情绪日记 / 日记详情 `diary` screen
+- 改动文件：`miniprogram/assets/diary-detail-v2/diary-report-button-bg.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：四个卡片左侧 icon 是 WXML 里单独插入的 `<image class="diary-detail-card-icon">`，同时 `.diary-detail-card` 为 icon 保留了 `128rpx` 左 padding，导致文字看起来没有完全左对齐。底部按钮问题不是全局 `.ghost` 首因，而是 `diary-report-button-bg.png` 自身可见 alpha 范围只有约 `x=99..329`，430px 画布左右各有接近 100px 透明留白，所以真机看起来背景没有包住文案。
+- 改动摘要：移除四个详情卡片左侧 icon 节点；将卡片 padding 改为左右统一 `42rpx`，标题和正文显式左对齐；本地重排 `diary-report-button-bg.png`，裁掉横向透明留白后重新铺满 `430x96` 透明画布，并为按钮文字补充固定行高和不换行规则。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、标签切图、日记数据和打开完整塔罗报告的业务逻辑。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/diary-detail-v2/*.png` 确认资源尺寸与 alpha；`du -ch miniprogram/assets/diary-detail-v2/*.png | tail -1` 显示资源总量约 `112K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2931110` Byte，主包约 `1898010` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：按钮背景是本地横向重排后的版本，视觉比原图更宽，需要真机确认与参考图的按钮宽度是否符合预期。
+- 基线/对比：`git diff --stat -- miniprogram/assets/diary-detail-v2/diary-report-button-bg.png miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-14 - 日记详情页切图接入
 
 - 页面/模块：情绪日记 / 日记详情 `diary` screen

@@ -5688,7 +5688,7 @@
   box-sizing: border-box;
   min-height: 198rpx;
   margin: 16rpx 0 0;
-  padding: 30rpx 30rpx 30rpx 128rpx;
+  padding: 34rpx 42rpx;
   border: 0;
   border-radius: 24rpx;
   color: #282342;
@@ -5706,21 +5706,13 @@
   pointer-events: none;
 }
 
-.diary-detail-card-icon {
-  position: absolute;
-  left: 28rpx;
-  top: 34rpx;
-  z-index: 1;
-  width: 76rpx;
-  height: 76rpx;
-}
-
 .diary-detail-card-copy {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 12rpx;
+  text-align: left;
 }
 
 .diary-detail-card .panel-title {
@@ -5732,13 +5724,16 @@
   background: transparent;
   border: 0;
   box-shadow: none;
+  text-align: left;
 }
 
 .diary-detail-card .muted {
+  display: block;
   color: #6f638f;
   font-size: 25rpx;
   font-weight: 700;
   line-height: 1.65;
+  text-align: left;
 }
 
 .diary-report-button {
@@ -5757,6 +5752,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 96rpx;
   overflow: hidden;
 }
 
@@ -5776,10 +5772,13 @@
 .diary-report-button text {
   position: relative;
   z-index: 1;
+  display: block;
   color: #ffffff;
   font-size: 28rpx;
   font-weight: 900;
-  line-height: 1;
+  line-height: 96rpx;
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* draw-v2 sliced assets: keep nav/background/tab and tarot deck/cards frozen */

@@ -361,7 +361,6 @@
       </view>
       <view class="result-block diary-detail-card">
         <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
-        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-summary.png" mode="aspectFit"></image>
         <view class="diary-detail-card-copy">
           <text class="panel-title">系统摘要</text>
           <text class="muted">{{activeDiary.summary}}</text>
@@ -369,7 +368,6 @@
       </view>
       <view class="result-block diary-detail-card">
         <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
-        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-note.png" mode="aspectFit"></image>
         <view class="diary-detail-card-copy">
           <text class="panel-title">我的补充</text>
           <text class="muted">{{activeDiary.userInput}}</text>
@@ -377,7 +375,6 @@
       </view>
       <view class="result-block diary-detail-card">
         <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
-        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-spread.png" mode="aspectFit"></image>
         <view class="diary-detail-card-copy">
           <text class="panel-title">关联牌阵</text>
           <text class="muted">{{activeDiary.cardsText}}</text>
@@ -385,7 +382,6 @@
       </view>
       <view class="result-block diary-detail-card">
         <image class="diary-detail-card-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
-        <image class="diary-detail-card-icon" src="/assets/diary-detail-v2/diary-icon-next.png" mode="aspectFit"></image>
         <view class="diary-detail-card-copy">
           <text class="panel-title">下次回来可以看</text>
           <text class="muted">{{activeDiary.suggestion}}</text>
