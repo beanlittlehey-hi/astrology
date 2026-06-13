@@ -185,6 +185,7 @@
       <view wx:if="{{hasShuffled}}" class="draw-guide">滑动牌轮，点击你第一眼被吸引的牌</view>
 
       <view class="deck-area {{hasShuffled ? 'is-wheel' : 'is-pile'}}">
+        <image class="draw-deck-panel-bg" src="/assets/draw-v2/draw-deck-panel-bg.png" mode="scaleToFill"></image>
         <view wx:if="{{!hasShuffled}}" class="deck-pile {{isShuffling ? 'shuffling' : ''}}" bindlongpress="shuffleDeck" bindtap="shuffleDeck">
           <image wx:for="{{deckBacks}}" wx:key="*this" class="pile-card pile-card-{{index}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
         </view>
@@ -196,12 +197,14 @@
             </view>
           </scroll-view>
         </view>
+        <image class="draw-deck-caption-ornament" src="/assets/draw-v2/draw-deck-caption-ornament.png" mode="scaleToFill"></image>
         <text wx:if="{{!hasShuffled}}" class="deck-status primary-status">{{isShuffling ? '正在洗牌...' : '长按牌堆洗牌'}}</text>
         <text wx:else class="deck-status">{{drawHint}}</text>
       </view>
 
       <view class="drawn draw-slots">
         <view wx:for="{{drawSlots}}" wx:key="position" class="tarot-mini {{item.drawn ? 'is-drawn' : ''}}">
+          <image class="draw-slot-card-bg" src="/assets/draw-v2/draw-slot-card-bg.png" mode="scaleToFill"></image>
           <image wx:if="{{item.drawn}}" class="drawn-card-image" src="{{item.image}}" mode="aspectFit"></image>
           <view wx:else class="card-back">
             <image src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
@@ -215,8 +218,12 @@
       <button wx:if="{{hasShuffled}}" class="primary draw-result-btn" bindtap="viewResult">查看解读</button>
     </view>
     <view class="draw-input-pill">
+      <image class="draw-input-pill-bg" src="/assets/draw-v2/draw-input-pill-bg.png" mode="scaleToFill"></image>
       <input class="draw-question-input" value="{{drawQuestionDraft}}" placeholder="请输入您想询问的问题" confirm-type="send" bindinput="onDrawQuestionInput" bindconfirm="submitDrawQuestion"></input>
-      <view class="send-dot" bindtap="submitDrawQuestion">↵</view>
+      <view class="send-dot" bindtap="submitDrawQuestion">
+        <image class="draw-send-button-bg" src="/assets/draw-v2/draw-send-button-bg.png" mode="scaleToFill"></image>
+        <text>↵</text>
+      </view>
     </view>
   </view>
 

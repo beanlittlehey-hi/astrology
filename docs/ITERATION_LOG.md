@@ -414,3 +414,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 牌阵抽牌页主体皮肤接入
+
+- 页面/模块：牌阵抽牌 / draw screen 主体视觉
+- 改动文件：`miniprogram/assets/draw-v2/*`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：基于 `/Users/shimiao/Desktop/Moon-Island/问问题.png` 生成并审计 `draw-v2` 组件资源，接入主抽牌玻璃面板、抽牌槽位卡片背景、底部问题输入框背景、发送按钮底图和提示装饰线。文字、用户问题、发送箭头、牌位、状态、牌堆、牌轮、卡背和抽到的牌面仍由 WXML/JS 动态渲染。
+- 资源处理：`gpt-image-2` 原始输出全部为大尺寸 RGB 且无 alpha，经本地透明化、裁切、重排为目标尺寸并调色板轻量化；最终 `draw-v2` 5 个透明 PNG 均为 `hasAlpha: yes`，总量约 `196KB`。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背/抽牌逻辑和结果页。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/draw-v2/*.png` 确认尺寸与 alpha 正确；`du -ch miniprogram/assets/draw-v2/*.png | tail -1` 显示总量约 `196K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 重试成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2772057` Byte，主包约 `1738957` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：槽位卡资源较淡，前端已压深文字颜色但仍需真机确认；主面板背景为调色板轻量化版本，玻璃纹理较原始生成图略简化。
+- 基线/对比：`git diff --stat -- miniprogram/assets/draw-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
