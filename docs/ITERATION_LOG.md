@@ -427,3 +427,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/draw-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 牌阵抽牌页皮肤细节修复
+
+- 页面/模块：牌阵抽牌 / draw screen 主体视觉与输入行为
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：进入抽牌页时 `startDraw()` 把 `drawQuestionDraft` 设为上一层 `question`，导致输入框默认带问题；洗牌提示仍在普通文档流中跟随牌堆，未绑定到底部荷花装饰；槽位背景图已生成且 alpha 合格，但旧 `.card-back` 背景/边框仍抢视觉，导致背景没有完整包住卡背和文字。
+- 改动摘要：进入抽牌页时清空 `question` 与 `drawQuestionDraft`，仅显示 placeholder；将 `deck-status` 绝对定位到主面板底部荷花装饰上方；固定抽牌槽位高度并让背景图包住卡背、标题和状态，清理槽位内旧卡背容器背景/边框；输入框和内部 input 背景改为透明，文字直接叠在 `draw-input-pill-bg.png` 上。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片、牌轮、抽牌流程和结果页。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/draw-v2/*.png` 确认尺寸与 alpha 正确；`du -ch miniprogram/assets/draw-v2/*.png | tail -1` 显示总量约 `196K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 第二次重试成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2772503` Byte，主包约 `1739403` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：输入框清空后，若用户从旧问题入口进入也需要重新输入问题；这是按本轮“输入框不需要默认一个问题”的规则处理。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

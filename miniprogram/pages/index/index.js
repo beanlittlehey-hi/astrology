@@ -877,7 +877,8 @@ Page({
       shuffleText: "点击洗牌",
       drawStep: 0,
       drawnCards: [],
-      drawQuestionDraft: this.data.question,
+      question: "",
+      drawQuestionDraft: "",
       drawQuestionConfirmed: false,
       drawSlots: selectedSpread.positions.map((position) => ({
         position,
