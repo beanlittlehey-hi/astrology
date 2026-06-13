@@ -388,3 +388,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 单张卡牌下半区间距回填
+
+- 页面/模块：单张卡牌 / daily screen 下半区布局
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：上一轮将按钮和卡片间距压得过紧，导致底部仍有空白但组件之间缺少呼吸感。本轮保持今日小行动卡片高度、输入框高度、按钮高度不变，只把下半区空白重新分配到组件之间：主卡片到行动卡片距离从 `4rpx` 调到 `14rpx`，行动卡片到按钮组距离从 `4rpx` 调到 `12rpx`，两个按钮之间 gap 从 `2rpx` 调到 `16rpx`，让页面更接近刚好铺满一屏。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景、按钮资源和业务逻辑。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。首次微信开发者工具 `cli preview` 连续两次在 preparing 阶段返回 `TypeError: Failed to fetch (code 10)`；随后重试成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2576904` Byte，主包约 `1543804` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：不同机型可视高度仍有差异，需在真机上确认“刚好铺满一屏”的最终观感；本轮只调整空白分配，不改变组件本体尺寸。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

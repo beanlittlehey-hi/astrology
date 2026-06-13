@@ -5384,7 +5384,7 @@
   position: relative;
   min-height: 720rpx;
   margin-top: 22rpx;
-  margin-bottom: 4rpx;
+  margin-bottom: 14rpx;
   padding: 58rpx 40rpx 44rpx;
   gap: 28rpx;
   border: 0;
@@ -5446,7 +5446,7 @@
   position: relative;
   min-height: 176rpx;
   margin-top: 0;
-  margin-bottom: 4rpx;
+  margin-bottom: 12rpx;
   padding: 22rpx 42rpx 20rpx;
   border: 0;
   border-radius: 28rpx;
@@ -5464,7 +5464,7 @@
 }
 
 .app-screen.has-shared-bg .daily-content .daily-actions {
-  gap: 2rpx;
+  gap: 16rpx;
 }
 
 .app-screen.has-shared-bg .daily-content .daily-actions .primary,
