@@ -400,3 +400,17 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 情绪日记页卡片背景与日期栏规则
+
+- 页面/模块：情绪日记 / journal screen
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：本周情绪波动卡片增加图片背景层，复用首页今日运势大卡 `home-card-hero-bg.png`；每条情绪日记卡片增加图片背景层，复用首页专属牌阵/小卡 `home-card-small-bg.png`；日记摘要限制最多三行展示，超出部分使用省略号。
+- 功能规则：顶部日期栏不再根据日记记录生成日期，避免同一天多条日记时重复展示；改为固定展示「全部 + 本周周一到周日」的日历日期，每一天只出现一次，点击某天后仍按 `journalDateKey` 过滤对应日记。
+- 包体策略：未新增图片资源，只复用 `home-v2` 已有图片；本轮包体变化主要来自 WXML/WXSS/JS 代码。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景和日记详情业务逻辑。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2577211` Byte，主包约 `1544111` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本周日期栏按周一到周日展示，若用户希望按“今天往前/往后连续 7 天”而不是自然周，需要再调整日期起点；日记卡片三行省略依赖微信 WebView 对 `-webkit-line-clamp` 的支持。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

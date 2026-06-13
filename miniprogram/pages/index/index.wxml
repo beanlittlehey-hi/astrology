@@ -288,6 +288,7 @@
         </view>
       </view>
       <view class="panel mood-panel">
+        <image class="journal-card-bg journal-mood-bg" src="/assets/home-v2/home-card-hero-bg.png" mode="scaleToFill"></image>
         <text class="panel-title">本周情绪波动</text>
         <view class="mood-bar">
           <view wx:for="{{moodBars}}" wx:key="index" class="bar {{item.cls}}" style="height: {{item.height}}rpx"></view>
@@ -297,6 +298,7 @@
       </view>
       <view class="timeline">
         <button wx:for="{{filteredDiaries}}" wx:key="id" class="timeline-item" data-id="{{item.id}}" bindtap="openDiary">
+          <image class="journal-card-bg journal-timeline-bg" src="/assets/home-v2/home-card-small-bg.png" mode="scaleToFill"></image>
           <view class="timeline-dot {{item.moodClass}}"></view>
           <text class="panel-title">{{item.date}} · {{item.sceneName}} · {{item.firstEmotion}}</text>
           <text class="muted">{{item.summary}}</text>

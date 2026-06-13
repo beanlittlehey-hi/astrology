@@ -58,16 +58,17 @@ function addDays(date, offset) {
   return next
 }
 
+function startOfWeek(date = new Date()) {
+  const next = new Date(date)
+  const day = next.getDay()
+  const mondayOffset = day === 0 ? -6 : 1 - day
+  next.setDate(next.getDate() + mondayOffset)
+  return next
+}
+
 function buildJournalCalendarDays(diaries = [], selectedDate = "all") {
-  const diaryKeys = diaries
-    .map(diaryDateKey)
-    .filter(Boolean)
-    .sort((a, b) => b.localeCompare(a))
-  const keys = diaryKeys.slice(0, 3)
-  while (keys.length < 3) {
-    const fallbackKey = dateKeyFromDate(addDays(new Date(), -keys.length))
-    if (!keys.includes(fallbackKey)) keys.push(fallbackKey)
-  }
+  const weekStart = startOfWeek(new Date())
+  const keys = Array.from({ length: 7 }, (_, index) => dateKeyFromDate(addDays(weekStart, index)))
   const dateItems = keys.map((key) => {
     const label = journalDayLabel(key)
     return {
@@ -85,13 +86,7 @@ function buildJournalCalendarDays(diaries = [], selectedDate = "all") {
     week: "",
     day: "全部",
     selected: selectedDate === "all"
-  }].concat(dateItems, {
-    key: "more",
-    type: "more",
-    week: "",
-    day: "···",
-    selected: false
-  })
+  }].concat(dateItems)
 }
 
 function buildJournalAllDates(diaries = [], selectedDate = "all") {

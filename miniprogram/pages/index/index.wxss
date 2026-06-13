@@ -4159,7 +4159,7 @@
   width: 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12rpx;
   margin: -12rpx 0 24rpx;
   padding: 16rpx;
@@ -4329,19 +4329,37 @@
 }
 
 .journal-content .mood-panel {
+  position: relative;
   padding: 32rpx 30rpx 28rpx;
   border-radius: 24rpx;
-  border-color: rgba(143, 154, 198, 0.16);
-  background:
-    radial-gradient(circle at 92% 0, rgba(255, 250, 240, 0.64), transparent 38%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(238, 245, 251, 0.56));
-  box-shadow: 0 16rpx 34rpx rgba(87, 99, 132, 0.08);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.journal-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .journal-content .mood-bar {
+  position: relative;
+  z-index: 1;
   height: 150rpx;
   gap: 14rpx;
   margin: 32rpx 0 14rpx;
+}
+
+.journal-content .mood-panel .panel-title,
+.journal-content .mood-panel .mood-legend,
+.journal-content .mood-panel .muted {
+  position: relative;
+  z-index: 1;
 }
 
 .journal-content .bar {
@@ -4381,16 +4399,16 @@
 }
 
 .journal-content .timeline-item {
+  position: relative;
   min-height: 142rpx;
   grid-template-columns: 48rpx minmax(0, 1fr);
   column-gap: 24rpx;
   padding: 30rpx 30rpx;
   border-radius: 24rpx;
-  border-color: rgba(143, 154, 198, 0.16);
-  background:
-    radial-gradient(circle at 94% 0, rgba(255, 250, 240, 0.58), transparent 38%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(238, 245, 251, 0.54));
-  box-shadow: 0 14rpx 30rpx rgba(87, 99, 132, 0.08);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
 }
 
 .journal-content .timeline-item::after {
@@ -4398,11 +4416,19 @@
 }
 
 .journal-content .timeline-item .panel-title {
+  position: relative;
+  z-index: 1;
   color: #2e3345;
   font-size: 28rpx;
 }
 
 .journal-content .timeline-item .muted {
+  position: relative;
+  z-index: 1;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   color: #8790aa;
   font-size: 25rpx;
   font-weight: 700;
@@ -4411,6 +4437,7 @@
 .timeline-dot {
   width: 34rpx;
   height: 34rpx;
+  z-index: 1;
   border-color: #fffaf0;
   box-shadow: 0 0 0 2rpx rgba(143, 154, 198, 0.22);
 }
