@@ -362,3 +362,17 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2/single-primary-button-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：本地 `main` 已包含未 push 的单张卡牌主体视觉提交，本轮提交后远端仍看不到这些版本差异，待用户确认是否 push
+
+## 2026-06-14 - 单张卡牌主按钮背景重生成
+
+- 页面/模块：单张卡牌 / daily screen 主按钮资源
+- 改动文件：`miniprogram/assets/single-card-v2/single-primary-button-bg.png`、`docs/ITERATION_LOG.md`
+- 根因：上一版 `single-primary-button-bg.png` 的 PNG 本体就是一条很薄的蓝紫横线，说明压扁发生在 `gpt-image-2` 切图/抠图环节，不是 WXML/WXSS 容器二次压缩导致。
+- 改动摘要：使用 `gpt-image-2` 基于 `/Users/shimiao/Desktop/Moon-Island/single-card.png` 单独重生成主按钮背景，并强调“完整蓝紫圆角胶囊按钮、填满 88px 高度、不是细线、不要只提取描边”；生成图返回大尺寸且无 alpha，随后本地透明化棋盘格背景、裁切按钮主体并重排为 `690x88` 透明 PNG。替换后主按钮背景变为完整蓝紫玻璃胶囊。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景、按钮布局高度和业务逻辑。
+- 包体策略：`single-primary-button-bg.png` 从约 `12KB` 增至约 `92KB`，`single-card-v2` 资源总量约 `372KB`；为保证按钮视觉完整，本轮接受该资源增量。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/single-card-v2/single-primary-button-bg.png` 确认尺寸 `690x88` 且 `hasAlpha: yes`；`du -ch miniprogram/assets/single-card-v2/*.png | tail -1` 显示总量约 `372K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2576882` Byte，主包约 `1543782` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：按钮主体来自生成图后处理，需真机肉眼确认蓝紫胶囊厚度、金色描边和文字层级是否符合参考图。
+- 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2/single-primary-button-bg.png docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
