@@ -5384,7 +5384,7 @@
   position: relative;
   min-height: 720rpx;
   margin-top: 22rpx;
-  margin-bottom: 8rpx;
+  margin-bottom: 4rpx;
   padding: 58rpx 40rpx 44rpx;
   gap: 28rpx;
   border: 0;
@@ -5444,10 +5444,10 @@
 
 .app-screen.has-shared-bg .daily-content .daily-action-card {
   position: relative;
-  min-height: 160rpx;
+  min-height: 176rpx;
   margin-top: 0;
-  margin-bottom: 6rpx;
-  padding: 24rpx 42rpx 24rpx;
+  margin-bottom: 4rpx;
+  padding: 22rpx 42rpx 20rpx;
   border: 0;
   border-radius: 28rpx;
   background: transparent;
@@ -5456,15 +5456,15 @@
 }
 
 .app-screen.has-shared-bg .daily-content .daily-action-card .textarea-input {
-  min-height: 74rpx;
-  height: 74rpx;
-  margin-top: 12rpx;
+  min-height: 88rpx;
+  height: 88rpx;
+  margin-top: 10rpx;
   border: 0;
   background: rgba(255, 255, 255, 0.58);
 }
 
 .app-screen.has-shared-bg .daily-content .daily-actions {
-  gap: 8rpx;
+  gap: 2rpx;
 }
 
 .app-screen.has-shared-bg .daily-content .daily-actions .primary,
@@ -5472,6 +5472,7 @@
   position: relative;
   min-height: 88rpx;
   height: 88rpx;
+  margin-top: 0;
   border: 0;
   background: transparent;
   box-shadow: none;

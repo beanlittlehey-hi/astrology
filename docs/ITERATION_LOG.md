@@ -376,3 +376,15 @@
 - 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2/single-primary-button-bg.png docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 单张卡牌下半区二次紧凑
+
+- 页面/模块：单张卡牌 / daily screen 下半区布局
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：继续压缩两个按钮之间的距离，将按钮组 gap 从 `8rpx` 收到 `2rpx`，并覆盖全局 button 的 `margin-top: 24rpx` 为 `0`，避免按钮自身上边距继续撑开距离；将今日小行动卡片高度从 `160rpx` 调高到 `176rpx`，输入框高度从 `74rpx` 调高到 `88rpx`，同时收紧行动卡上下 padding 和主卡/行动卡/按钮之间的外边距，保证输入框仍在卡片背景图范围内。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景、按钮资源和业务逻辑。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。首次微信开发者工具 `cli preview` 连续两次在 Uploading 阶段返回 `上传失败：网络请求错误 Failed to fetch (code 10)`；随后重试成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2576901` Byte，主包约 `1543801` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：一屏展示需要真机肉眼确认；本轮通过收紧下半区间距和按钮 margin 控制总高度，但不同机型可视高度仍可能有差异。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
