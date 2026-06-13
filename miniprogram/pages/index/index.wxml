@@ -204,7 +204,7 @@
 
       <view class="drawn draw-slots">
         <view wx:for="{{drawSlots}}" wx:key="position" class="tarot-mini {{item.drawn ? 'is-drawn' : ''}}">
-          <view class="draw-slot-card-bg-layer"></view>
+          <image class="draw-slot-card-bg" src="/assets/draw-v2/draw-slot-card-bg.png" mode="scaleToFill"></image>
           <image wx:if="{{item.drawn}}" class="drawn-card-image" src="{{item.image}}" mode="aspectFit"></image>
           <view wx:else class="card-back">
             <image src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>

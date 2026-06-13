@@ -480,3 +480,17 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：本地 `main` 已 ahead，远端暂不可见
+
+## 2026-06-14 - 牌阵抽牌槽位背景加载方式修正
+
+- 页面/模块：牌阵抽牌 / draw screen 抽牌槽位背景层
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：上一轮为了避开 `.tarot-mini image` 旧规则，将槽位背景改成 `view + background-image: url("/assets/draw-v2/draw-slot-card-bg.png")`。真机表现为背景完全消失，判断是微信小程序 WXSS 对本地包内图片作为 CSS `background-image` 的支持/加载不稳定，而不是 PNG 资源缺失或 z-index 被遮挡。
+- 改动摘要：槽位背景恢复为 `<image class="draw-slot-card-bg" src="/assets/draw-v2/draw-slot-card-bg.png" mode="scaleToFill">`，确保小程序按 image 资源链路加载；同时使用高优先级局部规则 `.app-screen.has-shared-bg .draw-content .draw-slots image.draw-slot-card-bg` 覆盖旧 `.tarot-mini image` 的紫色渐变、尺寸、margin、圆角和阴影，避免旧样式再次污染透明 PNG。
+- 层级确认：槽位背景 image 为 `position:absolute; inset:0; z-index:0`，卡背、抽中牌图、牌位标题和状态文字仍为 `position:relative; z-index:1`。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌流程和结果页。
+- 验证：`rg -n "draw-slot-card-bg|draw-slot-card-bg-layer|tarot-mini image|card-back|draw-slots" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 确认背景层恢复为 image 且无 `draw-slot-card-bg-layer` 残留；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2824673` Byte，主包约 `1791573` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本轮同时解决“CSS background 本地图片不显示”和“image 透明区被旧紫色背景污染”两条链路，仍需真机确认槽位背景可见且不再出现紫色旧底。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：本地 `main` 已 ahead，远端暂不可见
