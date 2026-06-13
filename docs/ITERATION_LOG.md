@@ -440,3 +440,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 牌阵抽牌槽位背景根因修复
+
+- 页面/模块：牌阵抽牌 / draw screen 抽牌槽位
+- 改动文件：`miniprogram/assets/draw-v2/draw-slot-card-bg.png`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：上一版 `draw-slot-card-bg.png` 实际是淡色竖向卡牌内框，不是能承载“卡背 + 牌位标题 + 待抽状态”的完整槽位卡片；同时槽位内卡背仍按旧横向铺满区域显示，导致真机肉眼主要看到紫色卡背，标题/状态没有被完整背景包住。
+- 改动摘要：单独使用 `gpt-image-2` 重生成完整槽位卡片背景，经过本地透明化、裁切和圆角 alpha 平滑处理后替换入包；槽位 CSS 改为让背景图铺满 `.tarot-mini`，卡背缩成竖向牌面区域，牌位标题和状态文字固定落在同一槽位背景内。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌流程和结果页。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/draw-v2/draw-slot-card-bg.png miniprogram/assets/draw-v2/*.png` 确认槽位资源为 `210x330` 且 `hasAlpha: yes`；`du -ch miniprogram/assets/draw-v2/*.png | tail -1` 显示 `draw-v2` 资源总量约 `244K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2824468` Byte，主包约 `1791368` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：新槽位背景比上一版更明显，需真机确认与参考图的浅色玻璃质感是否达到预期；资源体积增加约 `48KB`，仍在当前主包余量内。
+- 基线/对比：`git diff --stat -- miniprogram/assets/draw-v2/draw-slot-card-bg.png miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：本地 `main` 已 ahead，远端暂不可见
