@@ -335,3 +335,16 @@
 - 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss miniprogram/assets/reading-v2 docs/ITERATION_LOG.md`
 - 提交：待提交
 - 远端状态：待用户确认是否 push
+
+## 2026-06-14 - 单张卡牌页主体切图接入
+
+- 页面/模块：单张卡牌 / daily screen 主体视觉
+- 改动文件：`miniprogram/assets/single-card-v2/*`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：接入已确认的 `single-card-v2` 主卡玻璃背景、塔罗牌框、今日小行动卡片背景、主按钮背景、次按钮背景；不使用 `single-copy-panel-bg.png`，关键词和解读继续直接承载在主卡背景现有区域。顶部标题文案从「今日单张牌」改为「单张卡牌」。动态塔罗牌、关键词、解读、输入框和按钮文案仍由 WXML 渲染。
+- 冻结范围：未修改顶部导航位置、`navLayout`、底部 tab、整体页面固定首页背景、登录/抽牌/日记业务逻辑。
+- 包体策略：不生成整屏背景，不复制首页背景，不改 tab 资源；新增 `single-card-v2` 透明 PNG 资源总量约 `292KB`，全部通过 `hasAlpha: yes` 检查。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/single-card-v2/*.png` 确认 5 个组件尺寸正确且均有 alpha；`du -ch miniprogram/assets/single-card-v2/*.png | tail -1` 显示总量约 `292K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2494632` Byte，主包约 `1461532` Byte。
+- 风险/待确认：主卡背景和塔罗框来自透明化后处理，需真机肉眼确认主卡右上枝叶边缘、塔罗框透明中空区域和按钮文字层级是否符合预期。
+- 基线/对比：`git diff --stat -- miniprogram/assets/single-card-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push

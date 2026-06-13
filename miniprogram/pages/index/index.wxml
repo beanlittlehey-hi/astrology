@@ -103,13 +103,15 @@
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="custom-nav-title-text">今日单张牌</text>
+        <text class="custom-nav-title-text">单张卡牌</text>
       </view>
     </view>
     <view class="content custom-nav-content daily-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
 
       <view class="today-card">
+        <image class="single-hero-card-bg" src="/assets/single-card-v2/single-hero-card-bg.png" mode="scaleToFill"></image>
         <view class="today-image-wrap">
+          <image class="single-tarot-frame-bg" src="/assets/single-card-v2/single-tarot-frame-bg.png" mode="scaleToFill"></image>
           <image class="today-image" src="{{dailyCard.image}}" mode="aspectFit"></image>
         </view>
         <view class="today-card-copy">
@@ -118,12 +120,19 @@
         </view>
       </view>
       <view class="result-block accent daily-action-card">
+        <image class="single-action-card-bg" src="/assets/single-card-v2/single-action-card-bg.png" mode="scaleToFill"></image>
         <text class="panel-title">今日小行动</text>
         <textarea class="textarea-input" value="{{dailyNote}}" placeholder="写下自己现在的心情和需求" bindinput="onDailyInput"></textarea>
       </view>
       <view class="daily-actions">
-        <button class="primary" bindtap="saveDailyDiary">生成今日情绪日记</button>
-        <button class="ghost" data-screen="question" data-nav="reading" bindtap="go">进一步询问</button>
+        <button class="primary" bindtap="saveDailyDiary">
+          <image class="single-button-bg" src="/assets/single-card-v2/single-primary-button-bg.png" mode="scaleToFill"></image>
+          <text>生成今日情绪日记</text>
+        </button>
+        <button class="ghost" data-screen="question" data-nav="reading" bindtap="go">
+          <image class="single-button-bg" src="/assets/single-card-v2/single-secondary-button-bg.png" mode="scaleToFill"></image>
+          <text>进一步询问</text>
+        </button>
       </view>
     </view>
   </view>

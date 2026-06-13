@@ -1599,34 +1599,56 @@
 }
 
 .daily-content .today-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28rpx;
   width: 100%;
+  min-height: 720rpx;
   box-sizing: border-box;
   margin: 0 0 28rpx;
-  padding: 34rpx 34rpx 32rpx;
-  border-radius: 18rpx;
-  background:
-    radial-gradient(circle at 8% 9%, rgba(219, 251, 255, 0.86), transparent 34%),
-    radial-gradient(circle at 92% 2%, rgba(255, 244, 250, 0.88), transparent 31%),
-    rgba(255, 255, 255, 0.58);
-  border: 2rpx solid rgba(216, 198, 255, 0.76);
-  box-shadow: 0 24rpx 58rpx rgba(126, 97, 210, 0.08);
+  padding: 58rpx 40rpx 44rpx;
+  border-radius: 32rpx;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.single-hero-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .today-image-wrap {
+  position: relative;
+  z-index: 1;
   width: 330rpx;
   height: 500rpx;
   max-width: 100%;
-  border-radius: 24rpx;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 22rpx 44rpx rgba(57, 45, 98, 0.16);
+  border-radius: 26rpx;
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
+}
+
+.single-tarot-frame-bg {
+  position: absolute;
+  inset: -10rpx;
+  z-index: 2;
+  width: calc(100% + 20rpx);
+  height: calc(100% + 20rpx);
+  pointer-events: none;
 }
 
 .daily-content .today-image {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   display: block;
@@ -1637,6 +1659,8 @@
 }
 
 .today-card-copy {
+  position: relative;
+  z-index: 1;
   width: 100%;
   box-sizing: border-box;
   padding: 26rpx 30rpx;
@@ -1665,18 +1689,29 @@
 }
 
 .daily-action-card {
+  position: relative;
   margin-top: 0;
   margin-bottom: 26rpx;
   padding: 28rpx;
   border-radius: 18rpx;
-  background:
-    radial-gradient(circle at 8% 8%, rgba(218, 255, 252, 0.78), transparent 42%),
-    rgba(236, 249, 255, 0.76);
-  border: 2rpx solid rgba(156, 231, 218, 0.62);
-  box-shadow: 0 20rpx 48rpx rgba(85, 178, 178, 0.08);
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.single-action-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 .daily-action-card .panel-title {
+  position: relative;
+  z-index: 1;
   display: block;
   color: #282342;
   font-size: 30rpx;
@@ -1685,6 +1720,8 @@
 }
 
 .daily-action-card .textarea-input {
+  position: relative;
+  z-index: 1;
   min-height: 150rpx;
   margin-top: 24rpx;
   padding: 24rpx;
@@ -1753,24 +1790,39 @@
 
 .daily-actions .primary,
 .daily-actions .ghost {
+  position: relative;
   width: 100%;
   min-height: 92rpx;
   border-radius: 999rpx;
   font-size: 31rpx;
   font-weight: 900;
   box-shadow: none;
+  background: transparent;
+  border: 0;
+  overflow: visible;
+}
+
+.daily-actions .single-button-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.daily-actions .primary text,
+.daily-actions .ghost text {
+  position: relative;
+  z-index: 1;
 }
 
 .daily-actions .primary {
   color: #ffffff;
-  background: linear-gradient(135deg, #61cfc5 0%, #62b4f7 100%);
-  border: 0;
 }
 
 .daily-actions .ghost {
-  color: #8b55ff;
-  background: rgba(255, 255, 255, 0.82);
-  border: 3rpx solid rgba(216, 198, 255, 0.82);
+  color: #2f2d61;
 }
 
 /* Draw interaction page */
@@ -5320,6 +5372,117 @@
 
 .daily-content .daily-actions {
   margin-top: 0;
+}
+
+/* single-card sliced assets: content skin only, keep nav/background/tab frozen */
+.app-screen.has-shared-bg .daily-content {
+  padding-left: 36rpx;
+  padding-right: 36rpx;
+}
+
+.app-screen.has-shared-bg .daily-content .today-card {
+  position: relative;
+  min-height: 720rpx;
+  margin-top: 22rpx;
+  margin-bottom: 18rpx;
+  padding: 58rpx 40rpx 44rpx;
+  gap: 28rpx;
+  border: 0;
+  border-radius: 32rpx;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.app-screen.has-shared-bg .daily-content .single-hero-card-bg,
+.app-screen.has-shared-bg .daily-content .single-action-card-bg,
+.app-screen.has-shared-bg .daily-content .single-button-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.app-screen.has-shared-bg .daily-content .today-image-wrap {
+  position: relative;
+  z-index: 1;
+  width: 330rpx;
+  height: 500rpx;
+  border-radius: 26rpx;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.app-screen.has-shared-bg .daily-content .single-tarot-frame-bg {
+  position: absolute;
+  inset: -10rpx;
+  z-index: 2;
+  width: calc(100% + 20rpx);
+  height: calc(100% + 20rpx);
+  pointer-events: none;
+}
+
+.app-screen.has-shared-bg .daily-content .today-image,
+.app-screen.has-shared-bg .daily-content .today-card-copy,
+.app-screen.has-shared-bg .daily-content .daily-action-card .panel-title,
+.app-screen.has-shared-bg .daily-content .daily-action-card .textarea-input,
+.app-screen.has-shared-bg .daily-content .daily-actions button text {
+  position: relative;
+  z-index: 1;
+}
+
+.app-screen.has-shared-bg .daily-content .today-card-copy {
+  padding: 0 22rpx;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.app-screen.has-shared-bg .daily-content .daily-action-card {
+  position: relative;
+  min-height: 190rpx;
+  margin-top: 0;
+  margin-bottom: 14rpx;
+  padding: 34rpx 42rpx 30rpx;
+  border: 0;
+  border-radius: 28rpx;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.app-screen.has-shared-bg .daily-content .daily-action-card .textarea-input {
+  min-height: 90rpx;
+  height: 90rpx;
+  margin-top: 20rpx;
+  border: 0;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.app-screen.has-shared-bg .daily-content .daily-actions {
+  gap: 18rpx;
+}
+
+.app-screen.has-shared-bg .daily-content .daily-actions .primary,
+.app-screen.has-shared-bg .daily-content .daily-actions .ghost {
+  position: relative;
+  min-height: 92rpx;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.app-screen.has-shared-bg .daily-content .daily-actions .primary {
+  color: #ffffff;
+}
+
+.app-screen.has-shared-bg .daily-content .daily-actions .ghost {
+  color: #2f2d61;
 }
 
 .reading-v2-screen .question-content,
