@@ -308,5 +308,5 @@
 - 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha miniprogram/assets/reading-v2/*.png` 确认 10 个组件尺寸正确且均有 alpha；`du -ch miniprogram/assets/reading-v2/*.png | tail -1` 显示总量约 `176K`；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode.png`，总包约 `2215072` Byte，主包约 `1181972` Byte。
 - 风险/待确认：轻量版 PNG 使用调色板压缩控制包体，大卡玻璃纹理较原始生成图略有简化；需真机肉眼确认专属牌阵页卡片、分类 tab、右侧按钮和缩略图与参考图接近。
 - 基线/对比：`git diff --stat -- miniprogram/assets/reading-v2 miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
-- 提交：待提交
-- 远端状态：待用户确认是否 push
+- 提交：`9e037b9`（资源接入提交）
+- 远端状态：本地 `main` ahead 1，远端暂时看不到该版本，待用户确认是否 push
