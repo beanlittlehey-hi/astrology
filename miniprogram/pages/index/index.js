@@ -15,6 +15,10 @@ const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
 const DRAW_WHEEL_CARD_WIDTH = 104
 const DRAW_VISIBLE_DECK_COUNT = 12
 const DRAW_WHEEL_CYCLE_WIDTH = 1400
+const JOURNAL_YEAR_START = 1970
+const JOURNAL_YEAR_END = 2100
+const JOURNAL_MONTH_OPTIONS = Array.from({ length: 12 }, (_, index) => `${index + 1}月`)
+const JOURNAL_WEEK_LABELS = ["日", "一", "二", "三", "四", "五", "六"]
 const DRAW_WHEEL_ARC_STYLES = [
   { left: 0, top: 320, rotate: -64 },
   { left: 26, top: 286, rotate: -61 },
@@ -136,7 +140,7 @@ function buildJournalCalendarDays(diaries = [], selectedDate = "all") {
   const weekStart = startOfWeek(new Date())
   const keys = Array.from({ length: 7 }, (_, index) => dateKeyFromDate(addDays(weekStart, index)))
   const marked = buildJournalMarkedDateMap(diaries)
-  const dateItems = keys.slice(0, 2).map((key) => {
+  const dateItems = keys.slice(0, 3).map((key) => {
     const label = journalDayLabel(key)
     return {
       key,
@@ -172,12 +176,22 @@ function buildJournalMarkedDateMap(diaries = []) {
   return marked
 }
 
-function buildJournalMonthDays(diaries = [], selectedDate = "all") {
+function buildJournalYearOptions() {
+  return Array.from({ length: JOURNAL_YEAR_END - JOURNAL_YEAR_START + 1 }, (_, index) => String(JOURNAL_YEAR_START + index))
+}
+
+function buildJournalMonthPickerState(diaries = [], selectedDate = "all", year, month) {
   const marked = buildJournalMarkedDateMap(diaries)
-  const baseDate = selectedDate && selectedDate !== "all" ? parseDateKey(selectedDate) : new Date()
-  const monthStart = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1)
-  const monthEnd = new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0)
-  return Array.from({ length: monthEnd.getDate() }, (_, index) => {
+  const fallbackDate = selectedDate && selectedDate !== "all" ? parseDateKey(selectedDate) : new Date()
+  const displayYear = year || fallbackDate.getFullYear()
+  const displayMonth = month || fallbackDate.getMonth() + 1
+  const monthStart = new Date(displayYear, displayMonth - 1, 1)
+  const monthEnd = new Date(displayYear, displayMonth, 0)
+  const leadingBlanks = Array.from({ length: monthStart.getDay() }, (_, index) => ({
+    key: `blank-start-${displayYear}-${displayMonth}-${index}`,
+    type: "blank"
+  }))
+  const dateItems = Array.from({ length: monthEnd.getDate() }, (_, index) => {
     const key = dateKeyFromDate(new Date(monthStart.getFullYear(), monthStart.getMonth(), index + 1))
     const label = journalDayLabel(key)
     return {
@@ -189,6 +203,22 @@ function buildJournalMonthDays(diaries = [], selectedDate = "all") {
       selected: selectedDate === key
     }
   })
+  const trailingCount = (7 - ((leadingBlanks.length + dateItems.length) % 7)) % 7
+  const trailingBlanks = Array.from({ length: trailingCount }, (_, index) => ({
+    key: `blank-end-${displayYear}-${displayMonth}-${index}`,
+    type: "blank"
+  }))
+  const yearOptions = buildJournalYearOptions()
+  return {
+    journalCalendarYear: displayYear,
+    journalCalendarMonth: displayMonth,
+    journalYearOptions: yearOptions,
+    journalMonthOptions: JOURNAL_MONTH_OPTIONS,
+    journalYearIndex: Math.max(0, yearOptions.indexOf(String(displayYear))),
+    journalMonthIndex: displayMonth - 1,
+    journalWeekLabels: JOURNAL_WEEK_LABELS,
+    journalMonthDays: leadingBlanks.concat(dateItems, trailingBlanks)
+  }
 }
 
 function defaultJournalDate(diaries = []) {
@@ -203,7 +233,7 @@ function buildJournalState(diaries = [], selectedDate) {
   return {
     selectedJournalDate: date,
     journalCalendarDays: buildJournalCalendarDays(decorated, date),
-    journalMonthDays: buildJournalMonthDays(decorated, date),
+    ...buildJournalMonthPickerState(decorated, date),
     filteredDiaries,
     journalHasFilteredDiaries: filteredDiaries.length > 0
   }
@@ -577,6 +607,13 @@ Page({
     selectedJournalDate: "all",
     journalCalendarDays: [],
     journalMonthDays: [],
+    journalWeekLabels: JOURNAL_WEEK_LABELS,
+    journalYearOptions: buildJournalYearOptions(),
+    journalMonthOptions: JOURNAL_MONTH_OPTIONS,
+    journalYearIndex: 0,
+    journalMonthIndex: 0,
+    journalCalendarYear: new Date().getFullYear(),
+    journalCalendarMonth: new Date().getMonth() + 1,
     journalCalendarOpen: false,
     filteredDiaries: [],
     journalHasFilteredDiaries: false,
@@ -1327,6 +1364,7 @@ Page({
   selectJournalDate(event) {
     const date = event.currentTarget.dataset.date || "all"
     const type = event.currentTarget.dataset.type || "date"
+    if (type === "blank") return
     if (type === "more") {
       this.setData({
         journalCalendarOpen: true,
@@ -1338,6 +1376,29 @@ Page({
       ...buildJournalState(this.data.diaries, date),
       journalCalendarOpen: false
     })
+  },
+
+  changeJournalYear(event) {
+    const index = Number(event.detail.value)
+    const year = Number((this.data.journalYearOptions || [])[index])
+    if (!year) return
+    this.setData(buildJournalMonthPickerState(
+      this.data.diaries,
+      this.data.selectedJournalDate,
+      year,
+      this.data.journalCalendarMonth
+    ))
+  },
+
+  changeJournalMonth(event) {
+    const index = Number(event.detail.value)
+    const month = index + 1
+    this.setData(buildJournalMonthPickerState(
+      this.data.diaries,
+      this.data.selectedJournalDate,
+      this.data.journalCalendarYear,
+      month
+    ))
   },
 
   closeJournalCalendar() {

@@ -343,20 +343,29 @@
     <view wx:if="{{journalCalendarOpen}}" class="journal-calendar-mask" bindtap="closeJournalCalendar"></view>
     <view wx:if="{{journalCalendarOpen}}" class="journal-date-sheet">
       <view class="journal-date-sheet-head">
-        <text class="panel-title">选择日期</text>
+        <view class="journal-picker-controls">
+          <picker mode="selector" range="{{journalYearOptions}}" value="{{journalYearIndex}}" bindchange="changeJournalYear">
+            <view class="journal-picker-value">{{journalCalendarYear}}年</view>
+          </picker>
+          <picker mode="selector" range="{{journalMonthOptions}}" value="{{journalMonthIndex}}" bindchange="changeJournalMonth">
+            <view class="journal-picker-value">{{journalCalendarMonth}}月</view>
+          </picker>
+        </view>
         <view class="sheet-close" bindtap="closeJournalCalendar">×</view>
+      </view>
+      <view class="journal-week-grid">
+        <text wx:for="{{journalWeekLabels}}" wx:key="*this">{{item}}</text>
       </view>
       <view class="journal-date-grid">
         <view
           wx:for="{{journalMonthDays}}"
           wx:key="key"
-          class="journal-date-option {{item.selected ? 'is-selected' : ''}} {{item.hasDiary ? 'has-diary' : ''}}"
+          class="journal-date-option type-{{item.type}} {{item.selected ? 'is-selected' : ''}} {{item.hasDiary ? 'has-diary' : ''}}"
           data-date="{{item.key}}"
-          data-type="date"
+          data-type="{{item.type}}"
           bindtap="selectJournalDate"
         >
-          <text>{{item.week}}</text>
-          <text>{{item.day}}</text>
+          <text wx:if="{{item.type === 'date'}}" class="journal-date-number">{{item.day}}</text>
         </view>
       </view>
       <view wx:if="{{!journalMonthDays.length}}" class="timeline-empty sheet-empty">还没有可筛选的日期。</view>

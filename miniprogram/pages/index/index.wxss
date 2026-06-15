@@ -4207,9 +4207,9 @@
   width: 100%;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12rpx;
-  grid-auto-rows: 86rpx;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10rpx;
+  grid-auto-rows: 82rpx;
   margin: -12rpx 0 24rpx;
   padding: 16rpx;
   border: 2rpx solid rgba(143, 154, 198, 0.14);
@@ -4223,8 +4223,8 @@
   box-sizing: border-box;
   min-width: 0;
   width: 100%;
-  min-height: 86rpx;
-  padding: 12rpx 4rpx;
+  min-height: 82rpx;
+  padding: 10rpx 2rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -4246,9 +4246,9 @@
 }
 
 .journal-calendar-item .calendar-day {
-  margin-top: 8rpx;
+  margin-top: 6rpx;
   color: #2e3345;
-  font-size: 30rpx;
+  font-size: 28rpx;
   font-weight: 900;
 }
 
@@ -4321,9 +4321,26 @@
   margin-bottom: 22rpx;
 }
 
-.journal-date-sheet-head .panel-title {
-  color: #2e3345;
-  font-size: 31rpx;
+.journal-picker-controls {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.journal-picker-value {
+  min-width: 132rpx;
+  height: 58rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  border: 2rpx solid rgba(143, 154, 198, 0.16);
+  color: #2f4078;
+  background: rgba(255, 255, 255, 0.68);
+  font-size: 26rpx;
+  font-weight: 900;
 }
 
 .sheet-close {
@@ -4340,6 +4357,21 @@
   border: 2rpx solid rgba(143, 154, 198, 0.14);
 }
 
+.journal-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.journal-week-grid text {
+  display: block;
+  color: #8790aa;
+  font-size: 20rpx;
+  font-weight: 900;
+  text-align: center;
+}
+
 .journal-date-grid {
   max-height: 46vh;
   display: grid;
@@ -4350,8 +4382,8 @@
 
 .journal-date-option {
   min-width: 0;
-  min-height: 76rpx;
-  padding: 8rpx 4rpx;
+  min-height: 70rpx;
+  padding: 8rpx 4rpx 12rpx;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -4366,18 +4398,14 @@
   font-weight: 800;
 }
 
-.journal-date-option text:first-child {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 0;
-  color: #8790aa;
+.journal-date-option.type-blank {
+  border-color: transparent;
   background: transparent;
-  font-size: 19rpx;
-  line-height: 1;
+  box-shadow: none;
+  pointer-events: none;
 }
 
-.journal-date-option text:last-child {
+.journal-date-number {
   position: relative;
   min-width: 0;
   color: #2e3345;
@@ -4392,7 +4420,7 @@
   box-shadow: inset 0 0 0 2rpx rgba(255, 255, 255, 0.56);
 }
 
-.journal-date-option.has-diary text:last-child::after {
+.journal-date-option.has-diary .journal-date-number::after {
   content: "";
   position: absolute;
   left: 50%;

@@ -644,6 +644,18 @@
 - 提交：待提交
 - 远端状态：当前本地 `main` 已 ahead，远端暂不可见
 
+## 2026-06-16 - 情绪轨迹完整年月日历
+
+- 页面/模块：情绪轨迹 / journal screen 日历组件
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：顶部快捷日历从一行四格改为一行五格，展示 `全部`、本周前三天和 `...` 入口；日期弹层升级为完整日历组件，支持年份、月份 picker 筛选，并按所选年月展示完整月历网格。
+- 交互说明：弹层中可选择任意年份月份下的任意一天查看记录；有日记的日期继续显示高亮小点，空白补位格不可点击；选择日期后复用原筛选逻辑，无记录日期显示空状态。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、日记卡片背景和业务保存流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2964621` Byte，主包约 `1931521` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：年份范围为 `1970-2100`；真机需确认 picker 操作和月历格子触控面积是否顺手。
+- 提交：待提交
+- 远端状态：本地 `main` 待提交，远端暂不可见
+
 ## 2026-06-16 - 情绪轨迹日历单行与整月选择
 
 - 页面/模块：情绪轨迹 / journal screen 日历组件
