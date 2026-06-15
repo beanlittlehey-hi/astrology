@@ -531,6 +531,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 单张牌阵翻牌与返回按钮替换
+
+- 页面/模块：daily / 单张牌阵
+- 改动文件：`miniprogram/assets/single-card-v2/single-back-button.png`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将左上返回按钮替换为用户提供图片的透明化版本；标题从“单张卡牌”改为“单张牌阵”；进入页面默认展示 homepage 牌背和“请点击卡牌背面”，点击后播放翻牌动画并展示当前单张牌关键词和含义。
+- 交互处理：新增 `dailyRevealed`、`dailyFlipping`、`dailyDisplayImage`、`dailyDisplayKeyword`；进入 daily 页面会重置为未翻开并准备隐藏牌；未翻牌直接保存时不暴露真实牌面，保存记录使用 `/assets/home-v2/tarot-card-back.png` 和“未翻开的单张牌”占位数据。
+- 视觉调整：“今日小行动”改为“今日日记”；行动卡片显示高度提高并下移输入框，避免遮挡左上紫色图标；两个底部按钮改为 `300rpx x 96rpx`，继续使用原 `single-primary/secondary-button-bg.png`，主按钮文案改为“保存日记”。
+- 冻结范围：未修改 `navLayout` 计算、顶部导航定位、底部 tab、页面固定背景、首页视觉、其他页面业务逻辑。
+- 验证：`sips -g pixelWidth -g pixelHeight -g hasAlpha` 确认新返回按钮为 `192x192` 且 `hasAlpha: yes`，相关 single/home 资源 alpha 正常；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2947888` Byte，主包约 `1914788` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：返回按钮透明化由本地算法去除烘焙棋盘格，边缘高光可能与源图略有差异；翻牌动画需真机确认流畅度。
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 首页牌阵文案与最近日记标签
 
 - 页面/模块：homepage 首页

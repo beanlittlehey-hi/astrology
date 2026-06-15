@@ -100,33 +100,35 @@
   <view wx:elif="{{screen === 'daily'}}" class="screen app-screen has-shared-bg">
     <image class="shared-page-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">‹</view>
+      <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
+        <image class="daily-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
+      </view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
-        <text class="custom-nav-title-text">单张卡牌</text>
+        <text class="custom-nav-title-text">单张牌阵</text>
       </view>
     </view>
     <view class="content custom-nav-content daily-content" style="padding-top: {{navLayout.navTotalHeight}}px;">
 
       <view class="today-card">
         <image class="single-hero-card-bg" src="/assets/single-card-v2/single-hero-card-bg.png" mode="scaleToFill"></image>
-        <view class="today-image-wrap">
+        <view class="today-image-wrap {{dailyRevealed ? 'is-revealed' : 'is-hidden'}} {{dailyFlipping ? 'is-flipping' : ''}}" bindtap="revealDailyCard">
           <image class="single-tarot-frame-bg" src="/assets/single-card-v2/single-tarot-frame-bg.png" mode="scaleToFill"></image>
-          <image class="today-image" src="{{dailyCard.image}}" mode="aspectFit"></image>
+          <image class="today-image" src="{{dailyDisplayImage}}" mode="aspectFit"></image>
         </view>
         <view class="today-card-copy">
-          <text class="tags">关键词：{{dailyCard.keywordText}}</text>
-          <text class="muted">{{dailyCard.advice}}</text>
+          <text class="tags">{{dailyDisplayKeyword}}</text>
+          <text wx:if="{{dailyRevealed}}" class="muted">{{dailyCard.advice}}</text>
         </view>
       </view>
       <view class="result-block accent daily-action-card">
         <image class="single-action-card-bg" src="/assets/single-card-v2/single-action-card-bg.png" mode="scaleToFill"></image>
-        <text class="panel-title">今日小行动</text>
+        <text class="panel-title">今日日记</text>
         <textarea class="textarea-input" value="{{dailyNote}}" placeholder="写下自己现在的心情和需求" bindinput="onDailyInput"></textarea>
       </view>
       <view class="daily-actions">
         <button class="primary" bindtap="saveDailyDiary">
           <image class="single-button-bg" src="/assets/single-card-v2/single-primary-button-bg.png" mode="scaleToFill"></image>
-          <text>生成今日情绪日记</text>
+          <text>保存日记</text>
         </button>
         <button class="ghost" data-screen="question" data-nav="reading" bindtap="go">
           <image class="single-button-bg" src="/assets/single-card-v2/single-secondary-button-bg.png" mode="scaleToFill"></image>

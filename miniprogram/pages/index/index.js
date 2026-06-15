@@ -10,6 +10,8 @@ const { getNavLayout } = require("../../utils/navLayout")
 
 const STORAGE_KEY = "tarot_healing_v03_fresh_login"
 const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
+const DAILY_CARD_BACK_IMAGE = "/assets/home-v2/tarot-card-back.png"
+const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
 
 function pad(value) {
   return String(value).padStart(2, "0")
@@ -454,6 +456,10 @@ Page({
     resultBackScreen: "draw",
     resultBackNav: "reading",
     resultNote: "我真正害怕的是不是被忽视？",
+    dailyRevealed: false,
+    dailyFlipping: false,
+    dailyDisplayImage: DAILY_CARD_BACK_IMAGE,
+    dailyDisplayKeyword: DAILY_CARD_BACK_PROMPT,
     diaries: [],
     selectedJournalDate: "all",
     journalCalendarDays: [],
@@ -624,12 +630,22 @@ Page({
   go(event) {
     const screen = event.currentTarget.dataset.screen
     const nav = event.currentTarget.dataset.nav
-    this.setData({
+    const nextData = {
       screen,
       showTab: shouldShowTab(screen),
       activeNav: nav || this.navForScreen(screen),
       drawerOpen: false
-    })
+    }
+    if (screen === "daily") {
+      Object.assign(nextData, {
+        dailyCard: this.buildDailyCard(),
+        dailyRevealed: false,
+        dailyFlipping: false,
+        dailyDisplayImage: DAILY_CARD_BACK_IMAGE,
+        dailyDisplayKeyword: DAILY_CARD_BACK_PROMPT
+      })
+    }
+    this.setData(nextData)
     if (screen === "journal") {
       this.loadCloudDiaries(true)
     }
@@ -699,16 +715,41 @@ Page({
     this.setData({ drawerOpen: !this.data.drawerOpen })
   },
 
-  drawDaily(showToast = true) {
+  buildDailyCard() {
     const card = pickRandom(tarotDeck)
+    return {
+      ...card,
+      keywordText: card.keywords.join(" / "),
+      advice: card.upright
+    }
+  },
+
+  drawDaily(showToast = true) {
     this.setData({
-      dailyCard: {
-        ...card,
-        keywordText: card.keywords.join(" / "),
-        advice: card.upright
-      }
+      dailyCard: this.buildDailyCard(),
+      dailyRevealed: false,
+      dailyFlipping: false,
+      dailyDisplayImage: DAILY_CARD_BACK_IMAGE,
+      dailyDisplayKeyword: DAILY_CARD_BACK_PROMPT
     })
     if (showToast) wx.showToast({ title: "今日牌已更新", icon: "none" })
+  },
+
+  revealDailyCard() {
+    if (this.data.dailyRevealed || this.data.dailyFlipping) return
+    const nextData = { dailyFlipping: true }
+    if (!this.data.dailyCard) nextData.dailyCard = this.buildDailyCard()
+    this.setData(nextData)
+    setTimeout(() => {
+      const card = this.data.dailyCard || this.buildDailyCard()
+      this.setData({
+        dailyCard: card,
+        dailyRevealed: true,
+        dailyFlipping: false,
+        dailyDisplayImage: card.image,
+        dailyDisplayKeyword: `关键词：${card.keywordText}`
+      })
+    }, 420)
   },
 
   onDailyInput(event) {
@@ -716,42 +757,56 @@ Page({
   },
 
   saveDailyDiary() {
-    const card = this.data.dailyCard || pickRandom(tarotDeck)
+    const isRevealed = this.data.dailyRevealed
+    const sourceCard = this.data.dailyCard || this.buildDailyCard()
+    const card = isRevealed
+      ? sourceCard
+      : {
+          id: "daily-card-back",
+          name: "未翻开的单张牌",
+          image: DAILY_CARD_BACK_IMAGE,
+          keywords: ["未翻开"],
+          keywordText: DAILY_CARD_BACK_PROMPT,
+          advice: "你保存了一次未翻开的今日记录，可以稍后回到单张牌阵继续探索。"
+        }
+    const cardMeaning = card.advice || card.upright || "请点击卡牌背面"
+    const cardKeywordText = card.keywordText || (card.keywords || []).join(" / ") || "请点击卡牌背面"
+    const cardText = isRevealed ? `今日提醒：${card.name}正位` : "今日提醒：未翻开的单张牌"
     const dailySession = {
       id: `daily-session-${Date.now()}`,
-      question: "今日单张牌提醒",
+      question: "今日单张牌阵提醒",
       sceneId: "other",
       sceneName: "综合",
       spreadId: "daily",
-      spreadName: "今日单张牌",
+      spreadName: "单张牌阵",
       cards: [
         {
           ...card,
           position: "今日提醒",
-          orientation: "正位",
-          meaning: card.advice || card.upright,
-          keywordText: card.keywordText || card.keywords.join(" / ")
+          orientation: isRevealed ? "正位" : "未翻开",
+          meaning: cardMeaning,
+          keywordText: cardKeywordText
         }
       ],
-      cardText: `今日提醒：${card.name}正位`,
+      cardText,
       emotionTags: ["平静", "观察"],
       emotionText: "平静、观察",
-      title: "今日单张牌记录",
-      summary: `${card.name}提醒你：${card.advice || card.upright}`,
-      mirror: `${card.name}提醒你：${card.advice || card.upright}`,
+      title: "单张牌阵记录",
+      summary: isRevealed ? `${card.name}提醒你：${cardMeaning}` : cardMeaning,
+      mirror: isRevealed ? `${card.name}提醒你：${cardMeaning}` : cardMeaning,
       action: "今天先选择一个能让自己稳定下来的小行动，完成后再回看感受。",
       writing: "下次回来可以看：今天我有没有把注意力放回自己身上？",
       createdAt: formatDate()
     }
     const diary = {
       id: `daily-${Date.now()}`,
-      title: "今日单张牌记录",
+      title: "单张牌阵记录",
       date: formatDate(),
       sceneName: "综合",
       emotionTags: ["平静", "观察"],
-      summary: `${card.name}提醒你：${card.advice || card.upright}`,
+      summary: isRevealed ? `${card.name}提醒你：${cardMeaning}` : cardMeaning,
       userInput: this.data.dailyNote || "我想把今天的提醒留给晚一点的自己。",
-      cardsText: `今日单张牌：${card.name}。`,
+      cardsText: isRevealed ? `单张牌阵：${card.name}。` : "单张牌阵：未翻开。",
       suggestion: "下次回来可以看：今天我有没有把注意力放回自己身上？",
       session: dailySession
     }
