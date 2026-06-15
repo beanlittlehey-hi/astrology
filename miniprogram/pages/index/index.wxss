@@ -6150,6 +6150,84 @@
   line-height: 96rpx;
 }
 
+/* Draw question alignment and fan shuffle interaction */
+.app-screen.has-shared-bg .draw-content .deck-area .draw-question-text {
+  position: absolute;
+  left: 56rpx;
+  right: 56rpx;
+  top: 30rpx;
+  z-index: 2;
+  display: block;
+  width: auto;
+  padding: 0;
+  box-sizing: border-box;
+  color: #282342;
+  text-align: center;
+  font-size: 27rpx;
+  line-height: 1.45;
+  font-weight: 900;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile .pile-card {
+  transform-origin: 50% 115%;
+  animation-fill-mode: both;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card {
+  animation-duration: 0.56s;
+  animation-timing-function: cubic-bezier(0.34, 0.78, 0.32, 1);
+  animation-fill-mode: both;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-0,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-2,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-4,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-6,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-8,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-10 {
+  animation-name: pileFanShuffleLeft;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-1,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-3,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-5,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-7,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-9,
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-11 {
+  animation-name: pileFanShuffleRight;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-0 { animation-delay: 0ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-1 { animation-delay: 28ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-2 { animation-delay: 56ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-3 { animation-delay: 84ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-4 { animation-delay: 112ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-5 { animation-delay: 140ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-6 { animation-delay: 168ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-7 { animation-delay: 196ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-8 { animation-delay: 224ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-9 { animation-delay: 252ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-10 { animation-delay: 280ms; }
+.app-screen.has-shared-bg .draw-content .deck-pile.shuffling .pile-card-11 { animation-delay: 308ms; }
+
+@keyframes pileFanShuffleLeft {
+  0% { transform: translate(0, 74rpx) rotate(-2deg) scale(0.98); }
+  36% { transform: translate(-184rpx, -18rpx) rotate(-36deg) scale(1); }
+  66% { transform: translate(42rpx, 42rpx) rotate(10deg) scale(0.99); }
+  100% { transform: translate(-10rpx, 68rpx) rotate(-4deg) scale(0.98); }
+}
+
+@keyframes pileFanShuffleRight {
+  0% { transform: translate(0, 76rpx) rotate(3deg) scale(0.98); }
+  36% { transform: translate(184rpx, -16rpx) rotate(36deg) scale(1); }
+  66% { transform: translate(-44rpx, 44rpx) rotate(-10deg) scale(0.99); }
+  100% { transform: translate(12rpx, 66rpx) rotate(5deg) scale(0.98); }
+}
+
+.app-screen.has-shared-bg .draw-input-pill {
+  padding-left: 56rpx;
+}
+
 /* Page title color only: align titles with reading spread title color. */
 .custom-nav-title-text,
 .home-v2-content .panel-title,

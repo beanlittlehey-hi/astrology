@@ -156,6 +156,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-16 - 抽牌页问题输入与扇形洗牌动画
+
+- 页面/模块：牌阵抽牌 / draw screen 输入框、问题展示和洗牌动画
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将底部问题输入框文字起点左移到背景图可输入区域；用户提交问题后，问题文案立即显示在牌堆框顶部并复用洗牌后同一位置；将洗牌动画改为 12 张卡背分延迟的半扇形展开与左右交错合拢效果。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、牌堆/卡背图片资源、抽牌状态流和结果页。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：洗牌动画为 CSS 动效调整，需真机确认扇形开合节奏和问题文案顶部位置是否符合视觉预期。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 全局页面标题颜色统一
 
 - 页面/模块：全局页面标题文案
