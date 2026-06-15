@@ -156,6 +156,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-16 - 抽牌页 78 张卡背牌轮与牌堆边界
+
+- 页面/模块：牌阵抽牌 / draw screen 牌堆与洗牌后牌轮
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将洗牌后牌轮从固定 30 张卡背改为基于完整 `tarotDeck` 的 78 张乱序牌组渲染，视觉仍统一显示 `/assets/tarot/card-back.jpg`，每张卡背通过 `data-card-id` 绑定真实牌身份，点击后抽取对应真实牌；洗牌前牌堆改为展示 24 张代表卡背，并收窄尺寸与裁剪范围，避免越过背景图边界。
+- 数量确认：`tarotDeck.length` 为 `78`，唯一图片数为 `78`；`miniprogram/packages/tarot-assets/assets/tarot/` 下资源文件数为 `78`。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、塔罗资源文件、输入框位置、结果页解读结构和页面跳转流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`node -e "const { tarotDeck } = require('./miniprogram/data/content.js'); console.log('tarotDeck', tarotDeck.length, 'uniqueImages', new Set(tarotDeck.map(c=>c.image)).size)"` 输出 `tarotDeck 78 uniqueImages 78`；`find miniprogram/packages/tarot-assets/assets/tarot -maxdepth 1 -type f | wc -l` 输出 `78`。
+- 风险/待确认：洗牌后横向牌轮一次渲染 78 张卡背，需要真机确认滑动流畅度；洗牌前只展示 24 张代表卡背作为动画层，以避免 78 张同时堆叠造成溢出。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-16 - 抽牌页问题输入与扇形洗牌动画
 
 - 页面/模块：牌阵抽牌 / draw screen 输入框、问题展示和洗牌动画

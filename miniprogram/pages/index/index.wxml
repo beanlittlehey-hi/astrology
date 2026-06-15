@@ -210,12 +210,12 @@
         <image class="draw-deck-panel-bg" src="/assets/draw-v2/draw-deck-panel-bg.png" mode="scaleToFill"></image>
         <text wx:if="{{drawQuestionConfirmed}}" class="draw-question-text">{{question}}</text>
         <view wx:if="{{!hasShuffled}}" class="deck-pile {{isShuffling ? 'shuffling' : ''}}" bindlongpress="shuffleDeck" bindtap="shuffleDeck">
-          <image wx:for="{{deckBacks}}" wx:key="*this" class="pile-card pile-card-{{index}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+          <image wx:for="{{visibleDrawDeckCards}}" wx:key="id" class="pile-card pile-card-{{index}}" style="{{item.pileStyle}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
         </view>
         <view wx:else class="deck-wheel-panel">
           <scroll-view class="deck-wheel-scroll" scroll-x enhanced show-scrollbar="{{false}}">
-            <view class="deck-wheel" bindtap="drawOneCard">
-            <image wx:for="{{wheelCards}}" wx:key="*this" class="wheel-card wheel-card-{{index}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+            <view class="deck-wheel" style="{{drawWheelStyle}}">
+            <image wx:for="{{drawDeckCards}}" wx:key="id" class="wheel-card wheel-card-{{index}}" style="{{item.wheelStyle}}" src="/assets/tarot/card-back.jpg" mode="aspectFill" data-card-id="{{item.id}}" bindtap="drawOneCard"></image>
             </view>
           </scroll-view>
         </view>

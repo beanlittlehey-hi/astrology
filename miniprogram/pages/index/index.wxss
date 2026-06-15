@@ -6168,8 +6168,24 @@
   font-weight: 900;
 }
 
+.app-screen.has-shared-bg .draw-content .deck-area.is-pile {
+  overflow: hidden;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-pile {
+  width: 560rpx;
+  height: 390rpx;
+  overflow: hidden;
+}
+
 .app-screen.has-shared-bg .draw-content .deck-pile .pile-card {
-  transform-origin: 50% 115%;
+  top: 104rpx;
+  width: 118rpx;
+  height: 178rpx;
+  margin-left: -59rpx;
+  border-width: 3rpx;
+  border-radius: 13rpx;
+  transform-origin: 50% 50%;
   animation-fill-mode: both;
 }
 
@@ -6226,6 +6242,12 @@
 
 .app-screen.has-shared-bg .draw-input-pill {
   padding-left: 56rpx;
+}
+
+.app-screen.has-shared-bg .draw-content .deck-wheel .wheel-card {
+  width: 104rpx;
+  height: 162rpx;
+  pointer-events: auto;
 }
 
 /* Page title color only: align titles with reading spread title color. */

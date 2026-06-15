@@ -12,6 +12,9 @@ const STORAGE_KEY = "tarot_healing_v03_fresh_login"
 const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
 const DAILY_CARD_BACK_IMAGE = "/assets/home-v2/tarot-card-back.png"
 const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
+const DRAW_VISIBLE_DECK_COUNT = 24
+const DRAW_WHEEL_CARD_GAP = 50
+const DRAW_WHEEL_CARD_WIDTH = 104
 const DEFAULT_USER = {
   openid: "",
   openidShort: "",
@@ -162,6 +165,39 @@ function pickRandom(list) {
 function uniqueCards(count) {
   const pool = tarotDeck.slice().sort(() => Math.random() - 0.5)
   return pool.slice(0, count)
+}
+
+function buildDrawDeckCards() {
+  const shuffled = tarotDeck.slice().sort(() => Math.random() - 0.5)
+  return shuffled.map((card, index) => {
+    const wheelLeft = index * DRAW_WHEEL_CARD_GAP
+    const center = (shuffled.length - 1) / 2
+    const offset = Math.abs(index - center) / center
+    const wheelTop = Math.round(54 + offset * 260)
+    const wheelRotate = Math.round((index - center) * 2.7)
+    const pileIndex = index % DRAW_VISIBLE_DECK_COUNT
+    const pileAngle = (pileIndex / DRAW_VISIBLE_DECK_COUNT) * Math.PI * 2
+    const pileRadius = 10 + (pileIndex % 6) * 7
+    const pileX = Math.round(Math.cos(pileAngle) * pileRadius)
+    const pileY = Math.round(74 + Math.sin(pileAngle) * pileRadius * 0.58)
+    const pileRotate = Math.round(((pileIndex % 12) - 5.5) * 1.8)
+    return {
+      ...card,
+      deckIndex: index,
+      pileStyle: `transform: translate(${pileX}rpx, ${pileY}rpx) rotate(${pileRotate}deg);`,
+      wheelStyle: `left: ${wheelLeft}rpx; top: ${wheelTop}rpx; transform: rotate(${wheelRotate}deg);`
+    }
+  })
+}
+
+function buildDrawDeckState() {
+  const drawDeckCards = buildDrawDeckCards()
+  const wheelWidth = ((drawDeckCards.length - 1) * DRAW_WHEEL_CARD_GAP) + DRAW_WHEEL_CARD_WIDTH + 16
+  return {
+    drawDeckCards,
+    visibleDrawDeckCards: drawDeckCards.slice(0, DRAW_VISIBLE_DECK_COUNT),
+    drawWheelStyle: `width: ${wheelWidth}rpx;`
+  }
 }
 
 function sceneName(sceneId) {
@@ -477,8 +513,7 @@ Page({
     drawStep: 0,
     drawnCards: [],
     drawSlots: [],
-    deckBacks: Array.from({ length: 12 }, (_, index) => index),
-    wheelCards: Array.from({ length: 30 }, (_, index) => index),
+    ...buildDrawDeckState(),
     currentDrawPosition: "你",
     drawQuestionDraft: "",
     drawQuestionConfirmed: false,
@@ -1004,6 +1039,7 @@ Page({
       return
     }
     const spread = this.data.selectedSpread || spreads[0]
+    const drawDeckState = buildDrawDeckState()
     this.setData({
       question,
       drawQuestionDraft: question,
@@ -1013,6 +1049,7 @@ Page({
       shuffleText: "点击洗牌",
       drawStep: 0,
       drawnCards: [],
+      ...drawDeckState,
       drawSlots: spread.positions.map((position) => ({
         position,
         drawn: false,
@@ -1027,6 +1064,7 @@ Page({
 
   startDraw(spreadOverride) {
     const selectedSpread = spreadOverride || this.data.selectedSpread || spreads[0]
+    const drawDeckState = buildDrawDeckState()
     this.setData({
       screen: "draw",
       showTab: true,
@@ -1036,6 +1074,7 @@ Page({
       shuffleText: "点击洗牌",
       drawStep: 0,
       drawnCards: [],
+      ...drawDeckState,
       question: "",
       drawQuestionDraft: "",
       drawQuestionConfirmed: false,
@@ -1057,11 +1096,20 @@ Page({
       wx.showToast({ title: "请先输入问题并回车", icon: "none" })
       return
     }
+    const drawDeckState =
+      this.data.drawDeckCards && this.data.drawDeckCards.length === tarotDeck.length
+        ? {
+            drawDeckCards: this.data.drawDeckCards,
+            visibleDrawDeckCards: this.data.drawDeckCards.slice(0, DRAW_VISIBLE_DECK_COUNT),
+            drawWheelStyle: this.data.drawWheelStyle
+          }
+        : buildDrawDeckState()
     this.setData({
       isShuffling: true,
       shuffleText: "洗牌中...",
       drawStep: 0,
       drawnCards: [],
+      ...drawDeckState,
       drawSlots: (this.data.selectedSpread || spreads[0]).positions.map((position) => ({
         position,
         drawn: false,
@@ -1084,7 +1132,7 @@ Page({
     }, 900)
   },
 
-  drawOneCard() {
+  drawOneCard(event = {}) {
     if (!this.data.hasShuffled) {
       wx.showToast({ title: "先点击洗牌", icon: "none" })
       return
@@ -1096,8 +1144,13 @@ Page({
       return
     }
     const existingIds = this.data.drawnCards.map((item) => item.id)
-    const pool = tarotDeck.filter((item) => !existingIds.includes(item.id))
-    const card = pickRandom(pool.length ? pool : tarotDeck)
+    const tappedId = event.currentTarget && event.currentTarget.dataset && event.currentTarget.dataset.cardId
+    const deckCards = this.data.drawDeckCards && this.data.drawDeckCards.length ? this.data.drawDeckCards : tarotDeck
+    const tappedCard = deckCards.find((item) => item.id === tappedId)
+    const pool = deckCards.filter((item) => !existingIds.includes(item.id))
+    const card = tappedCard && !existingIds.includes(tappedCard.id)
+      ? tappedCard
+      : pickRandom(pool.length ? pool : tarotDeck)
     const reversed = Math.random() > 0.62
     const drawn = {
       ...card,
