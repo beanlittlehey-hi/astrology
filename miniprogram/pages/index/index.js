@@ -12,6 +12,33 @@ const STORAGE_KEY = "tarot_healing_v03_fresh_login"
 const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
 const DAILY_CARD_BACK_IMAGE = "/assets/home-v2/tarot-card-back.png"
 const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
+const DEFAULT_USER = {
+  openid: "",
+  openidShort: "",
+  maskedPhone: "",
+  loginType: "",
+  anonymousName: "月栖旅人",
+  isAdmin: false,
+  role: "user",
+  lastLoginAt: "",
+  maskedPhoneText: "未绑定手机号",
+  openidText: "暂未获取",
+  openidShortText: "--"
+}
+
+function normalizeUser(user = {}) {
+  const next = {
+    ...DEFAULT_USER,
+    ...user
+  }
+  return {
+    ...next,
+    anonymousName: next.anonymousName || DEFAULT_USER.anonymousName,
+    maskedPhoneText: next.maskedPhone || "未绑定手机号",
+    openidText: next.openid || "暂未获取",
+    openidShortText: next.openidShort || "--"
+  }
+}
 
 function pad(value) {
   return String(value).padStart(2, "0")
@@ -425,6 +452,8 @@ Page({
     showTab: false,
     navLayout: getNavLayout(),
     loggedIn: false,
+    user: normalizeUser(),
+    isAdmin: false,
     drawerOpen: false,
     authSheetOpen: false,
     authLoading: false,
@@ -509,6 +538,8 @@ Page({
     this.localHasUserDiaries = Boolean(saved.diaries && saved.diaries.some(isUserDiary))
     this.setData({
       loggedIn: Boolean(saved.loggedIn),
+      user: normalizeUser(saved.user),
+      isAdmin: Boolean(saved.user && saved.user.isAdmin),
       diaries,
       ...buildJournalState(diaries),
       screen: saved.loggedIn ? "home" : "splash",
@@ -529,7 +560,14 @@ Page({
 
   async syncCloudAfterLogin() {
     if (!cloudApi.isAvailable()) return
-    const userResult = await cloudApi.upsertUser()
+    const userResult = await cloudApi.getCurrentUser()
+    if (userResult.ok && userResult.user) {
+      this.setData({
+        user: normalizeUser(userResult.user),
+        isAdmin: Boolean(userResult.user.isAdmin)
+      })
+      this.persist({ user: normalizeUser(userResult.user) })
+    }
     if (!userResult.ok) return
     await this.migrateLocalDiariesOnce()
     await this.loadCloudDiaries(true)
@@ -537,13 +575,16 @@ Page({
 
   async migrateLocalDiariesOnce() {
     if (!cloudApi.isAvailable()) return
-    if (wx.getStorageSync(CLOUD_MIGRATION_KEY)) return
+    const user = this.data.user || {}
+    const migrationId = user.phoneHash || user.openid || "anonymous"
+    const migrationKey = `${CLOUD_MIGRATION_KEY}_${migrationId}`
+    if (wx.getStorageSync(migrationKey)) return
     const saved = wx.getStorageSync(STORAGE_KEY) || {}
     const localDiaries = (saved.diaries || []).filter(isUserDiary).map(decorateDiary)
     if (!localDiaries.length) return
     const result = await cloudApi.migrateDiaries(localDiaries)
     if (result.ok) {
-      wx.setStorageSync(CLOUD_MIGRATION_KEY, true)
+      wx.setStorageSync(migrationKey, true)
     }
   },
 
@@ -666,32 +707,65 @@ Page({
     this.setData({ authSheetOpen: false })
   },
 
-  finishLogin() {
+  finishLogin(user) {
+    const currentUser = normalizeUser(user)
     this.setData({
       loggedIn: true,
+      user: currentUser,
+      isAdmin: Boolean(currentUser.isAdmin),
       screen: "home",
       showTab: true,
       activeNav: "home",
       authSheetOpen: false,
       authLoading: false
     })
-    this.persist({ loggedIn: true })
-    this.syncCloudAfterLogin(true)
+    this.persist({ loggedIn: true, user: currentUser })
+    this.migrateLocalDiariesOnce()
+    this.loadCloudDiaries(true)
     wx.showToast({ title: "已进入月栖卡牌日记", icon: "none" })
   },
 
-  startWechatLogin() {
+  async startOpenIdLogin() {
     if (this.data.authLoading) return
     this.setData({ authLoading: true })
-    wx.login({
-      success: () => {
-        this.finishLogin()
-      },
-      fail: () => {
-        this.setData({ authLoading: false })
-        wx.showToast({ title: "微信登录失败，请稍后重试", icon: "none" })
-      }
+    const result = await cloudApi.loginWithOpenId({
+      consentVersion: "2026-06-15"
     })
+    if (result.ok && result.user) {
+      this.finishLogin(result.user)
+      return
+    }
+    this.setData({ authLoading: false })
+    wx.showToast({
+      title: result.localOnly ? "云环境未配置，暂无法登录" : "微信身份登录失败，请稍后重试",
+      icon: "none"
+    })
+  },
+
+  async startPhoneLogin(event) {
+    if (this.data.authLoading) return
+    const detail = event.detail || {}
+    if (!detail.code) {
+      wx.showToast({ title: "你可以使用微信身份继续", icon: "none" })
+      return
+    }
+    this.setData({ authLoading: true })
+    const result = await cloudApi.loginWithPhone(detail.code, {
+      consentVersion: "2026-06-15"
+    })
+    if (result.ok && result.user) {
+      this.finishLogin(result.user)
+      return
+    }
+    this.setData({ authLoading: false })
+    wx.showToast({
+      title: result.phoneUnavailable ? "手机号登录暂不可用，请使用微信身份继续" : "手机号登录失败，请稍后重试",
+      icon: "none"
+    })
+  },
+
+  startWechatLogin() {
+    this.startOpenIdLogin()
   },
 
   login() {
@@ -701,14 +775,30 @@ Page({
   logout() {
     this.setData({
       loggedIn: false,
+      user: normalizeUser(),
+      isAdmin: false,
       screen: "splash",
       showTab: false,
       drawerOpen: false,
       authSheetOpen: false,
       authLoading: false
     })
-    this.persist({ loggedIn: false })
+    this.persist({ loggedIn: false, user: normalizeUser() })
     wx.showToast({ title: "已退出登录", icon: "none" })
+  },
+
+  copyOpenId() {
+    const openid = this.data.user && this.data.user.openid
+    if (!openid) {
+      wx.showToast({ title: "暂未获取 openid", icon: "none" })
+      return
+    }
+    wx.setClipboardData({
+      data: openid,
+      success: () => {
+        wx.showToast({ title: "openid 已复制", icon: "none" })
+      }
+    })
   },
 
   toggleDrawer() {
@@ -1190,13 +1280,15 @@ Page({
   resetLocalData() {
     wx.showModal({
       title: "重置体验数据",
-      content: "会清空本地模拟登录、抽牌和日记记录，不影响原型图与源码。",
+      content: "会清空本地登录状态、抽牌和日记记录，不影响云端数据、原型图与源码。",
       success: (res) => {
         if (!res.confirm) return
         wx.removeStorageSync(STORAGE_KEY)
         const diaries = sampleDiaries.map(decorateDiary)
         this.setData({
           loggedIn: false,
+          user: normalizeUser(),
+          isAdmin: false,
           screen: "splash",
           showTab: false,
           diaries,

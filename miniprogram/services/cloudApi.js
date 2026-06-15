@@ -35,6 +35,21 @@ function upsertUser(profile = {}) {
   return callFunction("user", "upsertProfile", { profile })
 }
 
+function loginWithOpenId(payload = {}) {
+  return callFunction("user", "loginWithOpenId", payload)
+}
+
+function loginWithPhone(code, payload = {}) {
+  return callFunction("user", "loginWithPhone", {
+    ...payload,
+    code
+  })
+}
+
+function getCurrentUser() {
+  return callFunction("user", "getCurrentUser")
+}
+
 function createReading(session) {
   return callFunction("reading", "create", { session })
 }
@@ -86,6 +101,9 @@ function analyzeDiaryEmotion(payload) {
 module.exports = {
   isAvailable,
   upsertUser,
+  loginWithOpenId,
+  loginWithPhone,
+  getCurrentUser,
   createReading,
   listReadings,
   getReading,

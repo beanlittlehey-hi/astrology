@@ -531,6 +531,20 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - OPENID 真实登录最小闭环
+
+- 页面/模块：启动页登录、首页侧边栏、`user` 云函数、前端云 API
+- 改动文件：`cloudfunctions/user/index.js`、`miniprogram/services/cloudApi.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/OPENID_LOGIN_ADMIN_PROMPT.md`、`docs/OPENID_ADMIN_SETUP.md`、`docs/ITERATION_LOG.md`
+- 改动摘要：按 `OPENID_LOGIN_ADMIN_PROMPT.md` 先落地阶段 1，新增 `user.loginWithOpenId`、`user.loginWithPhone`、`user.getCurrentUser`；前端登录弹层改为“手机号登录”和“使用微信身份继续”双入口，手机号不可用时可退回 OPENID 登录。
+- 用户信息：侧边栏新增登录方式、手机号绑定状态、`openid`、`openidShort` 和复制 `openid` 按钮；复制成功提示“openid 已复制”；退出登录不删除云端数据。
+- 数据与迁移：`users` 集合 upsert 用户摘要，返回当前用户本人 `openid`；迁移 key 按 `openid/phoneHash` 区分，避免不同真实身份共用旧迁移标记。
+- 管理员基础：`user` 云函数登录时查询 `admin_users`，支持 `openid` 和手机号/`phoneHash` 白名单识别，返回 `isAdmin` 和 `role`；新增 `docs/OPENID_ADMIN_SETUP.md` 说明如何手动添加 OPENID 管理员。本阶段不展示未实现的管理后台入口，避免误导。
+- 冻结范围：未修改导航栏、标题栏、底部 tab、整体背景视觉；未改抽牌、单张牌阵、情绪日记和报告查看主流程；未把密钥或管理员敏感信息写入前端。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/services/cloudApi.js` 通过；`node --check cloudfunctions/user/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 和 `python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 连续两次在 preparing 阶段返回 `TypeError: Failed to fetch (code 10)`，未能生成新二维码，判断为开发者工具网络/权限 fetch 问题。
+- 风险/待确认：真实登录依赖云函数部署后的线上环境；手机号登录是否可用取决于小程序主体和接口权限，当前已提供明确 fallback。
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 单张牌阵翻牌与返回按钮替换
 
 - 页面/模块：daily / 单张牌阵

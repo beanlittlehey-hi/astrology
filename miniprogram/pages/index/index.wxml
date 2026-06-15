@@ -24,12 +24,13 @@
         <view class="wechat-login-mark">微</view>
         <view>
           <text class="panel-title">微信授权登录</text>
-          <text class="muted">授权后即可进入月栖卡牌日记。</text>
+          <text class="muted">手机号用于账号识别和数据找回，也可使用微信身份继续。</text>
         </view>
       </view>
-      <button class="primary auth-primary" loading="{{authLoading}}" bindtap="startWechatLogin">微信一键登录</button>
+      <button class="primary auth-primary" open-type="getPhoneNumber" loading="{{authLoading}}" bindgetphonenumber="startPhoneLogin">手机号登录</button>
+      <button class="ghost auth-openid" loading="{{authLoading}}" bindtap="startOpenIdLogin">使用微信身份继续</button>
       <button class="ghost auth-cancel" bindtap="closeAuthSheet">暂不登录</button>
-      <text class="auth-note">登录仅用于记录你的抽牌与情绪日记，内容不构成医疗、心理诊断、法律或投资建议。</text>
+      <text class="auth-note">使用微信身份继续时，系统会通过微信 openid 隔离你的数据；登录仅用于记录你的抽牌与情绪日记。</text>
     </view>
   </view>
 
@@ -83,9 +84,28 @@
       <view class="drawer-head">
         <text class="avatar large">M</text>
         <view>
-          <text class="panel-title">月光旅人 0328</text>
-          <text class="muted">已记录 {{diaries.length}} 条情绪日记</text>
+          <text class="panel-title">{{user.anonymousName}}</text>
+          <text class="muted">{{user.loginType === 'phone' ? '手机号登录' : '微信身份登录'}} · {{diaries.length}} 条情绪日记</text>
         </view>
+      </view>
+      <view class="drawer-user-info">
+        <view class="drawer-info-row">
+          <text>登录方式</text>
+          <text>{{user.loginType === 'phone' ? '手机号登录' : '微信身份登录'}}</text>
+        </view>
+        <view class="drawer-info-row">
+          <text>手机号</text>
+          <text>{{user.maskedPhoneText}}</text>
+        </view>
+        <view class="drawer-info-row openid-row">
+          <text>openid</text>
+          <text>{{user.openidText}}</text>
+        </view>
+        <view class="drawer-info-row">
+          <text>openidShort</text>
+          <text>{{user.openidShortText}}</text>
+        </view>
+        <button class="ghost small drawer-copy-openid" bindtap="copyOpenId">复制 openid</button>
       </view>
       <button class="settings-row" data-screen="question" data-nav="reading" bindtap="go"><text>测算历史</text><text>8 条</text></button>
       <button class="settings-row" data-screen="journal" data-nav="journal" bindtap="go"><text>情绪日记</text><text>{{diaries.length}} 条</text></button>
@@ -93,7 +113,7 @@
       <button class="settings-row" bindtap="showDisclaimer"><text>内容免责声明</text><text>查看</text></button>
       <button class="settings-row" bindtap="resetLocalData"><text>账号注销</text><text>一键申请</text></button>
       <text class="drawer-note">问题、测算结果和日记默认只展示摘要。</text>
-      <button class="ghost small drawer-logout" bindtap="logout">退出模拟登录</button>
+      <button class="ghost small drawer-logout" bindtap="logout">退出登录</button>
     </view>
   </view>
 
