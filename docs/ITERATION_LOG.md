@@ -441,6 +441,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 小程序命名统一为月栖卡牌日记
+
+- 页面/模块：启动页授权弹窗、登录流程、全局应用名、开发文档
+- 改动文件：`miniprogram/app.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`miniprogram/README.md`、`docs/ITERATION_LOG.md`
+- 改动摘要：将代码内小程序名称统一为「月栖卡牌日记」；`globalData.appName` 从「塔罗疗愈之旅」改为「月栖卡牌日记」；微信授权弹窗提示从「授权后即可进入心绪小岛。」改为「授权后即可进入月栖卡牌日记。」；登录成功 toast 从「已进入月息塔罗」改为「已进入月栖卡牌日记」；同步更新 `miniprogram/README.md` 中旧项目名。
+- Logo/系统页说明：用户截图中的黑底微信启动/授权过渡页显示的小程序名称和头像通常来自微信公众平台的小程序资料，不是小程序包内 WXML/CSS 可直接控制；本轮没有把 `output/imagegen/yuexi-logo/xinxu-island-logo-option-02-optimized.png` 拷入主包，避免新增约 `1.1MB` 无效包体。若要让截图中的系统页头像和名称变更，需要在微信公众平台资料中将名称设为「月栖卡牌日记」，头像上传为 `xinxu-island-logo-option-02-optimized.png`。
+- 验证：`rg -n "心绪小岛|月息塔罗|塔罗疗愈之旅|月息日记|已进入月息|授权后即可进入心绪" miniprogram cloudfunctions project.config.json project.private.config.json` 无运行时代码残留；`node --check miniprogram/app.js` 通过；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2937549` Byte，主包约 `1904449` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：微信系统黑底页的头像/名称需公众平台后台资料同步后才会变化，且可能有微信客户端缓存延迟；源码内无法强制替换该系统页 logo。
+- 基线/对比：`git diff --stat -- miniprogram/app.js miniprogram/pages/index/index.wxml miniprogram/pages/index/index.js miniprogram/README.md docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 启动页标题与字体调整
 
 - 页面/模块：启动页 `splash` screen

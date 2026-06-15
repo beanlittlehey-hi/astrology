@@ -660,7 +660,7 @@ Page({
     })
     this.persist({ loggedIn: true })
     this.syncCloudAfterLogin(true)
-    wx.showToast({ title: "已进入月息塔罗", icon: "none" })
+    wx.showToast({ title: "已进入月栖卡牌日记", icon: "none" })
   },
 
   startWechatLogin() {

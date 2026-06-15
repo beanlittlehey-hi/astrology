@@ -11,7 +11,7 @@ App({
   },
 
   globalData: {
-    appName: "塔罗疗愈之旅",
+    appName: "月栖卡牌日记",
     cloudReady: isCloudReady()
   }
 })

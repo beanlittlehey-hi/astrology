@@ -24,7 +24,7 @@
         <view class="wechat-login-mark">微</view>
         <view>
           <text class="panel-title">微信授权登录</text>
-          <text class="muted">授权后即可进入心绪小岛。</text>
+          <text class="muted">授权后即可进入月栖卡牌日记。</text>
         </view>
       </view>
       <button class="primary auth-primary" loading="{{authLoading}}" bindtap="startWechatLogin">微信一键登录</button>
