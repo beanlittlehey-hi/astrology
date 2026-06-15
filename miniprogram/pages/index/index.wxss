@@ -4475,6 +4475,7 @@
 
 /* Splash Yuexi final skin and auth sheet */
 .splash.screen {
+  --splash-font: "LXGW WenKai", "霞鹜文楷", "LXGW WenKai Screen", "KaiTi", "STKaiti", serif;
   position: relative;
   min-height: 100vh;
   padding: 0;
@@ -4540,7 +4541,7 @@
 .splash-copy .title {
   display: block;
   color: #263a70;
-  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-family: var(--splash-font);
   font-size: 66rpx;
   line-height: 1;
   font-weight: 900;
@@ -4575,7 +4576,7 @@
   width: 520rpx;
   margin: 22rpx auto 0;
   color: #263a70;
-  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-family: var(--splash-font);
   font-size: 30rpx;
   line-height: 1.62;
   font-weight: 600;
@@ -4608,7 +4609,7 @@
   z-index: 1;
   padding: 0;
   color: #2f3e68;
-  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-family: var(--splash-font);
   font-size: 27rpx;
   line-height: 1.66;
   font-weight: 700;
@@ -4659,7 +4660,7 @@
   position: relative;
   z-index: 1;
   color: #ffffff;
-  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-family: var(--splash-font);
   font-weight: 700;
   text-shadow: 0 2rpx 10rpx rgba(39, 54, 92, 0.42);
 }
@@ -4706,6 +4707,7 @@
 .auth-sheet-head .panel-title {
   display: block;
   color: #27365c;
+  font-family: var(--splash-font);
   font-size: 31rpx;
   font-weight: 900;
 }
@@ -4714,15 +4716,18 @@
   display: block;
   margin-top: 8rpx;
   color: #8790aa;
+  font-family: var(--splash-font);
   font-size: 24rpx;
   line-height: 1.4;
 }
 
 .auth-primary {
+  font-family: var(--splash-font);
   margin-top: 0;
 }
 
 .auth-cancel {
+  font-family: var(--splash-font);
   min-height: 80rpx;
   margin-top: 18rpx;
   border-radius: 999rpx;
@@ -4732,6 +4737,7 @@
   display: block;
   margin-top: 20rpx;
   color: #8790aa;
+  font-family: var(--splash-font);
   font-size: 22rpx;
   line-height: 1.55;
   text-align: center;
@@ -4747,6 +4753,7 @@
   color: #ffffff;
   background: #2fc777;
   box-shadow: 0 14rpx 32rpx rgba(47, 199, 119, 0.2);
+  font-family: var(--splash-font);
   font-size: 32rpx;
   font-weight: 900;
 }

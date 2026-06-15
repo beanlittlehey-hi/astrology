@@ -441,6 +441,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 启动页文案切换霞鹜文楷字体
+
+- 页面/模块：启动页 `splash` screen 与微信授权登录弹窗
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：在 `.splash.screen` 定义 `--splash-font`，优先使用 `"LXGW WenKai", "霞鹜文楷", "LXGW WenKai Screen"`，并将启动页标题、主说明文案、免责声明、开启按钮文案、授权弹窗标题/说明/按钮/备注和微信登录圆形标记的字体切换为该字体变量。
+- 约束确认：未修改任何字号、颜色、字重、间距、布局、背景图、按钮图、WXML 结构或业务逻辑。
+- 字体说明：项目内未发现霞鹜文楷字体文件，本轮不新增字体资源以避免包体增加；真机需依赖系统/客户端可用字体命中，否则会回退到楷体/系统 serif 兜底。
+- 验证：`node --check miniprogram/app.js` 通过；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2904898` Byte，主包约 `1871798` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：如果真机没有霞鹜文楷字体，视觉会回退到 `KaiTi/STKaiti/serif`；如必须强制一致，后续需要确认是否允许引入字体文件或远程字体方案。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 删除日记详情旧左侧 Icon
 
 - 页面/模块：情绪日记 / 日记详情资源
