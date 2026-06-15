@@ -16,11 +16,12 @@ const DEFAULT_USER = {
   openid: "",
   openidShort: "",
   maskedPhone: "",
-  loginType: "",
+  loginType: "local",
   anonymousName: "月栖旅人",
   isAdmin: false,
   role: "user",
   lastLoginAt: "",
+  loginTypeText: "本地体验",
   maskedPhoneText: "未绑定手机号",
   openidText: "暂未获取",
   openidShortText: "--"
@@ -34,6 +35,7 @@ function normalizeUser(user = {}) {
   return {
     ...next,
     anonymousName: next.anonymousName || DEFAULT_USER.anonymousName,
+    loginTypeText: next.loginType === "phone" ? "手机号登录" : (next.loginType === "openid" ? "微信身份登录" : "本地体验"),
     maskedPhoneText: next.maskedPhone || "未绑定手机号",
     openidText: next.openid || "暂未获取",
     openidShortText: next.openidShort || "--"
@@ -707,7 +709,7 @@ Page({
     this.setData({ authSheetOpen: false })
   },
 
-  finishLogin(user) {
+  finishLogin(user, options = {}) {
     const currentUser = normalizeUser(user)
     this.setData({
       loggedIn: true,
@@ -720,26 +722,37 @@ Page({
       authLoading: false
     })
     this.persist({ loggedIn: true, user: currentUser })
-    this.migrateLocalDiariesOnce()
-    this.loadCloudDiaries(true)
+    if (!options.localOnly) {
+      this.migrateLocalDiariesOnce()
+      this.loadCloudDiaries(true)
+    }
     wx.showToast({ title: "已进入月栖卡牌日记", icon: "none" })
+  },
+
+  enterLocalMode() {
+    this.finishLogin(
+      normalizeUser({
+        loginType: "local",
+        anonymousName: "月栖旅人"
+      }),
+      { localOnly: true }
+    )
   },
 
   async startOpenIdLogin() {
     if (this.data.authLoading) return
     this.setData({ authLoading: true })
-    const result = await cloudApi.loginWithOpenId({
-      consentVersion: "2026-06-15"
-    })
-    if (result.ok && result.user) {
-      this.finishLogin(result.user)
-      return
+    if (cloudApi.isAvailable()) {
+      const result = await cloudApi.loginWithOpenId({
+        consentVersion: "2026-06-15"
+      })
+      if (result.ok && result.user) {
+        this.finishLogin(result.user)
+        return
+      }
+      console.warn("[login] openid login fallback to local", result.error)
     }
-    this.setData({ authLoading: false })
-    wx.showToast({
-      title: result.localOnly ? "云环境未配置，暂无法登录" : "微信身份登录失败，请稍后重试",
-      icon: "none"
-    })
+    this.enterLocalMode()
   },
 
   async startPhoneLogin(event) {

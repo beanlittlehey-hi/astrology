@@ -23,14 +23,13 @@
       <view class="auth-sheet-head">
         <view class="wechat-login-mark">微</view>
         <view>
-          <text class="panel-title">微信授权登录</text>
-          <text class="muted">手机号用于账号识别和数据找回，也可使用微信身份继续。</text>
+          <text class="panel-title">进入月栖卡牌日记</text>
+          <text class="muted">优先使用微信身份保存数据；云端暂不可用时也能先本地体验。</text>
         </view>
       </view>
-      <button class="primary auth-primary" open-type="getPhoneNumber" loading="{{authLoading}}" bindgetphonenumber="startPhoneLogin">手机号登录</button>
-      <button class="ghost auth-openid" loading="{{authLoading}}" bindtap="startOpenIdLogin">使用微信身份继续</button>
+      <button class="primary auth-primary" loading="{{authLoading}}" bindtap="startWechatLogin">进入月栖卡牌日记</button>
       <button class="ghost auth-cancel" bindtap="closeAuthSheet">暂不登录</button>
-      <text class="auth-note">使用微信身份继续时，系统会通过微信 openid 隔离你的数据；登录仅用于记录你的抽牌与情绪日记。</text>
+      <text class="auth-note">登录仅用于记录你的抽牌与情绪日记；如云端暂不可用，会先保存到本机。</text>
     </view>
   </view>
 
@@ -85,13 +84,13 @@
         <text class="avatar large">M</text>
         <view>
           <text class="panel-title">{{user.anonymousName}}</text>
-          <text class="muted">{{user.loginType === 'phone' ? '手机号登录' : '微信身份登录'}} · {{diaries.length}} 条情绪日记</text>
+          <text class="muted">{{user.loginTypeText}} · {{diaries.length}} 条情绪日记</text>
         </view>
       </view>
       <view class="drawer-user-info">
         <view class="drawer-info-row">
           <text>登录方式</text>
-          <text>{{user.loginType === 'phone' ? '手机号登录' : '微信身份登录'}}</text>
+          <text>{{user.loginTypeText}}</text>
         </view>
         <view class="drawer-info-row">
           <text>手机号</text>

@@ -545,6 +545,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 登录入口收敛为本地可跑通兜底
+
+- 页面/模块：启动页登录弹层、首页侧边栏
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`docs/ITERATION_LOG.md`
+- 改动摘要：按真机反馈删除失败率较高的手机号登录入口，将登录弹层收敛为一个“进入月栖卡牌日记”按钮；点击后优先尝试 `loginWithOpenId`，云端或权限失败时自动进入本地体验模式，不再弹“登录失败”阻塞用户。
+- 兜底策略：本地体验模式保存 `loggedIn` 和本地日记数据，不触发云端迁移/拉取；侧边栏登录方式显示“本地体验”，`openid` 显示“暂未获取”。
+- 冻结范围：未修改导航栏、标题栏、底部 tab、背景图和抽牌/日记业务流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/services/cloudApi.js` 通过；`node --check cloudfunctions/user/index.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 和 `python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2952458` Byte，主包约 `1919358` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本地体验模式不能获得真实 `openid`，因此无法用于添加管理员白名单；待云函数部署和权限稳定后可恢复 OPENID 云端登录展示。
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 单张牌阵翻牌与返回按钮替换
 
 - 页面/模块：daily / 单张牌阵
