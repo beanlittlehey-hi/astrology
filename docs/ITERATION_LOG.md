@@ -531,6 +531,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 全局统一左上返回按钮
+
+- 页面/模块：所有使用 `custom-nav-back` 的二级页面
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：将专属牌阵、抽牌、结果页、日记详情页的左上返回按钮统一替换为单张牌阵页使用的 `/assets/single-card-v2/single-back-button.png`，单张牌阵页同步改用公共 `nav-back-button-img` 类。
+- 样式处理：新增公共 `.nav-back-button-img`；对 `.custom-nav-back.icon-btn/.daily-round-btn/.draw-round-btn` 清除旧背景、边框、阴影和文字色，避免旧 `‹` / `×` 视觉残留。
+- 冻结范围：未修改 `navLayout`、标题位置、底部 tab、背景图、弹窗关闭按钮、日历 sheet 关闭按钮和页面返回逻辑。
+- 验证：`rg -n "custom-nav-back|‹|×|nav-back-button-img|single-back-button" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 确认所有 `custom-nav-back` 都使用 `nav-back-button-img`，剩余 `×` 仅为日历弹层关闭按钮；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 和 `python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 连续两次在 preparing 阶段返回 `TypeError: Failed to fetch (code 10)`，未能生成新二维码。
+- 风险/待确认：所有二级页返回按钮视觉会统一为紫色圆形返回图，需真机确认与各页标题行视觉协调。
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - OPENID 真实登录最小闭环
 
 - 页面/模块：启动页登录、首页侧边栏、`user` 云函数、前端云 API

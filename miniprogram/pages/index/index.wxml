@@ -120,7 +120,7 @@
     <image class="shared-page-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <view class="custom-nav-back daily-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
-        <image class="daily-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
+        <image class="nav-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
       </view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">单张牌阵</text>
@@ -161,7 +161,7 @@
     <image class="shared-page-bg reading-v2-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
       <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="home" data-nav="home" bindtap="go">
-        <text>‹</text>
+        <image class="nav-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
       </button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">专属牌阵</text>
@@ -194,7 +194,9 @@
   <view wx:elif="{{screen === 'draw'}}" class="screen app-screen has-shared-bg">
     <image class="shared-page-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
-      <view class="custom-nav-back draw-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">×</view>
+      <view class="custom-nav-back draw-round-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="question" data-nav="reading" bindtap="go">
+        <image class="nav-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
+      </view>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{hasShuffled ? '跟着你的直觉抽牌' : (drawQuestionConfirmed ? '请洗牌' : '输入您的问题')}}</text>
       </view>
@@ -253,7 +255,9 @@
   <view wx:elif="{{screen === 'result'}}" class="screen app-screen has-shared-bg">
     <image class="shared-page-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
-      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" bindtap="backFromResult">‹</button>
+      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" bindtap="backFromResult">
+        <image class="nav-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
+      </button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{currentSession.title}}</text>
       </view>
@@ -362,7 +366,9 @@
   <view wx:elif="{{screen === 'diary'}}" class="screen app-screen has-shared-bg">
     <image class="shared-page-bg" src="/assets/home-v2/home-bg-clean.jpg" mode="aspectFill"></image>
     <view class="custom-nav custom-nav-left-title" style="height: {{navLayout.navTotalHeight}}px;">
-      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">‹</button>
+      <button class="custom-nav-back icon-btn" style="left: {{navLayout.leftButtonLeft}}px; top: {{navLayout.leftButtonTop}}px; height: {{navLayout.leftButtonSize}}px; width: {{navLayout.leftButtonSize}}px;" data-screen="journal" data-nav="journal" bindtap="go">
+        <image class="nav-back-button-img" src="/assets/single-card-v2/single-back-button.png" mode="aspectFit"></image>
+      </button>
       <view class="custom-nav-title" style="top: {{navLayout.titleTop}}px; height: {{navLayout.titleHeight}}px; line-height: {{navLayout.titleHeight}}px; left: {{navLayout.titleLeft}}px; right: {{navLayout.titleRight}}px;">
         <text class="custom-nav-title-text">{{activeDiary.title}}</text>
       </view>
