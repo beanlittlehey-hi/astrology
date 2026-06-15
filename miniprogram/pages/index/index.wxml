@@ -44,7 +44,7 @@
       <view class="home-v2-card home-v2-hero daily-draw-card">
         <image class="home-card-bg" src="/assets/home-v2/home-card-hero-bg.png" mode="scaleToFill"></image>
         <view class="home-card-copy">
-          <text class="eyebrow">今日运势</text>
+          <text class="eyebrow">单张牌阵</text>
           <text class="hero-title">随机抽取一张牌，查看今天的心流</text>
           <button class="primary home-v2-primary" data-screen="daily" data-nav="home" bindtap="go">
             <image class="home-v2-primary-bg" src="/assets/home-v2/home-draw-button-bg.png" mode="scaleToFill"></image>
@@ -59,7 +59,7 @@
         <image class="home-card-small-right-bg" src="/assets/home-v2/home-card-small-right-bg.png" mode="aspectFit"></image>
         <image class="mini-icon-img" src="/assets/home-v2/home-icon-question.png" mode="aspectFit"></image>
         <view class="home-small-copy">
-          <text class="panel-title">专属牌阵</text>
+          <text class="panel-title">多张牌阵</text>
           <text class="muted">感情 / 工作 / 综合</text>
         </view>
       </view>
@@ -73,7 +73,9 @@
             <text class="panel-title">最近日记</text>
             <text class="time">{{diaries[0].date}}</text>
           </view>
-          <text class="tags">{{diaries[0].homeEmotionText}}</text>
+          <view class="home-journal-tags" wx:if="{{diaries[0].homeEmotionTags.length}}">
+            <text wx:for="{{diaries[0].homeEmotionTags}}" wx:key="*this" class="home-journal-tag">{{item}}</text>
+          </view>
         </view>
       </view>
     </view>

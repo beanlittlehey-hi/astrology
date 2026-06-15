@@ -531,6 +531,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 首页牌阵文案与最近日记标签
+
+- 页面/模块：homepage 首页
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：首页主卡 eyebrow 从“今日运势”改为“单张牌阵”，牌阵入口标题从“专属牌阵”改为“多张牌阵”；最近日记卡片新增前三个情绪标签展示，数据来自日记 `emotionTags` 前 3 个，缺失时沿用 `emotionText` 拆分结果。
+- 数据处理：`decorateDiary()` 新增 `homeEmotionTags` 数组并继续保留 `homeEmotionText`；本地重置体验数据时也先装饰样例日记，避免首页标签字段缺失。
+- 冻结范围：未修改导航栏、标题栏、底部 tab、首页背景图、页面跳转逻辑、日记详情和情绪日记业务流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：最近日记卡片新增标签行，需预览确认卡片内部留白仍自然且不影响首页首屏视觉。
+- 提交：待提交
+- 远端状态：当前本地 `main` 已 ahead，远端暂不可见
+
 ## 2026-06-14 - 牌阵抽牌槽位背景根因修复
 
 - 页面/模块：牌阵抽牌 / draw screen 抽牌槽位

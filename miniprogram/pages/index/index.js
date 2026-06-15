@@ -346,6 +346,7 @@ function decorateDiary(diary) {
     ...diary,
     journalDateKey,
     emotionText: emotionTags.join(" / "),
+    homeEmotionTags: homeTags,
     homeEmotionText: homeTags.join(" / "),
     firstEmotion,
     moodClass: moodMap[firstEmotion] || "calm"
@@ -1138,12 +1139,13 @@ Page({
       success: (res) => {
         if (!res.confirm) return
         wx.removeStorageSync(STORAGE_KEY)
+        const diaries = sampleDiaries.map(decorateDiary)
         this.setData({
           loggedIn: false,
           screen: "splash",
           showTab: false,
-          diaries: sampleDiaries,
-          activeDiary: sampleDiaries[0],
+          diaries,
+          activeDiary: diaries[0],
           drawerOpen: false,
           authSheetOpen: false,
           authLoading: false
