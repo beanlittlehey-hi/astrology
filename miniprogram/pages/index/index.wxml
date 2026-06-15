@@ -84,28 +84,9 @@
         <text class="avatar large">M</text>
         <view>
           <text class="panel-title">{{user.anonymousName}}</text>
-          <text class="muted">{{user.loginTypeText}} · {{diaries.length}} 条情绪日记</text>
         </view>
       </view>
-      <view class="drawer-user-info">
-        <view class="drawer-info-row">
-          <text>登录方式</text>
-          <text>{{user.loginTypeText}}</text>
-        </view>
-        <view class="drawer-info-row">
-          <text>手机号</text>
-          <text>{{user.maskedPhoneText}}</text>
-        </view>
-        <view class="drawer-info-row openid-row">
-          <text>openid</text>
-          <text>{{user.openidText}}</text>
-        </view>
-        <view class="drawer-info-row">
-          <text>openidShort</text>
-          <text>{{user.openidShortText}}</text>
-        </view>
-        <button class="ghost small drawer-copy-openid" bindtap="copyOpenId">复制 openid</button>
-      </view>
+      <view class="settings-row drawer-user-number" bindlongpress="copyOpenId"><text>用户号</text><text>{{user.openidText}}</text></view>
       <button class="settings-row" data-screen="question" data-nav="reading" bindtap="go"><text>测算历史</text><text>8 条</text></button>
       <button class="settings-row" data-screen="journal" data-nav="journal" bindtap="go"><text>情绪日记</text><text>{{diaries.length}} 条</text></button>
       <button class="settings-row" bindtap="showDisclaimer"><text>隐私政策</text><text>查看</text></button>

@@ -3375,58 +3375,6 @@
   font-weight: 900;
 }
 
-.app-screen > .drawer .drawer-head .muted {
-  display: block;
-  margin-top: 10rpx;
-  color: #817b96;
-  font-size: 23rpx;
-  line-height: 1.35;
-  font-weight: 800;
-}
-
-.app-screen > .drawer .drawer-user-info {
-  margin: -26rpx 0 28rpx;
-  padding: 22rpx 20rpx;
-  border-radius: 24rpx;
-  background: rgba(244, 241, 251, 0.74);
-  border: 1rpx solid rgba(154, 139, 198, 0.16);
-}
-
-.app-screen > .drawer .drawer-info-row {
-  display: grid;
-  grid-template-columns: 150rpx minmax(0, 1fr);
-  gap: 14rpx;
-  align-items: start;
-  min-height: 42rpx;
-  color: #282342;
-  font-size: 23rpx;
-  line-height: 1.45;
-  font-weight: 800;
-}
-
-.app-screen > .drawer .drawer-info-row + .drawer-info-row {
-  margin-top: 10rpx;
-}
-
-.app-screen > .drawer .drawer-info-row text:first-child {
-  color: #817b96;
-}
-
-.app-screen > .drawer .drawer-info-row text:last-child {
-  min-width: 0;
-  color: #4d4770;
-  word-break: break-all;
-}
-
-.app-screen > .drawer .drawer-copy-openid {
-  width: 100%;
-  min-height: 68rpx;
-  margin-top: 18rpx;
-  border-radius: 999rpx;
-  font-size: 24rpx;
-  font-weight: 900;
-}
-
 .app-screen > .drawer .settings-row {
   width: 100%;
   min-height: 92rpx;
@@ -3449,6 +3397,18 @@
   color: #817b96;
   font-size: 27rpx;
   font-weight: 800;
+}
+
+.app-screen > .drawer .drawer-user-number {
+  margin-top: 12rpx;
+}
+
+.app-screen > .drawer .drawer-user-number text:last-child {
+  max-width: 360rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: normal;
 }
 
 .drawer-note {

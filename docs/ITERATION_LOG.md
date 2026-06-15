@@ -644,6 +644,18 @@
 - 提交：待提交
 - 远端状态：当前本地 `main` 已 ahead，远端暂不可见
 
+## 2026-06-16 - 个人中心用户号精简
+
+- 页面/模块：首页个人中心抽屉 / drawer profile
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：删除个人中心头像下方的“登录方式 · 情绪日记”小字；删除登录方式、手机号、openid、openidShort、复制 openid 按钮和灰色信息底板；在“测算历史”前新增“用户号”行，样式沿用设置列表行，右侧展示 `user.openidText`。
+- 交互说明：长按“用户号”行会复制完整 `openid` 字符串；未获取 openid 时提示“暂未获取用户号”，复制成功提示“用户号已复制”。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、背景图、首页卡片和登录业务流程。
+- 验证：`rg -n "登录方式|手机号|openidShort|复制 openid|drawer-user-info|drawer-info-row|drawer-copy-openid|微信身份登录 ·|条情绪日记" miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss` 无结果；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：用户号右侧为了保持列表行整洁采用单行省略显示，但长按复制的是完整 openid。
+- 提交：待提交
+- 远端状态：本地 `main` 待提交，远端暂不可见
+
 ## 2026-06-16 - 情绪轨迹完整年月日历
 
 - 页面/模块：情绪轨迹 / journal screen 日历组件

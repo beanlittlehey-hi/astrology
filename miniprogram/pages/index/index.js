@@ -922,13 +922,13 @@ Page({
   copyOpenId() {
     const openid = this.data.user && this.data.user.openid
     if (!openid) {
-      wx.showToast({ title: "暂未获取 openid", icon: "none" })
+      wx.showToast({ title: "暂未获取用户号", icon: "none" })
       return
     }
     wx.setClipboardData({
       data: openid,
       success: () => {
-        wx.showToast({ title: "openid 已复制", icon: "none" })
+        wx.showToast({ title: "用户号已复制", icon: "none" })
       }
     })
   },
