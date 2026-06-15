@@ -6149,3 +6149,17 @@
   font-weight: 900;
   line-height: 96rpx;
 }
+
+/* Page title color only: align titles with reading spread title color. */
+.custom-nav-title-text,
+.home-v2-content .panel-title,
+.app-screen.has-shared-bg .daily-content .daily-action-card .panel-title,
+.result-block .panel-title,
+.insight-title,
+.journal-content .mood-panel .panel-title,
+.journal-content .timeline-item .panel-title,
+.journal-date-sheet-head .panel-title,
+.diary-detail-card .panel-title,
+.app-screen.has-shared-bg .draw-content .draw-slots .panel-title {
+  color: #2f4078;
+}

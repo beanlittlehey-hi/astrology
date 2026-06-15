@@ -156,6 +156,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 全局页面标题颜色统一
+
+- 页面/模块：全局页面标题文案
+- 改动文件：`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：以卡牌牌阵页面「三张牌阵」标题色 `#2f4078` 为基准，仅对顶部自定义导航标题、首页卡片标题、单张牌阵「今日日记」标题、抽牌槽位标题、结果页标题块、情绪轨迹标题和日记详情卡片标题追加颜色覆盖。
+- 冻结范围：只修改标题 `color`，未修改字号、字重、行高、间距、导航位置、标题起点、WXML 结构、JS 业务逻辑、背景图和底部 tab。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过。
+- 风险/待确认：后置覆盖会统一标题颜色；副标题、正文、按钮文案和标签文案不在本轮改动范围内。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-12 - 启动页心绪小岛视觉还原
 
 - 页面/模块：启动页 `splash`
