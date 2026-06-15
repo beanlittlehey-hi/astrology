@@ -210,7 +210,7 @@
         <image class="draw-deck-panel-bg" src="/assets/draw-v2/draw-deck-panel-bg.png" mode="scaleToFill"></image>
         <text wx:if="{{drawQuestionConfirmed}}" class="draw-question-text">{{question}}</text>
         <view wx:if="{{!hasShuffled}}" class="deck-pile {{isShuffling ? 'shuffling' : ''}}" bindlongpress="shuffleDeck" bindtap="shuffleDeck">
-          <image wx:for="{{visibleDrawDeckCards}}" wx:key="id" class="pile-card pile-card-{{index}}" style="{{item.pileStyle}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
+          <image wx:for="{{visibleDrawDeckCards}}" wx:key="id" class="pile-card pile-card-{{item.pileClassIndex}}" src="/assets/tarot/card-back.jpg" mode="aspectFill"></image>
         </view>
         <view wx:else class="deck-wheel-panel">
           <scroll-view class="deck-wheel-scroll" scroll-x enhanced show-scrollbar="{{false}}">

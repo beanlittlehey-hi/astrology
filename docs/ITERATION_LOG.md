@@ -644,6 +644,19 @@
 - 提交：待提交
 - 远端状态：当前本地 `main` 已 ahead，远端暂不可见
 
+## 2026-06-16 - 抽牌页 78 张卡背与 GitHub 牌堆/滑轮样式恢复
+
+- 页面/模块：牌阵抽牌 / draw screen 牌堆与抽牌滑轮
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 根因：本地上一轮为了容纳 78 张牌，额外覆盖了 `.deck-area.is-pile`、`.deck-pile`、`.pile-card` 和 `.wheel-card` 的尺寸/裁剪/位置，导致牌堆大小、占位和抽牌滑轮视觉偏离 `origin/main` 的 GitHub 样式。
+- 改动摘要：保留 `drawDeckCards` 的 78 张真实塔罗牌身份和卡背渲染；洗牌前只显示 12 张可视卡背，继续复用 GitHub 原 `.pile-card-0..11` 牌堆布局；洗牌后牌轮继续显示 78 张卡背，每张卡背绑定真实牌 `id`，但排布按 GitHub 原 30 张半圈曲线重复延展，不改滑轮卡牌尺寸、方向和视窗高度。
+- 样式冻结：移除本地新增的牌堆外层 `height: 430rpx`、`overflow: hidden`、卡牌 `top/height/border` 覆盖和 `.wheel-card` 尺寸覆盖；洗牌动画只作用在 `.deck-pile.shuffling .pile-card` 子元素，外层牌堆容器尺寸和页面布局不变。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、按钮、输入框、结果页结构和塔罗资源文件。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；`node -e "const { tarotDeck } = require('./miniprogram/data/content.js'); console.log(tarotDeck.length, new Set(tarotDeck.map(c=>c.image)).size)"` 输出 `78 78`；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2961176` Byte，主包约 `1928076` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：78 张卡背通过重复 GitHub 原 30 张半圈曲线延展，真机需确认横向滑动长度和连续叠放感符合预期。
+- 提交：待提交
+- 远端状态：本地 `main` 已 ahead，远端暂不可见
+
 ## 2026-06-14 - 牌阵抽牌槽位背景根因修复
 
 - 页面/模块：牌阵抽牌 / draw screen 抽牌槽位

@@ -12,9 +12,41 @@ const STORAGE_KEY = "tarot_healing_v03_fresh_login"
 const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
 const DAILY_CARD_BACK_IMAGE = "/assets/home-v2/tarot-card-back.png"
 const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
-const DRAW_VISIBLE_DECK_COUNT = 24
-const DRAW_WHEEL_CARD_GAP = 42
 const DRAW_WHEEL_CARD_WIDTH = 104
+const DRAW_VISIBLE_DECK_COUNT = 12
+const DRAW_WHEEL_CYCLE_WIDTH = 1400
+const DRAW_WHEEL_ARC_STYLES = [
+  { left: 0, top: 320, rotate: -64 },
+  { left: 26, top: 286, rotate: -61 },
+  { left: 54, top: 254, rotate: -58 },
+  { left: 84, top: 224, rotate: -55 },
+  { left: 118, top: 196, rotate: -51 },
+  { left: 154, top: 170, rotate: -47 },
+  { left: 194, top: 148, rotate: -43 },
+  { left: 238, top: 128, rotate: -39 },
+  { left: 284, top: 110, rotate: -35 },
+  { left: 334, top: 94, rotate: -31 },
+  { left: 386, top: 82, rotate: -27 },
+  { left: 440, top: 72, rotate: -23 },
+  { left: 496, top: 64, rotate: -19 },
+  { left: 554, top: 58, rotate: -15 },
+  { left: 612, top: 54, rotate: -11 },
+  { left: 670, top: 52, rotate: -7 },
+  { left: 728, top: 52, rotate: -3 },
+  { left: 786, top: 54, rotate: 1 },
+  { left: 844, top: 58, rotate: 5 },
+  { left: 902, top: 64, rotate: 9 },
+  { left: 958, top: 72, rotate: 13 },
+  { left: 1012, top: 82, rotate: 17 },
+  { left: 1064, top: 94, rotate: 21 },
+  { left: 1114, top: 110, rotate: 25 },
+  { left: 1160, top: 128, rotate: 29 },
+  { left: 1204, top: 148, rotate: 33 },
+  { left: 1244, top: 170, rotate: 37 },
+  { left: 1280, top: 196, rotate: 41 },
+  { left: 1314, top: 224, rotate: 45 },
+  { left: 1344, top: 254, rotate: 49 }
+]
 const DEFAULT_USER = {
   openid: "",
   openidShort: "",
@@ -170,29 +202,25 @@ function uniqueCards(count) {
 function buildDrawDeckCards() {
   const shuffled = tarotDeck.slice().sort(() => Math.random() - 0.5)
   return shuffled.map((card, index) => {
-    const wheelLeft = index * DRAW_WHEEL_CARD_GAP
-    const center = (shuffled.length - 1) / 2
-    const offset = Math.abs(index - center) / center
-    const wheelTop = Math.round(52 + offset * 270)
-    const wheelRotate = Math.round((index - center) * 1.45)
-    const pileIndex = index % DRAW_VISIBLE_DECK_COUNT
-    const pileAngle = (pileIndex / DRAW_VISIBLE_DECK_COUNT) * Math.PI * 2
-    const pileRadius = 10 + (pileIndex % 6) * 8
-    const pileX = Math.round(Math.cos(pileAngle) * pileRadius)
-    const pileY = Math.round(74 + Math.sin(pileAngle) * pileRadius * 0.58)
-    const pileRotate = Math.round(((pileIndex % 12) - 5.5) * 1.8)
+    const wheelCycle = Math.floor(index / DRAW_WHEEL_ARC_STYLES.length)
+    const wheelArc = DRAW_WHEEL_ARC_STYLES[index % DRAW_WHEEL_ARC_STYLES.length]
+    const wheelLeft = wheelArc.left + (wheelCycle * DRAW_WHEEL_CYCLE_WIDTH)
     return {
       ...card,
       deckIndex: index,
-      pileStyle: `transform: translate(${pileX}rpx, ${pileY}rpx) rotate(${pileRotate}deg);`,
-      wheelStyle: `left: ${wheelLeft}rpx; top: ${wheelTop}rpx; transform: rotate(${wheelRotate}deg);`
+      pileClassIndex: index % DRAW_VISIBLE_DECK_COUNT,
+      wheelStyle: `left: ${wheelLeft}rpx; top: ${wheelArc.top}rpx; transform: rotate(${wheelArc.rotate}deg);`
     }
   })
 }
 
 function buildDrawDeckState() {
   const drawDeckCards = buildDrawDeckCards()
-  const wheelWidth = ((drawDeckCards.length - 1) * DRAW_WHEEL_CARD_GAP) + DRAW_WHEEL_CARD_WIDTH + 16
+  const wheelWidth = drawDeckCards.reduce((max, card) => {
+    const match = String(card.wheelStyle || "").match(/left:\s*(\d+)rpx/)
+    const left = match ? Number(match[1]) : 0
+    return Math.max(max, left + DRAW_WHEEL_CARD_WIDTH + 16)
+  }, 1480)
   return {
     drawDeckCards,
     visibleDrawDeckCards: drawDeckCards.slice(0, DRAW_VISIBLE_DECK_COUNT),
