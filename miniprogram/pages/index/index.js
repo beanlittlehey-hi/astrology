@@ -135,13 +135,15 @@ function startOfWeek(date = new Date()) {
 function buildJournalCalendarDays(diaries = [], selectedDate = "all") {
   const weekStart = startOfWeek(new Date())
   const keys = Array.from({ length: 7 }, (_, index) => dateKeyFromDate(addDays(weekStart, index)))
-  const dateItems = keys.map((key) => {
+  const marked = buildJournalMarkedDateMap(diaries)
+  const dateItems = keys.slice(0, 2).map((key) => {
     const label = journalDayLabel(key)
     return {
       key,
       type: "date",
       week: label.week,
       day: label.day,
+      hasDiary: Boolean(marked[key]),
       selected: selectedDate === key
     }
   })
@@ -152,21 +154,38 @@ function buildJournalCalendarDays(diaries = [], selectedDate = "all") {
     week: "",
     day: "全部",
     selected: selectedDate === "all"
-  }].concat(dateItems)
+  }].concat(dateItems, [{
+    key: "more",
+    type: "more",
+    week: "",
+    day: "...",
+    selected: false
+  }])
 }
 
-function buildJournalAllDates(diaries = [], selectedDate = "all") {
-  const keys = []
+function buildJournalMarkedDateMap(diaries = []) {
+  const marked = {}
   diaries.forEach((diary) => {
     const key = diaryDateKey(diary)
-    if (key && !keys.includes(key)) keys.push(key)
+    if (key) marked[key] = true
   })
-  return keys.sort((a, b) => b.localeCompare(a)).map((key) => {
+  return marked
+}
+
+function buildJournalMonthDays(diaries = [], selectedDate = "all") {
+  const marked = buildJournalMarkedDateMap(diaries)
+  const baseDate = selectedDate && selectedDate !== "all" ? parseDateKey(selectedDate) : new Date()
+  const monthStart = new Date(baseDate.getFullYear(), baseDate.getMonth(), 1)
+  const monthEnd = new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0)
+  return Array.from({ length: monthEnd.getDate() }, (_, index) => {
+    const key = dateKeyFromDate(new Date(monthStart.getFullYear(), monthStart.getMonth(), index + 1))
     const label = journalDayLabel(key)
     return {
       key,
+      type: "date",
       week: label.week,
       day: label.day,
+      hasDiary: Boolean(marked[key]),
       selected: selectedDate === key
     }
   })
@@ -184,7 +203,7 @@ function buildJournalState(diaries = [], selectedDate) {
   return {
     selectedJournalDate: date,
     journalCalendarDays: buildJournalCalendarDays(decorated, date),
-    journalAllDates: buildJournalAllDates(decorated, date),
+    journalMonthDays: buildJournalMonthDays(decorated, date),
     filteredDiaries,
     journalHasFilteredDiaries: filteredDiaries.length > 0
   }
@@ -557,7 +576,7 @@ Page({
     diaries: [],
     selectedJournalDate: "all",
     journalCalendarDays: [],
-    journalAllDates: [],
+    journalMonthDays: [],
     journalCalendarOpen: false,
     filteredDiaries: [],
     journalHasFilteredDiaries: false,

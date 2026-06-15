@@ -312,7 +312,7 @@
         <view
           wx:for="{{journalCalendarDays}}"
           wx:key="key"
-          class="journal-calendar-item type-{{item.type}} {{item.selected ? 'is-selected' : ''}}"
+          class="journal-calendar-item type-{{item.type}} {{item.selected ? 'is-selected' : ''}} {{item.hasDiary ? 'has-diary' : ''}}"
           data-date="{{item.key}}"
           data-type="{{item.type}}"
           bindtap="selectJournalDate"
@@ -348,18 +348,18 @@
       </view>
       <view class="journal-date-grid">
         <view
-          wx:for="{{journalAllDates}}"
+          wx:for="{{journalMonthDays}}"
           wx:key="key"
-          class="journal-date-option {{item.selected ? 'is-selected' : ''}}"
+          class="journal-date-option {{item.selected ? 'is-selected' : ''}} {{item.hasDiary ? 'has-diary' : ''}}"
           data-date="{{item.key}}"
           data-type="date"
           bindtap="selectJournalDate"
         >
           <text>{{item.week}}</text>
-          <text>{{item.key}}</text>
+          <text>{{item.day}}</text>
         </view>
       </view>
-      <view wx:if="{{!journalAllDates.length}}" class="timeline-empty sheet-empty">还没有可筛选的日记日期。</view>
+      <view wx:if="{{!journalMonthDays.length}}" class="timeline-empty sheet-empty">还没有可筛选的日期。</view>
     </view>
   </view>
 

@@ -644,6 +644,18 @@
 - 提交：待提交
 - 远端状态：当前本地 `main` 已 ahead，远端暂不可见
 
+## 2026-06-16 - 情绪轨迹日历单行与整月选择
+
+- 页面/模块：情绪轨迹 / journal screen 日历组件
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：顶部日历从“全部 + 本周 7 天”的两行布局改为单行四格，只展示 `全部`、本周前两天和最后的 `...` 入口；点击省略号拉起日期选择弹层。弹层数据从“仅有日记日期”改为当前月份每一天，用户可选择任意一天查看记录；有日记的日期在顶部行和弹层中都显示紫色高亮标记。
+- 交互说明：选择无日记日期时继续复用原筛选逻辑，页面显示“这一天还没有记录”；选择有日记日期时展示对应记录；选择 `全部` 展示全部记录。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定背景、日记卡片背景和业务保存流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2962322` Byte，主包约 `1929222` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：弹层目前按当前所选日期所在月份展示整月日期；真机需确认省略号入口和有日记日期标记的视觉是否清晰。
+- 提交：待提交
+- 远端状态：本地 `main` 待提交，远端暂不可见
+
 ## 2026-06-16 - 抽牌页 78 张卡背与 GitHub 牌堆/滑轮样式恢复
 
 - 页面/模块：牌阵抽牌 / draw screen 牌堆与抽牌滑轮
