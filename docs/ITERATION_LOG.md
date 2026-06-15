@@ -441,6 +441,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 删除日记详情旧左侧 Icon
+
+- 页面/模块：情绪日记 / 日记详情资源
+- 改动文件：`miniprogram/assets/diary-detail-v2/diary-icon-next.png`、`miniprogram/assets/diary-detail-v2/diary-icon-note.png`、`miniprogram/assets/diary-detail-v2/diary-icon-spread.png`、`miniprogram/assets/diary-detail-v2/diary-icon-summary.png`、`docs/ITERATION_LOG.md`
+- 改动摘要：仅删除 `diary-detail-v2` 中 4 个已确认无引用的旧左侧 icon；未修改 WXML、WXSS、JS、导航、标题、底部 tab、背景图、页面布局和业务逻辑。
+- 体积变化：删除前 4 个 icon 按磁盘块合计约 `40K`；`diary-detail-v2` 目录剩余 `diary-report-button-bg.png` 与两个标签背景，目录总量约 `80K`；微信预览主包从上一上传版本约 `1904449` Byte 降至 `1871713` Byte。
+- 验证：删除前后 `rg -n "diary-icon-(next|note|spread|summary)" miniprogram` 均无引用；`node --check miniprogram/app.js` 通过；`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2904813` Byte，主包约 `1871713` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：本轮只删除无引用资源，理论上页面视觉不变；仍需以真机扫码检查日记详情页、底部 tab、启动页和首页无异常。
+- 基线/对比：`git diff --stat -- miniprogram/assets/diary-detail-v2 docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-15 - 小程序命名统一为月栖卡牌日记
 
 - 页面/模块：启动页授权弹窗、登录流程、全局应用名、开发文档
