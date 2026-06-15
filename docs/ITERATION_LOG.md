@@ -169,6 +169,18 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-16 - 抽牌页牌堆尺寸与 78 张半圈牌轮修复
+
+- 页面/模块：牌阵抽牌 / draw screen 牌堆与洗牌后牌轮
+- 改动文件：`miniprogram/pages/index/index.js`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：在上一版 78 张卡背牌轮基础上，将洗牌前牌堆卡背尺寸放大到接近参考图，同时保留背景框内裁剪；将 78 张牌轮的坐标和旋转收回原半圈滑轮风格，继续横向滑动查看，不改变卡背视觉和抽牌逻辑。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、整体固定首页背景、塔罗资源文件、输入框位置、结果页解读结构和页面跳转流程。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；数量检查输出 `tarotDeck 78 uniqueImages 78 wheelWidth 3354`。
+- 风险/待确认：78 张卡背牌轮仍需真机确认滑动流畅度；牌堆放大后通过背景框裁剪避免越界，需真机肉眼确认边界。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.js miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-16 - 抽牌页问题输入与扇形洗牌动画
 
 - 页面/模块：牌阵抽牌 / draw screen 输入框、问题展示和洗牌动画

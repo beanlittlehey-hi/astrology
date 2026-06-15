@@ -13,7 +13,7 @@ const CLOUD_MIGRATION_KEY = `${STORAGE_KEY}_cloud_migrated`
 const DAILY_CARD_BACK_IMAGE = "/assets/home-v2/tarot-card-back.png"
 const DAILY_CARD_BACK_PROMPT = "请点击卡牌背面"
 const DRAW_VISIBLE_DECK_COUNT = 24
-const DRAW_WHEEL_CARD_GAP = 50
+const DRAW_WHEEL_CARD_GAP = 42
 const DRAW_WHEEL_CARD_WIDTH = 104
 const DEFAULT_USER = {
   openid: "",
@@ -173,11 +173,11 @@ function buildDrawDeckCards() {
     const wheelLeft = index * DRAW_WHEEL_CARD_GAP
     const center = (shuffled.length - 1) / 2
     const offset = Math.abs(index - center) / center
-    const wheelTop = Math.round(54 + offset * 260)
-    const wheelRotate = Math.round((index - center) * 2.7)
+    const wheelTop = Math.round(52 + offset * 270)
+    const wheelRotate = Math.round((index - center) * 1.45)
     const pileIndex = index % DRAW_VISIBLE_DECK_COUNT
     const pileAngle = (pileIndex / DRAW_VISIBLE_DECK_COUNT) * Math.PI * 2
-    const pileRadius = 10 + (pileIndex % 6) * 7
+    const pileRadius = 10 + (pileIndex % 6) * 8
     const pileX = Math.round(Math.cos(pileAngle) * pileRadius)
     const pileY = Math.round(74 + Math.sin(pileAngle) * pileRadius * 0.58)
     const pileRotate = Math.round(((pileIndex % 12) - 5.5) * 1.8)

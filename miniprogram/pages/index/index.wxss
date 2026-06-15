@@ -6174,17 +6174,17 @@
 
 .app-screen.has-shared-bg .draw-content .deck-pile {
   width: 560rpx;
-  height: 390rpx;
+  height: 430rpx;
   overflow: hidden;
 }
 
 .app-screen.has-shared-bg .draw-content .deck-pile .pile-card {
-  top: 104rpx;
-  width: 118rpx;
-  height: 178rpx;
-  margin-left: -59rpx;
+  top: 86rpx;
+  width: 150rpx;
+  height: 228rpx;
+  margin-left: -75rpx;
   border-width: 3rpx;
-  border-radius: 13rpx;
+  border-radius: 16rpx;
   transform-origin: 50% 50%;
   animation-fill-mode: both;
 }
