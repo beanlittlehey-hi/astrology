@@ -73,9 +73,7 @@
             <text class="panel-title">最近日记</text>
             <text class="time">{{diaries[0].date}}</text>
           </view>
-          <view class="home-journal-tags" wx:if="{{diaries[0].homeEmotionTags.length}}">
-            <text wx:for="{{diaries[0].homeEmotionTags}}" wx:key="*this" class="home-journal-tag">{{item}}</text>
-          </view>
+          <text class="muted" wx:if="{{diaries[0].homeEmotionText}}">{{diaries[0].homeEmotionText}}</text>
         </view>
       </view>
     </view>
