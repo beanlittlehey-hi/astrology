@@ -4,8 +4,7 @@
     <view class="splash-panel">
       <view class="splash-main">
         <view class="splash-copy">
-          <text class="title">心绪小岛</text>
-          <view class="title-rule"></view>
+          <text class="title">月栖卡牌日记</text>
           <text class="desc">把一段不安的情绪，整理成今天可以完成的一小步。</text>
         </view>
       </view>

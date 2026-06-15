@@ -441,6 +441,19 @@
 - 提交：待提交
 - 远端状态：待用户确认是否 push
 
+## 2026-06-15 - 启动页标题与字体调整
+
+- 页面/模块：启动页 `splash` screen
+- 改动文件：`miniprogram/pages/index/index.wxml`、`miniprogram/pages/index/index.wxss`、`docs/ITERATION_LOG.md`
+- 改动摘要：标题文案由「心绪小岛」改为「月栖卡牌日记」；删除标题下方横线和中心小 icon 节点；标题字体切到宋体类字体栈并使用 Heavy 视觉字重；主说明文案、免责声明文案和「开启治愈之旅」按钮文案切到宋体类字体栈；删除横线后将主说明文案用较小 `22rpx` 顶部间距承接标题，避免原横线区域留下过大空白。
+- 字体说明：小程序运行环境不保证内置精确的“思源宋体 Heavy/SemiBold”字体文件，本轮使用 `"Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif` 字体栈，并通过 `font-weight: 900/700/600` 对应 Heavy、Bold/SemiBold 和正文宋体视觉。
+- 冻结范围：未修改首页、二级页导航规则、底部 tab、登录弹窗业务逻辑和启动页背景/按钮图片资源。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2937537` Byte，主包约 `1904437` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：真机如未命中思源宋体会回退到系统宋体，需以真机截图确认字体效果；标题新文案更长，已降低字号和字距避免溢出。
+- 基线/对比：`git diff --stat -- miniprogram/pages/index/index.wxml miniprogram/pages/index/index.wxss docs/ITERATION_LOG.md`
+- 提交：待提交
+- 远端状态：待用户确认是否 push
+
 ## 2026-06-14 - 日记详情页报告按钮高度修复
 
 - 页面/模块：情绪日记 / 日记详情 `diary` screen

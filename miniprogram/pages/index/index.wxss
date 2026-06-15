@@ -4540,29 +4540,22 @@
 .splash-copy .title {
   display: block;
   color: #263a70;
-  font-size: 74rpx;
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-size: 66rpx;
   line-height: 1;
   font-weight: 900;
-  letter-spacing: 18rpx;
-  text-indent: 18rpx;
+  letter-spacing: 2rpx;
+  text-indent: 0;
   text-shadow: 0 4rpx 8rpx rgba(255, 255, 255, 0.66);
 }
 
 .splash-copy .title-rule {
-  width: 378rpx;
-  height: 28rpx;
-  margin: 34rpx auto 28rpx;
-  position: relative;
+  display: none;
 }
 
 .splash-copy .title-rule::before,
 .splash-copy .title-rule::after {
-  content: "";
-  position: absolute;
-  top: 13rpx;
-  width: 164rpx;
-  height: 2rpx;
-  background: rgba(39, 54, 92, 0.58);
+  display: none;
 }
 
 .splash-copy .title-rule::before {
@@ -4574,23 +4567,18 @@
 }
 
 .splash-copy .title-rule {
-  background:
-    radial-gradient(circle at 50% 50%, transparent 0 8rpx, rgba(39, 54, 92, 0.7) 9rpx 10rpx, transparent 11rpx),
-    linear-gradient(45deg, transparent 42%, rgba(39, 54, 92, 0.72) 43% 57%, transparent 58%),
-    linear-gradient(-45deg, transparent 42%, rgba(39, 54, 92, 0.72) 43% 57%, transparent 58%);
-  background-size: 28rpx 28rpx, 28rpx 28rpx, 28rpx 28rpx;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: none;
 }
 
 .splash-copy .desc {
   display: block;
   width: 520rpx;
-  margin: 0 auto;
+  margin: 22rpx auto 0;
   color: #263a70;
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
   font-size: 30rpx;
   line-height: 1.62;
-  font-weight: 900;
+  font-weight: 600;
   text-align: left;
   letter-spacing: 2rpx;
   text-shadow: 0 3rpx 8rpx rgba(255, 255, 255, 0.64);
@@ -4620,6 +4608,7 @@
   z-index: 1;
   padding: 0;
   color: #2f3e68;
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
   font-size: 27rpx;
   line-height: 1.66;
   font-weight: 700;
@@ -4670,6 +4659,8 @@
   position: relative;
   z-index: 1;
   color: #ffffff;
+  font-family: "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", serif;
+  font-weight: 700;
   text-shadow: 0 2rpx 10rpx rgba(39, 54, 92, 0.42);
 }
 
