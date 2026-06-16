@@ -644,6 +644,17 @@
 - 提交：待提交
 - 远端状态：当前本地 `main` 已 ahead，远端暂不可见
 
+## 2026-06-16 - 个人中心入口精简
+
+- 页面/模块：首页个人中心抽屉 / drawer profile
+- 改动文件：`miniprogram/pages/index/index.wxml`、`docs/ITERATION_LOG.md`
+- 改动摘要：删除个人中心抽屉里的“测算历史”“情绪日记”“隐私政策”入口；将“内容免责声明”文案改为“内容声明”；保留“用户号”和“账号注销”。
+- 冻结范围：未修改顶部导航位置、标题栏、`navLayout`、底部 tab、背景图、登录逻辑和其它页面入口。
+- 验证：`node --check miniprogram/pages/index/index.js` 通过；`node --check miniprogram/utils/navLayout.js` 通过；`python3 -m json.tool project.config.json >/dev/null` 通过；`python3 -m json.tool miniprogram/app.json >/dev/null` 通过；`git diff --check` 通过；微信开发者工具 `cli preview` 成功并生成 `output/wechat-preview/preview-qrcode-display.png`，总包约 `2963036` Byte，主包约 `1929936` Byte，`/packages/tarot-assets/` 约 `1033100` Byte。
+- 风险/待确认：抽屉入口减少后，测算与日记仍可通过底部 tab 和首页卡片进入。
+- 提交：待提交
+- 远端状态：本地 `main` 待提交，远端暂不可见
+
 ## 2026-06-16 - 个人中心用户号精简
 
 - 页面/模块：首页个人中心抽屉 / drawer profile

@@ -87,10 +87,7 @@
         </view>
       </view>
       <view class="settings-row drawer-user-number" bindlongpress="copyOpenId"><text>用户号</text><text>{{user.openidText}}</text></view>
-      <button class="settings-row" data-screen="question" data-nav="reading" bindtap="go"><text>测算历史</text><text>8 条</text></button>
-      <button class="settings-row" data-screen="journal" data-nav="journal" bindtap="go"><text>情绪日记</text><text>{{diaries.length}} 条</text></button>
-      <button class="settings-row" bindtap="showDisclaimer"><text>隐私政策</text><text>查看</text></button>
-      <button class="settings-row" bindtap="showDisclaimer"><text>内容免责声明</text><text>查看</text></button>
+      <button class="settings-row" bindtap="showDisclaimer"><text>内容声明</text><text>查看</text></button>
       <button class="settings-row" bindtap="resetLocalData"><text>账号注销</text><text>一键申请</text></button>
       <text class="drawer-note">问题、测算结果和日记默认只展示摘要。</text>
       <button class="ghost small drawer-logout" bindtap="logout">退出登录</button>
